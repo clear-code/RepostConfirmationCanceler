@@ -35,7 +35,6 @@ class Program
             string ind = new string(' ', indent * 2);
             Console.WriteLine($"{ind}- {element.Current.ControlType.ProgrammaticName} : {element.Current.Name}");
 
-            // 子要素を再帰的に表示
             var children = element.FindAll(TreeScope.Children, Condition.TrueCondition);
             foreach (AutomationElement child in children)
             {
