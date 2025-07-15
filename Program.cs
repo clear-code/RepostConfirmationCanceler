@@ -24,7 +24,7 @@ class Program
             Console.WriteLine("ウィンドウタイトル: " + edgeElement.Current.Name);
 
             PrintControlIdentifiers(edgeElement, 0);
-            CancelChildConfirmationDialog(edgeElement);
+            CancelRepostConfirmationDialog(edgeElement);
         }
     }
 
@@ -47,7 +47,7 @@ class Program
         }
     }
 
-    static void CancelChildConfirmationDialog(AutomationElement element)
+    static void CancelRepostConfirmationDialog(AutomationElement element)
     {
         try
         {
