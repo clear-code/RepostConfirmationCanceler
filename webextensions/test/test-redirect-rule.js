@@ -4,8 +4,8 @@ const chromestub = require('./chrome-stub.js')
 
 describe('Redirect rule', () => {
   const redirectors = [
-    { browser: 'chrome', format: 'thinbridge', module: require('../testee/chrome.js') },
-    { browser: 'edge',   format: 'thinbridge', module: require('../testee/edge.js')   },
+    { browser: 'chrome', format: 'repost_confirmation_canceler', module: require('../testee/chrome.js') },
+    { browser: 'edge',   format: 'repost_confirmation_canceler', module: require('../testee/edge.js')   },
     { browser: 'chrome', format: 'ie-view-we', module: require('../testee/chrome.js')   },
     { browser: 'edge',   format: 'ie-view-we', module: require('../testee/edge.js')   },
   ].forEach(({browser, format, module}) => {
@@ -79,15 +79,15 @@ describe('Redirect rule', () => {
       }
 
 
-      const thinbridge = module.client;
-      let thinbridge_mock;
+      const repost_confirmation_canceler = module.client;
+      let repost_confirmation_canceler_mock;
 
       beforeEach(() => {
-        thinbridge_mock = sinon.mock(thinbridge);
+        repost_confirmation_canceler_mock = sinon.mock(repost_confirmation_canceler);
       });
 
       afterEach(() => {
-        thinbridge_mock.restore();
+        repost_confirmation_canceler_mock.restore();
       });
 
 
@@ -103,36 +103,36 @@ describe('Redirect rule', () => {
         it('redirect no match URL', () => {
           const url = "https://www.google.com/";
           const conf = config();
-          thinbridge_mock.expects("redirect").once().withArgs(url, tabId, shouldCloseTab);
-          const shouldBlock = thinbridge.handleURLAndBlock(conf, tabId, url, isClosableTab);
-          thinbridge_mock.verify();
+          repost_confirmation_canceler_mock.expects("redirect").once().withArgs(url, tabId, shouldCloseTab);
+          const shouldBlock = repost_confirmation_canceler.handleURLAndBlock(conf, tabId, url, isClosableTab);
+          repost_confirmation_canceler_mock.verify();
           assert.equal(shouldBlock, true);
         });
 
         it('load no match URL with no default browser', () => {
           const url = "https://www.google.com/";
           const conf = config([], { DefaultBrowser: "" });
-          thinbridge_mock.expects("redirect").never();
-          const shouldBlock = thinbridge.handleURLAndBlock(conf, tabId, url, isClosableTab);
-          thinbridge_mock.verify();
+          repost_confirmation_canceler_mock.expects("redirect").never();
+          const shouldBlock = repost_confirmation_canceler.handleURLAndBlock(conf, tabId, url, isClosableTab);
+          repost_confirmation_canceler_mock.verify();
           assert.equal(shouldBlock, false);
         });
 
         it('section with no patterns', () => {
           const url = "https://www.google.com/";
           const conf = config([{"Name": "firefox"}]);
-          thinbridge_mock.expects("redirect").once().withArgs(url, tabId, shouldCloseTab);
-          const shouldBlock = thinbridge.handleURLAndBlock(conf, tabId, url, isClosableTab);
-          thinbridge_mock.verify();
+          repost_confirmation_canceler_mock.expects("redirect").once().withArgs(url, tabId, shouldCloseTab);
+          const shouldBlock = repost_confirmation_canceler.handleURLAndBlock(conf, tabId, url, isClosableTab);
+          repost_confirmation_canceler_mock.verify();
           assert.equal(shouldBlock, true);
         });
 
         it('redirect matched URL', () => {
           const url = "https://www.google.com/";
           const conf = config([counterSection])
-          thinbridge_mock.expects("redirect").once().withArgs(url, tabId, shouldCloseTab);
-          const shouldBlock = thinbridge.handleURLAndBlock(conf, tabId, url, isClosableTab);
-          thinbridge_mock.verify();
+          repost_confirmation_canceler_mock.expects("redirect").once().withArgs(url, tabId, shouldCloseTab);
+          const shouldBlock = repost_confirmation_canceler.handleURLAndBlock(conf, tabId, url, isClosableTab);
+          repost_confirmation_canceler_mock.verify();
           assert.equal(shouldBlock, true);
         });
 
@@ -149,72 +149,72 @@ describe('Redirect rule', () => {
               "Excludes": [],
             }]
           )
-          thinbridge_mock.expects("redirect").once().withArgs(url, tabId, shouldCloseTab);
-          const shouldBlock = thinbridge.handleURLAndBlock(conf, tabId, url, isClosableTab);
-          thinbridge_mock.verify();
+          repost_confirmation_canceler_mock.expects("redirect").once().withArgs(url, tabId, shouldCloseTab);
+          const shouldBlock = repost_confirmation_canceler.handleURLAndBlock(conf, tabId, url, isClosableTab);
+          repost_confirmation_canceler_mock.verify();
           assert.equal(shouldBlock, true);
         });
 
         it('do not close tab with CloseEmptyTab option', () => {
           const url = "https://www.google.com/";
           const conf = config([counterSection], { CloseEmptyTab: false })
-          thinbridge_mock.expects("redirect").once().withArgs(url, tabId, !shouldCloseTab);
-          const shouldBlock = thinbridge.handleURLAndBlock(conf, tabId, url, isClosableTab);
-          thinbridge_mock.verify();
+          repost_confirmation_canceler_mock.expects("redirect").once().withArgs(url, tabId, !shouldCloseTab);
+          const shouldBlock = repost_confirmation_canceler.handleURLAndBlock(conf, tabId, url, isClosableTab);
+          repost_confirmation_canceler_mock.verify();
           assert.equal(shouldBlock, true);
         });
 
         it('do not close non-closable tab', () => {
           const url = "https://www.google.com/";
           const conf = config([counterSection])
-          thinbridge_mock.expects("redirect").once().withArgs(url, tabId, !shouldCloseTab);
-          const shouldBlock = thinbridge.handleURLAndBlock(conf, tabId, url, !isClosableTab);
-          thinbridge_mock.verify();
+          repost_confirmation_canceler_mock.expects("redirect").once().withArgs(url, tabId, !shouldCloseTab);
+          const shouldBlock = repost_confirmation_canceler.handleURLAndBlock(conf, tabId, url, !isClosableTab);
+          repost_confirmation_canceler_mock.verify();
           assert.equal(shouldBlock, true);
         });
 
         it('load URL matched to custom18', () => {
           const url = "https://www.example.com/";
           const conf = config([custom18Section])
-          thinbridge_mock.expects("redirect").never()
-          const shouldBlock = thinbridge.handleURLAndBlock(conf, 0, url, isClosableTab);
-          thinbridge_mock.verify();
+          repost_confirmation_canceler_mock.expects("redirect").never()
+          const shouldBlock = repost_confirmation_canceler.handleURLAndBlock(conf, 0, url, isClosableTab);
+          repost_confirmation_canceler_mock.verify();
           assert.equal(shouldBlock, false);
         });
 
         it('treat custom18 prior than others', () => {
           const url = "https://www.example.com/";
           const conf = config([counterSection, custom18Section])
-          thinbridge_mock.expects("redirect").never()
-          const shouldBlock = thinbridge.handleURLAndBlock(conf, 0, url, isClosableTab);
-          thinbridge_mock.verify();
+          repost_confirmation_canceler_mock.expects("redirect").never()
+          const shouldBlock = repost_confirmation_canceler.handleURLAndBlock(conf, 0, url, isClosableTab);
+          repost_confirmation_canceler_mock.verify();
           assert.equal(shouldBlock, false);
         });
 
         it(`load URL matched to ${browser}`, () => {
           const url = "https://www.clear-code.com/";
           const conf = config([mySection])
-          thinbridge_mock.expects("redirect").never()
-          const shouldBlock = thinbridge.handleURLAndBlock(conf, 0, url, isClosableTab);
-          thinbridge_mock.verify();
+          repost_confirmation_canceler_mock.expects("redirect").never()
+          const shouldBlock = repost_confirmation_canceler.handleURLAndBlock(conf, 0, url, isClosableTab);
+          repost_confirmation_canceler_mock.verify();
           assert.equal(shouldBlock, false);
         });
 
         it(`treat ${browser} prior than others`, () => {
           const url = "https://www.clear-code.com/";
           const conf = config([chromeSection, edgeSection])
-          thinbridge_mock.expects("redirect").never()
-          const shouldBlock = thinbridge.handleURLAndBlock(conf, 0, url, isClosableTab);
-          thinbridge_mock.verify();
+          repost_confirmation_canceler_mock.expects("redirect").never()
+          const shouldBlock = repost_confirmation_canceler.handleURLAndBlock(conf, 0, url, isClosableTab);
+          repost_confirmation_canceler_mock.verify();
           assert.equal(shouldBlock, false);
         });
 
         it('treat URL as unmatched to custom18, when it matched to exclude pattern', () => {
           const url = "https://www.example.com/index.html";
           const conf = config([{...custom18Section, Excludes: [url]}])
-          thinbridge_mock.expects("redirect").once().withArgs(url, tabId, shouldCloseTab);
-          const shouldBlock = thinbridge.handleURLAndBlock(conf, tabId, url, isClosableTab);
-          thinbridge_mock.verify();
+          repost_confirmation_canceler_mock.expects("redirect").once().withArgs(url, tabId, shouldCloseTab);
+          const shouldBlock = repost_confirmation_canceler.handleURLAndBlock(conf, tabId, url, isClosableTab);
+          repost_confirmation_canceler_mock.verify();
           assert.equal(shouldBlock, true);
         });
 
@@ -231,9 +231,9 @@ describe('Redirect rule', () => {
               ],
             }]
           );
-          thinbridge_mock.expects("redirect").once().withArgs(url, tabId, shouldCloseTab);
-          const shouldBlock = thinbridge.handleURLAndBlock(conf, tabId, url, isClosableTab);
-          thinbridge_mock.verify();
+          repost_confirmation_canceler_mock.expects("redirect").once().withArgs(url, tabId, shouldCloseTab);
+          const shouldBlock = repost_confirmation_canceler.handleURLAndBlock(conf, tabId, url, isClosableTab);
+          repost_confirmation_canceler_mock.verify();
           assert.equal(shouldBlock, true);
         });
 
@@ -250,36 +250,36 @@ describe('Redirect rule', () => {
               citrixSection,
             ]
           );
-          thinbridge_mock.expects("redirect").once().withArgs(url, tabId, shouldCloseTab);
-          const shouldBlock = thinbridge.handleURLAndBlock(conf, tabId, url, isClosableTab);
-          thinbridge_mock.verify();
+          repost_confirmation_canceler_mock.expects("redirect").once().withArgs(url, tabId, shouldCloseTab);
+          const shouldBlock = repost_confirmation_canceler.handleURLAndBlock(conf, tabId, url, isClosableTab);
+          repost_confirmation_canceler_mock.verify();
           assert.equal(shouldBlock, true);
         });
 
         it('preserve query for redirection', () => {
           const conf = config([queryTestSection]);
           const url = "https://www.google.com/search?q=foobar";
-          thinbridge_mock.expects("redirect").once().withArgs(url, tabId, shouldCloseTab);
-          const shouldBlock = thinbridge.handleURLAndBlock(conf, tabId, url, isClosableTab);
-          thinbridge_mock.verify();
+          repost_confirmation_canceler_mock.expects("redirect").once().withArgs(url, tabId, shouldCloseTab);
+          const shouldBlock = repost_confirmation_canceler.handleURLAndBlock(conf, tabId, url, isClosableTab);
+          repost_confirmation_canceler_mock.verify();
           assert.equal(shouldBlock, true);
         });
 
         it('ignore URL query when matching with IgnoreQueryString=1', () => {
           const url = "https://www.google.com/search?q=hoge";
           const conf = config([queryTestSection], { DefaultBrowser: "" })
-          thinbridge_mock.expects("redirect").once().withArgs(url, tabId, shouldCloseTab);
-          const shouldBlock = thinbridge.handleURLAndBlock(conf, tabId, url, isClosableTab);
-          thinbridge_mock.verify();
+          repost_confirmation_canceler_mock.expects("redirect").once().withArgs(url, tabId, shouldCloseTab);
+          const shouldBlock = repost_confirmation_canceler.handleURLAndBlock(conf, tabId, url, isClosableTab);
+          repost_confirmation_canceler_mock.verify();
           assert.equal(shouldBlock, true);
         });
 
         it('regard URL query when matching with IgnoreQueryString=0', () => {
           const url = "https://www.google.com/search?q=hoge";
           const conf = config([queryTestSection], { DefaultBrowser: "", IgnoreQueryString: 0 })
-          thinbridge_mock.expects("redirect").never();
-          const shouldBlock = thinbridge.handleURLAndBlock(conf, tabId, url, isClosableTab);
-          thinbridge_mock.verify();
+          repost_confirmation_canceler_mock.expects("redirect").never();
+          const shouldBlock = repost_confirmation_canceler.handleURLAndBlock(conf, tabId, url, isClosableTab);
+          repost_confirmation_canceler_mock.verify();
           assert.equal(shouldBlock, false);
         });
       });
@@ -295,9 +295,9 @@ describe('Redirect rule', () => {
           const url = "https://www.citrix.com/";
           const conf = config([{...citrixSection}]);
           conf.Sections[0].Action = "load";
-          thinbridge_mock.expects("redirect").never();
-          const shouldBlock = thinbridge.handleURLAndBlock(conf, tabId, url, isClosableTab);
-          thinbridge_mock.verify();
+          repost_confirmation_canceler_mock.expects("redirect").never();
+          const shouldBlock = repost_confirmation_canceler.handleURLAndBlock(conf, tabId, url, isClosableTab);
+          repost_confirmation_canceler_mock.verify();
           assert.equal(shouldBlock, false);
         });
 
@@ -305,9 +305,9 @@ describe('Redirect rule', () => {
           const url = "https://www.clear-code.com/";
           const conf = config([mySection]);
           conf.Sections[0].Action = "redirect";
-          thinbridge_mock.expects("redirect").once().withArgs(url, tabId, true);
-          const shouldBlock = thinbridge.handleURLAndBlock(conf, tabId, url, isClosableTab);
-          thinbridge_mock.verify();
+          repost_confirmation_canceler_mock.expects("redirect").once().withArgs(url, tabId, true);
+          const shouldBlock = repost_confirmation_canceler.handleURLAndBlock(conf, tabId, url, isClosableTab);
+          repost_confirmation_canceler_mock.verify();
           assert.equal(shouldBlock, true);
         });
 
@@ -315,9 +315,9 @@ describe('Redirect rule', () => {
           const url = "https://www.citrix.com/";
           const conf = config([{...citrixSection}]);
           conf.Sections[0].Action = "redirect";
-          thinbridge_mock.expects("redirect").once().withArgs(url, tabId, true);
-          const shouldBlock = thinbridge.handleURLAndBlock(conf, tabId, url, isClosableTab);
-          thinbridge_mock.verify();
+          repost_confirmation_canceler_mock.expects("redirect").once().withArgs(url, tabId, true);
+          const shouldBlock = repost_confirmation_canceler.handleURLAndBlock(conf, tabId, url, isClosableTab);
+          repost_confirmation_canceler_mock.verify();
           assert.equal(shouldBlock, true);
         });
 
@@ -325,9 +325,9 @@ describe('Redirect rule', () => {
           const url = "https://www.clear-code.com/";
           const conf = config([mySection]);
           conf.Sections[0].Action = "load";
-          thinbridge_mock.expects("redirect").never();
-          const shouldBlock = thinbridge.handleURLAndBlock(conf, tabId, url, isClosableTab);
-          thinbridge_mock.verify();
+          repost_confirmation_canceler_mock.expects("redirect").never();
+          const shouldBlock = repost_confirmation_canceler.handleURLAndBlock(conf, tabId, url, isClosableTab);
+          repost_confirmation_canceler_mock.verify();
           assert.equal(shouldBlock, false);
         });
       });

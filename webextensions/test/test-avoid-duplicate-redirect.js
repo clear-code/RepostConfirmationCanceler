@@ -11,17 +11,17 @@ describe('avoidDuplicateRedirect', () => {
       return browser == "edge";
     }
     describe(browser, () => {
-      const thinbridge = module.client;
+      const repost_confirmation_canceler = module.client;
       const tabId = 123;
       let clock;
 
       beforeEach(() => {
         clock = sinon.useFakeTimers();
-        thinbridge.recentRequests = {};
+        repost_confirmation_canceler.recentRequests = {};
       });
 
       afterEach(() => {
-        delete thinbridge.recentRequests;
+        delete repost_confirmation_canceler.recentRequests;
         clock.restore();
         sinon.restore();
       });
@@ -52,7 +52,7 @@ describe('avoidDuplicateRedirect', () => {
         status: 'complete',
       };
 
-      const SERVER_NAME = 'com.clear_code.thinbridge';
+      const SERVER_NAME = 'com.clear_code.repost_confirmation_canceler';
 
       it('handleStartup => onTabUpdated', async () => {
         const sendNativeMessageStub = sinon.stub(chrome.runtime, 'sendNativeMessage')
@@ -66,9 +66,9 @@ describe('avoidDuplicateRedirect', () => {
         sinon.stub(chrome.tabs, 'remove').resolves(true);
         sinon.stub(chrome.storage.session, 'get').resolves({ newTabIds: null, knownTabIds: null });
 
-        thinbridge.cached = config;
-        await thinbridge.handleStartup(config);
-        await thinbridge.onTabUpdated(tabId, { url: tab.url }, { ...tab });
+        repost_confirmation_canceler.cached = config;
+        await repost_confirmation_canceler.handleStartup(config);
+        await repost_confirmation_canceler.onTabUpdated(tabId, { url: tab.url }, { ...tab });
         await Promise.resolve(true); // We need to wait until all async operations are finished
 
         const redirectMessage = new String(`Q ${browser} ${tab.url}`);
@@ -87,9 +87,9 @@ describe('avoidDuplicateRedirect', () => {
         sinon.stub(chrome.tabs, 'remove').resolves(true);
         sinon.stub(chrome.storage.session, 'get').resolves({ newTabIds: null, knownTabIds: null });
 
-        thinbridge.cached = config;
-        await thinbridge.onTabUpdated(tabId, { url: tab.url }, { ...tab });
-        await thinbridge.handleStartup(config);
+        repost_confirmation_canceler.cached = config;
+        await repost_confirmation_canceler.onTabUpdated(tabId, { url: tab.url }, { ...tab });
+        await repost_confirmation_canceler.handleStartup(config);
         await Promise.resolve(true); // We need to wait until all async operations are finished
 
         const redirectMessage = new String(`Q ${browser} ${tab.url}`);
