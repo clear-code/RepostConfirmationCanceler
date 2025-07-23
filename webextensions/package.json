@@ -1,5 +1,5 @@
 {
-  "name": "EdgeRepostConfirmationCanceler",
+  "name": "RepostConfirmationCanceler",
   "version": "0.0.0",
   "engines": {
     "node": ">=13.2"
