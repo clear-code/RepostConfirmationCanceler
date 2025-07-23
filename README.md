@@ -1,4 +1,4 @@
-# EdgeRepostConfirmationCanceler
+# RepostConfirmationCanceler
 
 ## ビルド方法
 
