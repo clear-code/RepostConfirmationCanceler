@@ -1,0 +1,9 @@
+{
+  "name": "com.clear_code.repost_confirmation_canceler",
+  "description": "RepostConfirmationCanceler Talk Serger",
+  "path": "RepostConfirmationCancelerTalk.exe",
+  "type": "stdio",
+  "allowed_origins": [
+    "chrome-extension://gfmemaifchppdpchjijkahhngfnjdihm/"
+  ]
+}
