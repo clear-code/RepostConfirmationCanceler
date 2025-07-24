@@ -37,7 +37,7 @@ static int start_monitoring(char *browser, char *path)
 	                    NULL,   /* lpProcessAttributes  */
 	                    NULL,   /* lpThreadAttributes */
 	                    FALSE,  /* bInheritHandles */
-	                    NULL,
+	                    CREATE_NEW_PROCESS_GROUP,
 	                    NULL,   /* lpEnvironment */
 	                    NULL,   /* lpCurrentDirectory */
 	                    &si,    /* lpStartupInfo */
@@ -86,7 +86,7 @@ int cb_query(char *cmd)
 	if (get_ThinBridgeExtensionExecfile(path, MAX_PATH) < 0)
 		return -1;
 
-	if (start_monitoring(browser, path, url) < 0)
+	if (start_monitoring(browser, path) < 0)
 		return -1;
 
 	talk_response("{\"status\":\"OK\"}");
