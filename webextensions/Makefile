@@ -11,12 +11,12 @@ testee:
 testee/edge.js: edge/background.js testee
 	sed -e "s/RepostConfirmationCancelerTalkClient.init();/exports.client = RepostConfirmationCancelerTalkClient/g" -e "s/ResourceCap.init();//g" edge/background.js > $@
 
-unittest: install_dependency testee/chrome.js testee/edge.js
+unittest: install_dependency testee/edge.js
 	npx mocha --require mocha-suppress-logs test
 
 test: unittest
 
-test-verbose: install_dependency testee/chrome.js testee/edge.js
+test-verbose: install_dependency testee/edge.js
 	npx mocha test
 
 clean:
@@ -25,9 +25,7 @@ clean:
 	rm -rf testee
 
 packages: test clean lint
-	cd chrome && make && make dev && mv *.zip ../
 	cd edge && make && make dev && mv *.zip ../
-	cd firefox && make && mv *.xpi ../
 
 install_dependency:
 	[ -e "$(NPM_BIN_DIR)/eslint" -a -e "$(NPM_BIN_DIR)/jsonlint-cli" ] || npm install --save-dev
