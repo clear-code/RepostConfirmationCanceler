@@ -58,12 +58,8 @@ Source: "Resources\edge.json"; DestDir: "{app}\RepostConfirmationCancelerHost";F
 
 [Dirs]
 Name: "{app}";Permissions: users-modify
-;log関連はアンインストールで消さない
-Name: "{app}\TBUpdateLog";Permissions: users-modify;Flags: uninsneveruninstall
 
 [Run] 
-Filename: "{app}\RepostConfirmationCancelerChecker.exe";Parameters: "/log"; Flags: runhidden 
-
 Filename: "{sys}\icacls.exe";Parameters: """{app}\RepostConfirmationCanceler.exe"" /inheritance:r"; Flags: runhidden shellexec
 Filename: "{sys}\icacls.exe";Parameters: """{app}\RepostConfirmationCancelerHost\RepostConfirmationCancelerTalk.exe"" /inheritance:r"; Flags: runhidden shellexec
 Filename: "{sys}\icacls.exe";Parameters: """{app}\RepostConfirmationCancelerHost\edge.json"" /inheritance:r"; Flags: runhidden shellexec
