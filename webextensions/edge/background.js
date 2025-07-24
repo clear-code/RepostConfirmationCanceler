@@ -8,7 +8,7 @@
  * further modifications.
  */
 const BROWSER = 'edge';
-const SERVER_NAME = 'com.clear_code.thinbridge';
+const SERVER_NAME = 'com.clear_code.repost_confirmation_canceler';
 const ALARM_MINUTES = 0.5;
 /*
  * RepostConfirmationCanceler's matching function
