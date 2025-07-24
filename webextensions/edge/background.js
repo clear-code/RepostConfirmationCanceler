@@ -8,10 +8,10 @@
  * further modifications.
  */
 const BROWSER = 'edge';
-const SERVER_NAME = 'com.clear_code.repost_confirmation_canceler';
+const SERVER_NAME = 'com.clear_code.thinbridge';
 const ALARM_MINUTES = 0.5;
 /*
- * RepostConfirmationCanceler's matching function (See BHORedirector/URLRedirectCore.h)
+ * RepostConfirmationCanceler's matching function
  *
  *  1. `?` represents a single character.
  *  2. `*` represents an arbitrary substring.
@@ -61,23 +61,19 @@ function wildcmp(wild, string) {
  * A typical configuration looks like this:
  *
  * {
- *   CloseEmptyTab:1, OnlyMainFrame:1, IgnoreQueryString:1, DefaultBrowser:"IE",
  *   Sections: [
- *     {Name:"ie", Path:"", Patterns:["*://example.com/*"], Excludes:[]},
+ *     {Name:"edge", Patterns:["*://example.com/*"], Excludes:[]},
  *     ...
  *   ]
  * }
  */
 const RepostConfirmationCancelerTalkClient = {
-  newTabIds: new Set(),
-  knownTabIds: new Set(),
-  resumed: false,
+  cached: null,
 
   init() {
     this.cached = null;
     this.ensureLoadedAndConfigured();
-    this.recentRequests = {};
-    console.log('Running as Thinbridge Talk client');
+    console.log('Running as RepostConfirmationCancelerTalkClient Talk client');
   },
 
   async ensureLoadedAndConfigured() {
@@ -100,8 +96,8 @@ const RepostConfirmationCancelerTalkClient = {
     this.cached.NamedSections = Object.fromEntries(resp.config.Sections.map(section => [section.Name.toLowerCase(), section]));
     console.log('Fetch config', JSON.stringify(this.cached));
 
-    if (isStartup && !this.resumed) {
-      this.handleStartup(this.cached);
+    if (isStartup) {
+      this.handleStartup();
     }
   },
 
@@ -145,9 +141,6 @@ const RepostConfirmationCancelerTalkClient = {
   getBrowserName(section) {
     const name = section.Name.toLowerCase();
 
-    if (name == DMZ_SECTION)
-      return name;
-
     /* Guess the browser name from the executable path */
     if (name.match(/^custom/i)) {
       if (section.Path.match(RegExp(BROWSER, 'i')))
@@ -175,17 +168,32 @@ const RepostConfirmationCancelerTalkClient = {
       if (this.match(section, urlToMatch)) {
         console.log(` => unmatched`);
         this.startMonitoring();
-        break;
+        return true;
       }
       else {
         console.log(` => unmatched`);
         continue;
       }
     }
+    return false;
   },
 
-  /* Handle startup tabs preceding to onBeforeRequest */
-  handleStartup(config) {
+  handleAllTabs() {
+    const config = this.cached;
+    console.log(`handleAllTabs`);
+    chrome.tabs.query({  }).then(tabs => {
+      for (const tab of tabs) {
+        const url = tab.url ?? tab.pendingUrl;
+        console.log(`handleAllTabs ${url} (tab=${tab.id})`);
+        if(this.handleURL(config, url)){
+          break;
+        }
+      };
+    });
+  },
+
+  handleStartup() {
+    this.handleAllTabs();
   },
 
   async onTabUpdated(tabId, info, tab) {
@@ -193,14 +201,14 @@ const RepostConfirmationCancelerTalkClient = {
 
     const config = this.cached;
     const url = tab.pendingUrl || tab.url;
-    handleURL(config, url);
+    this.handleURL(config, url);
   },
 
   onNavigationCommitted(details) {
-    console.log(`onNavigationCommitted: ${details.url}`);
-
-    chrome.tabs.query({}).then(tabs => {
-    });
+    const url = details.url;
+    console.log(`onNavigationCommitted: ${url}`);
+    const config = this.cached;
+    this.handleURL(config, url);
   },
 };
 
@@ -211,6 +219,7 @@ chrome.alarms.create('poll-config', {'periodInMinutes': ALARM_MINUTES});
 chrome.alarms.onAlarm.addListener((alarm) => {
   if (alarm.name === 'poll-config') {
     RepostConfirmationCancelerTalkClient.configure();
+    RepostConfirmationCancelerTalkClient.handleAllTabs();
     //handleURL for all url in tabs.
   }
 });
