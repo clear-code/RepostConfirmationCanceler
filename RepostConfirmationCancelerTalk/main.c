@@ -116,7 +116,7 @@ int main(int argc, char *argv[])
 	    return -1;
 	}
 
-	if (len < 2) {
+	if (len < 3) {
 	    fprintf(stderr, "command too short (%i bytes)", len);
 	    return -1;
 	}
@@ -143,8 +143,8 @@ int main(int argc, char *argv[])
 	 *
 	 *  "C edge"
 	 *    ... Read and return ThinBridgeBHO.ini.
-	 *  "Q edge https://google.com"
-	 *    ... Open URL in another browser.
+	 *  "Q edge
+	 *    ... Open RepostConfirmationCanceler for edge.
 	 */
 	switch (cmd[0]) {
 	case 'C':

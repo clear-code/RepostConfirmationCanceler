@@ -54,12 +54,10 @@ static int start_monitoring(char *browser, char *path)
 
 int cb_query(char *cmd)
 {
-	char *url;
 	char path[MAX_PATH];
-	char *space;
 	char *browser;
 
-	if (strlen(cmd) < 2) {
+	if (strlen(cmd) < 3) {
 		fprintf(stderr, "command too short '%s'", cmd);
 		return -1;
 	}
@@ -69,19 +67,6 @@ int cb_query(char *cmd)
 	 *    ----
 	 */
 	browser = cmd + 2;
-
-	space = strchr(browser, ' ');
-	if (space == NULL) {
-		fprintf(stderr, "invalid query request '%s'", cmd);
-		return -1;
-	}
-	*space = '\0';
-
-	/*
-	 *  Q edge
-	 *         -------------------
-	 */
-	url = space + 1;
 
 	if (get_ThinBridgeExtensionExecfile(path, MAX_PATH) < 0)
 		return -1;
