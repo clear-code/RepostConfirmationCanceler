@@ -103,15 +103,11 @@ const RepostConfirmationCancelerTalkClient = {
 
   /*
    * Request redirection to Native Messaging Hosts.
-   *
-   * * chrome.tabs.get() is to confirm that the URL is originated from
-   *   an actual tab (= not an internal prefetch request).
-   *
    * * Request Example: "Q edge https://example.com/".
    */
   startMonitoring() {
-    const query = new String('S ' + BROWSER);
-    console.log(`Cenceler: Send "start monitoring" message: ${query}`);
+    const query = new String('Q ' + BROWSER);
+    console.log(`Cenceler: Send start monitoring message: ${query}`);
     chrome.runtime.sendNativeMessage(SERVER_NAME, query);
   },
 

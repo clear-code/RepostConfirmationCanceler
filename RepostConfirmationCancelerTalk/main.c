@@ -116,7 +116,7 @@ int main(int argc, char *argv[])
 	    return -1;
 	}
 
-	if (len < 3) {
+	if (len < 2) {
 	    fprintf(stderr, "command too short (%i bytes)", len);
 	    return -1;
 	}
