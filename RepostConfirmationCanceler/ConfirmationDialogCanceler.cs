@@ -57,8 +57,11 @@ namespace RepostConfirmationCanceler
         {
             try
             {
+                var confirmDialogNameCondition = new OrCondition(
+                    new PropertyCondition(AutomationElement.NameProperty, "Resubmit the form?"),
+                    new PropertyCondition(AutomationElement.NameProperty, "フォームを再送信しますか?"));
                 var confirmDialogCondition = new AndCondition(
-                    new PropertyCondition(AutomationElement.NameProperty, "フォームを再送信しますか?"),
+                    confirmDialogNameCondition,
                     new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Window));
                 var confirmDialogElement = edgeElement.FindFirst(TreeScope.Descendants, confirmDialogCondition);
                 if (confirmDialogElement == null)
@@ -66,8 +69,11 @@ namespace RepostConfirmationCanceler
                     return;
                 }
                 context.Logger.Log($"Found confirmation dialog: {confirmDialogElement.Current.Name}");
+                var cancelButtonNameCondition = new OrCondition(
+                    new PropertyCondition(AutomationElement.NameProperty, "Cancel"),
+                    new PropertyCondition(AutomationElement.NameProperty, "キャンセル"));
                 var cancelButtonCondition = new AndCondition(
-                    new PropertyCondition(AutomationElement.NameProperty, "キャンセル"),
+                    cancelButtonNameCondition,
                     new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Button));
                 var cancelButtonElement = confirmDialogElement.FindFirst(TreeScope.Descendants, cancelButtonCondition);
                 if (cancelButtonElement == null)
@@ -80,7 +86,7 @@ namespace RepostConfirmationCanceler
                     return;
                 }
                 cancelButton.Invoke();
-                context.Logger.Log($"Canceled: {confirmDialogElement.Current.Name}");
+                context.Logger.Log($"Dialog canceled: {confirmDialogElement.Current.Name}");
             }
             catch (Exception ex)
             {
