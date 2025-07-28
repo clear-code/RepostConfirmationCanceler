@@ -29,7 +29,7 @@ namespace RepostConfirmationCanceler
                     PrintControlIdentifiers(context, edgeElement, 0);
                     CancelEdgeDialog(context, edgeElement);
                 }
-                Task.Delay(2000).Wait();
+                Task.Delay(1000).Wait();
             }
         }
 
