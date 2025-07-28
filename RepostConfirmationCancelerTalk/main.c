@@ -142,7 +142,7 @@ int main(int argc, char *argv[])
 	 * Talk protocol defines two operations.
 	 *
 	 *  "C edge"
-	 *    ... Read and return ThinBridgeBHO.ini.
+	 *    ... Read and return RepostConfirmationCanceler.ini.
 	 *  "Q edge
 	 *    ... Open RepostConfirmationCanceler for edge.
 	 */

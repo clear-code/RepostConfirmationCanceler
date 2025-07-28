@@ -7,7 +7,7 @@
  * Typycally, each browser addon calls this program every 1 minute,
  * to sync with the latest redirect rules.
  *
- * NOTE: You need to set up `HKLM\SOFTWARE\ThinBridge\Rulefile` before
+ * NOTE: You need to set up `HKLM\SOFTWARE\RepostConfirmationCanceler\Rulefile` before
  * using this program.
  */
 
@@ -60,7 +60,7 @@ static struct section *new_section(char *line)
 }
 
 /*
- * The format of ThinBridge config uses an INI-file like syntax.
+ * The format of RepostConfirmationCanceler config uses an INI-file like syntax.
  * You can define variables/URLs in each section like this:
  *
  *     [GLOBAL]
@@ -250,9 +250,9 @@ static char *dump_json(struct config *conf)
 }
 
 /*
- * Utils to locate & read ThinBridgeBHO.ini.
+ * Utils to locate & read RepostConfirmationCanceler.ini.
  */
-static int get_ThinBridgeRulefile(char *buf, DWORD size)
+static int get_RepostConfirmationCancelerRulefile(char *buf, DWORD size)
 {
 	int ret;
 	DWORD len = size;
@@ -315,7 +315,7 @@ int cb_config(char *cmd)
 
 	char path[MAX_PATH] = {0};
 
-	if (get_ThinBridgeRulefile(path, MAX_PATH) < 0)
+	if (get_RepostConfirmationCancelerRulefile(path, MAX_PATH) < 0)
 	    return -1;
 
 	data = read_file(path);

@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include "internal.h"
 
-static int get_ThinBridgeExtensionExecfile(char *buf, DWORD size)
+static int get_RepostConfirmationCancelerExtensionExecfile(char *buf, DWORD size)
 {
 	int ret;
 	DWORD len = size;
@@ -68,7 +68,7 @@ int cb_query(char *cmd)
 	 */
 	browser = cmd + 2;
 
-	if (get_ThinBridgeExtensionExecfile(path, MAX_PATH) < 0)
+	if (get_RepostConfirmationCancelerExtensionExecfile(path, MAX_PATH) < 0)
 		return -1;
 
 	if (start_monitoring(browser, path) < 0)

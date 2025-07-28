@@ -19,7 +19,7 @@
 #include "messagebox.h"
 
 #define HKCU HKEY_CURRENT_USER
-#define TB_RCAP _T("SOFTWARE\\Policies\\ThinBridge\\RCAP")
+#define TB_RCAP _T("SOFTWARE\\Policies\\RepostConfirmationCanceler\\RCAP")
 
 struct config {
 	DWORD tab_enabled;
@@ -165,7 +165,7 @@ static void show_warning(LPCTSTR message, int sec)
 	if (hMutex) {
 		ret = WaitForSingleObject(hMutex, 300);   /* 300 msec */
 		if (ret != WAIT_TIMEOUT) {
-			ShowMessageBoxTimeout(message, _T("ThinBridge"),
+			ShowMessageBoxTimeout(message, _T("RepostConfirmationCanceler"),
 						MB_OK|MB_ICONWARNING|MB_SYSTEMMODAL, sec);
 		}
 		CloseHandle(hMutex);
