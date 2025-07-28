@@ -4,15 +4,14 @@ using System.Threading.Tasks;
 
 class Program
 {
-    private static readonly Mutex _mutex = new Mutex(false, @"Global\RepostConfirmationCancelerMutex");
-
+    private static Mutex MyMutex { get; } = new Mutex(false, @"Global\RepostConfirmationCancelerMutex");
 
     static void Main()
     {
         bool isMutexAcquired = false;
         try
         {
-            isMutexAcquired = _mutex.WaitOne(1000, false);
+            isMutexAcquired = MyMutex.WaitOne(1000, false);
         }
         catch (AbandonedMutexException)
         {
@@ -24,19 +23,19 @@ class Program
 
         if (isMutexAcquired)
         {
-            // Mutexの獲得に成功した。
-            // * ダイアログの監視を開始
+            // Mutexの獲得に成功した
             // * NamedPipeサーバーを起動し、後続のプロセスによるメッセージ受付を開始
+            // * ダイアログの監視を開始
             try
             {
                 var runtimeContext = new RuntimeContext(RunTimeMode.Server);
                 Task serverTask = Task.Run(() => ProcessCommunicator.RunNamedPipedServer(runtimeContext));
-                Task watchTask = Task.Run(() => ConfirmationCanceler.WatchEdgeRepostConfirmationDialog(runtimeContext));
+                Task watchTask = Task.Run(() => ConfirmationDialogCanceler.WatchEdgeDialog(runtimeContext));
                 Task.WhenAll(serverTask, watchTask).Wait();
             }
             finally
             {
-                _mutex.ReleaseMutex();
+                MyMutex.ReleaseMutex();
             }
         }
         else

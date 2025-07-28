@@ -86,7 +86,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConfirmationCanceler.cs" />
+    <Compile Include="ConfirmationDialogCanceler.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="ProcessCommunicator.cs" />
     <Compile Include="Program.cs" />

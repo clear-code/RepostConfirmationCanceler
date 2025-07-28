@@ -67,7 +67,9 @@ namespace RepostConfirmationCanceler
 
             if (LogStream is null)
             {
-                LogStream = new StreamWriter(new FileStream(FilePath, FileMode.OpenOrCreate));
+                var fileStream = new FileStream(FilePath, FileMode.OpenOrCreate);
+                fileStream.Seek(0, SeekOrigin.End);
+                LogStream = new StreamWriter(fileStream);
             }
 
             var fi = new FileInfo(FilePath);

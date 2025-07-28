@@ -6,9 +6,9 @@ using System.Windows.Automation;
 
 namespace RepostConfirmationCanceler
 {
-    internal static class ConfirmationCanceler
+    internal static class ConfirmationDialogCanceler
     {
-        internal static void WatchEdgeRepostConfirmationDialog(RuntimeContext context)
+        internal static void WatchEdgeDialog(RuntimeContext context)
         {
             AutomationElement desktop = AutomationElement.RootElement;
             while (!context.IsEndTime)
@@ -27,7 +27,7 @@ namespace RepostConfirmationCanceler
                         continue;
                     }
                     PrintControlIdentifiers(context, edgeElement, 0);
-                    CancelRepostConfirmationDialog(context, edgeElement);
+                    CancelEdgeDialog(context, edgeElement);
                 }
                 Task.Delay(2000).Wait();
             }
@@ -53,7 +53,7 @@ namespace RepostConfirmationCanceler
             }
         }
 
-        internal static void CancelRepostConfirmationDialog(RuntimeContext context, AutomationElement edgeElement)
+        internal static void CancelEdgeDialog(RuntimeContext context, AutomationElement edgeElement)
         {
             try
             {
