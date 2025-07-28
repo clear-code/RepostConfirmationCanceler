@@ -86,8 +86,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfirmationCanceler.cs" />
+    <Compile Include="Logger.cs" />
+    <Compile Include="ProcessCommunicator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RuntimeContext.cs" />
+    <Compile Include="RunTimeMode.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
