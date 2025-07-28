@@ -6,9 +6,9 @@ using System.Windows.Automation;
 
 namespace RepostConfirmationCanceler
 {
-    internal static class ConfirmationDialogCanceler
+    internal static class EdgeConfirmationDialogCanceler
     {
-        internal static void WatchEdgeDialog(RuntimeContext context)
+        internal static void WatchDialog(RuntimeContext context)
         {
             AutomationElement desktop = AutomationElement.RootElement;
             while (!context.IsEndTime)
@@ -27,7 +27,7 @@ namespace RepostConfirmationCanceler
                         continue;
                     }
                     PrintControlIdentifiers(context, edgeElement, 0);
-                    CancelEdgeDialog(context, edgeElement);
+                    CancelDialog(context, edgeElement);
                 }
                 Task.Delay(1000).Wait();
             }
@@ -38,9 +38,8 @@ namespace RepostConfirmationCanceler
         {
             try
             {
-                string ind = new string(' ', indent * 2);
+                var ind = new string(' ', indent * 2);
                 Console.WriteLine($"{ind}- {element.Current.ControlType.ProgrammaticName} : {element.Current.Name}");
-
                 var children = element.FindAll(TreeScope.Children, Condition.TrueCondition);
                 foreach (AutomationElement child in children)
                 {
@@ -53,7 +52,7 @@ namespace RepostConfirmationCanceler
             }
         }
 
-        internal static void CancelEdgeDialog(RuntimeContext context, AutomationElement edgeElement)
+        internal static void CancelDialog(RuntimeContext context, AutomationElement edgeElement)
         {
             try
             {
