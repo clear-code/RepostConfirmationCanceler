@@ -29,17 +29,11 @@ PANDOC_OPT_DOCX= --toc-depth=2 --table-of-contents \
                  -t docx \
                  --reference-doc="$(BASE)/assets/style-reference.docx"
 
-all: startup-guide set-up redirect-config \
-    redirect-autoupdate config-microsoft365 collect-tracelog troubleshooting-guide \
-	distribute-in-house
+all: startup-guide set-up troubleshooting-guide distribute-in-house
 
-all-pdf: startup-guide-pdf set-up-pdf redirect-config-pdf \
-    redirect-autoupdate-pdf config-microsoft365-pdf collect-tracelog-pdf troubleshooting-guide-pdf \
-	distribute-in-house-pdf
+all-pdf: startup-guide-pdf set-up-pdf troubleshooting-guide-pdf distribute-in-house-pdf
 
-all-docx: startup-guide-docx set-up-docx redirect-config-docx \
-    redirect-autoupdate-docx config-microsoft365-docx collect-tracelog-docx troubleshooting-guide-docx \
-	distribute-in-house-docx
+all-docx: startup-guide-docx set-up-docx troubleshooting-guide-docx distribute-in-house-docx
 
 startup-guide: startup-guide-pdf startup-guide-docx
 
