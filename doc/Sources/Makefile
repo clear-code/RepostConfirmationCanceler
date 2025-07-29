@@ -29,31 +29,21 @@ PANDOC_OPT_DOCX= --toc-depth=2 --table-of-contents \
                  -t docx \
                  --reference-doc="$(BASE)/assets/style-reference.docx"
 
-all: startup-guide set-up troubleshooting-guide distribute-in-house
+all:  user-guide troubleshooting-guide distribute-in-house
 
-all-pdf: startup-guide-pdf set-up-pdf troubleshooting-guide-pdf distribute-in-house-pdf
+all-pdf: user-guide-pdf troubleshooting-guide-pdf distribute-in-house-pdf
 
-all-docx: startup-guide-docx set-up-docx troubleshooting-guide-docx distribute-in-house-docx
+all-docx: user-guide-docx troubleshooting-guide-docx distribute-in-house-docx
 
-startup-guide: startup-guide-pdf startup-guide-docx
+user-guide: user-guide-pdf user-guide-docx
 
-startup-guide-pdf:
+user-guide-pdf:
 	test -d "$(OUTDIR)" || mkdir "$(OUTDIR)" 
-	cat startup-guide.md | pandoc ${PANDOC_OPT_PDF} -o "$(OUTDIR)/startup-guide-$(DATE).pdf"
+	cat user-guide.md | pandoc ${PANDOC_OPT_PDF} -o "$(OUTDIR)/user-guide-$(DATE).pdf"
 
-startup-guide-docx:
+user-guide-docx:
 	test -d "$(OUTDIR)" || mkdir "$(OUTDIR)"
-	cat startup-guide.md | pandoc ${PANDOC_OPT_DOCX} -o "$(OUTDIR)/startup-guide-$(DATE).docx"
-
-set-up: set-up-pdf set-up-docx
-
-set-up-pdf:
-	test -d "$(OUTDIR)" || mkdir "$(OUTDIR)" 
-	cat set-up.md | pandoc ${PANDOC_OPT_PDF} -o "$(OUTDIR)/set-up-$(DATE).pdf"
-
-set-up-docx:
-	test -d "$(OUTDIR)" || mkdir "$(OUTDIR)"
-	cat set-up.md | pandoc ${PANDOC_OPT_DOCX} -o "$(OUTDIR)/set-up-$(DATE).docx"
+	cat user-guide.md | pandoc ${PANDOC_OPT_DOCX} -o "$(OUTDIR)/user-guide-$(DATE).docx"
 
 troubleshooting-guide: troubleshooting-guide-pdf troubleshooting-guide-docx
 
