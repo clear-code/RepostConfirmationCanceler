@@ -39,6 +39,8 @@ Name: jp; MessagesFile: "compiler:Languages\Japanese.isl"
 [Files]
 ;exe
 Source: "bin\Release\RepostConfirmationCanceler.exe"; DestDir: "{app}\";Flags: ignoreversion;permissions:users-readexec admins-full system-full
+;ini
+Source: "Resources\RepostConfirmationCanceler.ini"; DestDir: "{app}"; Flags: onlyifdoesntexist
 
 ;host
 Source: "bin\Release\RepostConfirmationCancelerTalk.exe"; DestDir: "{app}\RepostConfirmationCancelerHost";Flags: ignoreversion;permissions:users-readexec admins-full system-full
