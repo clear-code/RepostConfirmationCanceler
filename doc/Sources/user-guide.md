@@ -2,11 +2,11 @@
 CJKmainfont: Noto Sans CJK JP
 CJKoptions:
   - BoldFont=Noto Sans CJK JP Bold
-titlepage-logo: ./set-up/media/image1.png
+titlepage-logo: ./user-guide/media/image1.png
 title: |
   RepostConfirmationCanceler  
-  セットアップ手順
-subject: RepostConfirmationCancelerセットアップ手順
+  ユーザーガイド
+subject: RepostConfirmationCancelerユーザーガイド
 date: 2025/09/26
 author: 株式会社クリアコード
 keywords: [RepostConfirmationCanceler, Set up]
@@ -28,13 +28,19 @@ toc-own-page: true
 本書で使用するシステム名、製品名は、それぞれの各社の商標、または登録商標です。なお、本文中ではTM、®、©マークは省略しています。
 
 \newpage
+# RepostConfirmationCanceler概要
+
+## RepostConfirmationCancelerとは
+
+WEBサイトをリロードした際に「フォームを再送信しますか?」ダイアログが表示されたとき、自動でキャンセルしリロードを中止するソリューションです。
+誤操作によるフォーム再送信の防止を目的としています。
+
+\newpage
 # システム要件
 
 ## 概要
 
 RepostConfirmationCancelerが対応しているWindowsシステムについて、記述します。
-
-RepostConfirmationCancelerを利用するために、別途ランタイムライブラリーや追加インストールが必要なコンポーネントは、ありません。
 
 ## 動作サポートOS
 
@@ -66,14 +72,14 @@ RepostConfirmationCancelerを利用するために、別途ランタイムライ
 **RepostConfirmationCancelerSetup_x86.exe**
 
 Windows環境に合っていないセットアップファイルを実行すると以下のメッセージが表示されます。
-![](set-up/media/image3.png)
+![](user-guide/media/image3.png)
 
 > このプログラムは  
 > x86プロセッサー向けの Windows にしかインストールできません。
 
 対処方法：RepostConfirmationCancelerSetup_x64.exeを利用してください。
 
-![](set-up/media/image4.png)
+![](user-guide/media/image4.png)
 
 > このプログラムは  
 > x64プロセッサー向けの Windows にしかインストールできません。
@@ -84,25 +90,25 @@ Windows環境に合っていないセットアップファイルを実行する�
 
 （1） RepostConfirmationCancelerSetup_x64.exeを実行します。
 
-![](set-up/media/image5.png)  
+![](user-guide/media/image5.png)  
 ■管理者権限で実行してください。
 
 （2） 「次へ」ボタンをクリックします。
 
-![](set-up/media/image6.png)  
+![](user-guide/media/image6.png)  
 ■インストール先を変更する場合は、「参照」ボタンよりインストール先を変更します。
 
 （3） 「次へ」ボタンをクリックします。
 
-![](set-up/media/image7.png)
+![](user-guide/media/image7.png)
 
 （4） 「インストール」ボタンをクリックします。
 
-![](set-up/media/image8.png)
+![](user-guide/media/image8.png)
 
 （5） 「完了」ボタンをクリックします。
 
-![](set-up/media/image9.png)
+![](user-guide/media/image9.png)
 
 以上で、インストール作業は完了です。
 
@@ -114,25 +120,25 @@ Windows環境に合っていないセットアップファイルを実行する�
 （1）コントロールパネルより「プログラムと機能」を表示します。  
 **■管理者権限で実行してください。**
 
-![](set-up/media/image10.png)
+![](user-guide/media/image10.png)
 
 （2）一覧より「RepostConfirmationCanceler」を選択しダブルクリックします。
 
-![](set-up/media/image10.png)
+![](user-guide/media/image10.png)
 
 （3）「はい」ボタンをクリックします。
 
-![](set-up/media/image11.png)
+![](user-guide/media/image11.png)
 
 
 （4）アンインストールが完了するとメッセージが表示されます。  
 [OK]をクリックします。
 
-![](set-up/media/image12.png)
+![](user-guide/media/image12.png)
 
 （5）`<インストール先>\RepostConfirmationCanceler`フォルダーを削除します。
 
-![](set-up/media/image13.png)
+![](user-guide/media/image13.png)
 
 以上でアンインストールは、完了です。
 
@@ -155,7 +161,7 @@ RepostConfirmationCancelerのインストールをサイレント実行するた
 
 （1）メモ帳を起動し`RepostConfirmationCanceler.inf`ファイルを作成します。
 
-![](set-up/media/image14.png)
+![](user-guide/media/image14.png)
 
 （2）メモ帳に設定値を記述します。  
 カスタマイズ可能な項目は、インストール先とスタートメニューフォルダー名になります。
@@ -183,7 +189,7 @@ Tasks=
 （1）セットアップ用のEXEファイルに「/SP- /VERYSILENT」オプションを付与し実行します。  
 例) RepostConfirmationCancelerSetup_x64.exe /SP- /VERYSILENT</p>
 
-![](set-up/media/image15.png)
+![](user-guide/media/image15.png)
 
 **応答ファイルを利用したサイレント インストールの場合**
 
@@ -192,7 +198,7 @@ Tasks=
 
 ■応答ファイル RepostConfirmationCanceler.infはSetupファイルと同一フォルダーに設置するかフルパスを指定します。
 
-![](set-up/media/image16.png)
+![](user-guide/media/image16.png)
 
 \newpage
 # サイレント アンインストール手順（自動アンインストール）
@@ -210,7 +216,7 @@ RepostConfirmationCancelerのアンインストールをサイレント実行す
 （1）RepostConfirmationCancelerセットアップ先にあるunins000.exeファイルに「/VERYSILENT」オプションを付与し実行します。  
 例) `C:\Program Files\RepostConfirmationCanceler\unins000.exe /VERYSILENT`
 
-![](set-up/media/image17.png)
+![](user-guide/media/image17.png)
 
 \newpage
 # バージョンアップ手順
@@ -233,14 +239,14 @@ RepostConfirmationCancelerのアンインストールの必要はありません
 
 Windows環境に合っていないセットアップファイルを実行すると以下のメッセージが表示されます。
 
-![](set-up/media/image3.png)
+![](user-guide/media/image3.png)
 
 > このプログラムは  
 > x86プロセッサー向けの Windows にしかインストールできません。
 
 対処方法：RepostConfirmationCancelerSetup_x64.exeを利用してください。
 
-![](set-up/media/image4.png)
+![](user-guide/media/image4.png)
 
 > このプログラムは  
 > x64プロセッサー向けの Windows にしかインストールできません。
@@ -252,15 +258,15 @@ Windows環境に合っていないセットアップファイルを実行する�
 （1）RepostConfirmationCancelerSetup_x64.exeを実行します。  
 **■管理者権限で実行してください。**
 
-![](set-up/media/image5.png)
+![](user-guide/media/image5.png)
 
 （2）「インストール」ボタンをクリックします。
 
-![](set-up/media/image18.png)
+![](user-guide/media/image18.png)
 
 （3）「完了」ボタンをクリックします。
 
-![](set-up/media/image19.png)
+![](user-guide/media/image19.png)
 
 以上で、バージョンアップ作業は完了です。
 
@@ -287,12 +293,12 @@ https://learn.microsoft.com/ja-jp/deployedge/configure-microsoft-edge
 
 （1）グループポリシーエディターを起動します。
 
-![](set-up/media/image27.png)
+![](user-guide/media/image27.png)
 
 （2）「管理用テンプレート」―「Microsoft Edge」―「拡張機能」を選択します。  
 「サイレント インストールされる拡張機能を制御する」をダブルクリックします。
 
-![](set-up/media/image27a.png)
+![](user-guide/media/image27a.png)
 
 （3）「有効」を選択します。
 
@@ -301,7 +307,7 @@ https://learn.microsoft.com/ja-jp/deployedge/configure-microsoft-edge
 
 表示するコンテンツ画面でRepostConfirmationCanceler拡張アプリID「<ストア登録後の拡張機能のIDに変更する>」を入力します。
 
-![](set-up/media/image28.png)
+![](user-guide/media/image28.png)
 
 ■RepostConfirmationCanceler拡張アプリID  
 <ストア登録後の拡張機能のIDに変更する>
@@ -310,14 +316,14 @@ https://learn.microsoft.com/ja-jp/deployedge/configure-microsoft-edge
 
 `\SOFTWARE\Policies\Microsoft\Edge\ExtensionInstallForcelist`
 
-![](set-up/media/image29.png)
+![](user-guide/media/image29.png)
 
 （5）グループポリシーを利用し自動的に拡張機能が有効化されます。  
 ユーザーは、拡張機能の削除や無効化を行うことはできません。
 
 グループポリシーが適用されると青のスライドバーの左隣に鍵マークが表示されます。
 
-![](set-up/media/image30.png)
+![](user-guide/media/image30.png)
 
 \newpage
 # モジュール構成
@@ -337,3 +343,65 @@ RepostConfirmationCancelerTalk.exe
 `RepostConfirmationCancelerHost\` \              約1KB            Microsoft Edge拡張連携
 edge.json
 --------------------------------------------------------------------------------------------
+
+# 設定概要
+
+RepostConfirmationCancelerは設定ファイルにより動作を変更することができます。
+
+## 設定ファイルの場所
+
+RepostConfirmationCancelerセットアップ先のRepostConfirmationCanceler.iniファイル
+例) `C:\Program Files\RepostConfirmationCanceler\RepostConfirmationCanceler.ini`
+
+## 設定項目の一覧
+
+Edgeでの動作については、`[Edge]`セクションに記載します。
+
+| 項目       | 設定内容                                                | 既定  |
+|------------|--------------------------------------------------------|------|
+| 対象URL一覧（書式は後述） | 「フォームを再送信しますか?」ダイアログを自動でキャンセルする対象のURL一覧|*（すべてのURL）|
+
+注: いずれかのタブで対象URLを開いている場合に本プログラムが動作します。実際に開いているURLが対象URLでなくても、別のタブで対象URLを
+開いている場合、「フォームを再送信しますか?」ダイアログがキャンセルされます。
+
+### 対象URL一覧書式
+
+対象URL一覧は以下のようにURL全体を改行切りで指定します。
+
+例) 
+
+```
+[Edge]
+https://www.clear-code.com/
+https://example.com/
+```
+
+
+イルドカード「`*`」「`?`」を利用することが可能です。
+「`*`」は0文字以上の任意の文字列を表し、「`?`」は任意の1文字を表します。
+
+例) 
+
+* `*://example.com*`
+  * ドメイン名にexample.comを含むサイトがマッチします。
+  * 例) 
+    * `http://example.com/`
+    * `https://example.com/`
+    * `https://example.com/example`
+* `*://example.??/*`
+  * exampleドメインのサブドメインが二文字であるサイトがマッチします。
+  * 例) 
+    * `https://example.jp/`
+    * `https://example.au/`
+
+また、先頭に`-`をつけることで、除外URLを指定することが可能です。
+
+例) 
+
+```
+[Edge]
+https://example.com/*
+-https://example.com/test/
+```
+
+これは「`https://example.com/`を含むサイトを対象とするが、`https://example.com/test/`は除外する」という設定です。
