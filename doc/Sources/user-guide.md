@@ -189,16 +189,12 @@ Tasks=
 （1）セットアップ用のEXEファイルに「/SP- /VERYSILENT」オプションを付与し実行します。  
 例) RepostConfirmationCancelerSetup_x64.exe /SP- /VERYSILENT</p>
 
-![](user-guide/media/image15.png)
-
 **応答ファイルを利用したサイレント インストールの場合**
 
 （1）セットアップ用のEXEファイルに「/SP- /VERYSILENT **/LOADINF="RepostConfirmationCanceler.inf"**」オプションを付与し実行します。  
 例) RepostConfirmationCancelerSetup_x64.exe /SP- /VERYSILENT /LOADINF="RepostConfirmationCanceler.inf"
 
 ■応答ファイル RepostConfirmationCanceler.infはSetupファイルと同一フォルダーに設置するかフルパスを指定します。
-
-![](user-guide/media/image16.png)
 
 \newpage
 # サイレント アンインストール手順（自動アンインストール）
@@ -214,9 +210,7 @@ RepostConfirmationCancelerのアンインストールをサイレント実行す
 ## サイレント アンインストール
 
 （1）RepostConfirmationCancelerセットアップ先にあるunins000.exeファイルに「/VERYSILENT」オプションを付与し実行します。  
-例) `C:\Program Files\RepostConfirmationCanceler\unins000.exe /VERYSILENT`
-
-![](user-guide/media/image17.png)
+例) `"C:\Program Files\RepostConfirmationCanceler\unins000.exe" /VERYSILENT`
 
 \newpage
 # バージョンアップ手順
