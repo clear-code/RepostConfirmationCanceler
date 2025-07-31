@@ -114,7 +114,6 @@
   <ItemGroup>
     <ClCompile Include="cb_config.c" />
     <ClCompile Include="cb_query.c" />
-    <ClCompile Include="cb_resource.c" />
     <ClCompile Include="main.c" />
   </ItemGroup>
   <ItemGroup>

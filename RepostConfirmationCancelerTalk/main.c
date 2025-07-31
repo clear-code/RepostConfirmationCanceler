@@ -153,9 +153,6 @@ int main(int argc, char *argv[])
 	case 'Q':
 	    ret = cb_query(cmd);
 	    break;
-	case 'R':
-	    ret = cb_resource(cmd);
-	    break;
 	default:
 	    fprintf(stderr, "unknown command '%s'", cmd);
 	    break;
