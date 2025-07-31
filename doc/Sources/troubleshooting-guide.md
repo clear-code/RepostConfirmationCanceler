@@ -57,4 +57,3 @@ toc-own-page: true
   * `RepostConfirmationCanceler_server.log.N`（Nは1から10までの整数）
   * `RepostConfirmationCanceler_client.log`
   * `RepostConfirmationCanceler_client.log.N`（Nは1から10までの整数）
-
