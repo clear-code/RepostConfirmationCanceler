@@ -188,7 +188,7 @@ ADドメイン参加端末全体を対象として、RepostConfirmationCanceler�
 * 1.2 Windows のエクスプローラーもしくはZip形式の展開が可能なツールを使用し、RepostConfirmationCanceler.zip（クリアコード提供の組織内サーバー配布用RepostConfirmationCanceler拡張機能関連ファイル一式を含むZipファイル）を展開します。   
 以下の3つのファイルが展開されます。  
 「edge.crx」  
-「edge.json」  
+「edge.json」
 「manifest.xml」
 * 1.3 1.2 で展開された3つのファイルを、1.1で作成したファイル配布用フォルダーにコピーします。  
 前述の仮定に従い、各ファイルのUNCパスは  
