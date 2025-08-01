@@ -1,4 +1,8 @@
-﻿using RepostConfirmationCanceler;
+﻿using Microsoft.Win32;
+using RepostConfirmationCanceler;
+using System;
+using System.Collections.Generic;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -6,6 +10,7 @@ class Program
 {
     private static Mutex MyMutex { get; } = new Mutex(false, @"Global\RepostConfirmationCancelerMutex");
 
+    [STAThread]
     static void Main()
     {
         bool isMutexAcquired = false;
@@ -46,4 +51,69 @@ class Program
 
         }
     }
+
+    public static class RepostConfirmationCancelerUtils
+    {
+        public static string GetRepostConfirmationCancelerRulefile()
+        {
+            const string registryPath = @"SOFTWARE\RepostConfirmationCanceler";
+            const string valueName = "Rulefile";
+            try
+            {
+                using (RegistryKey key = Registry.LocalMachine.OpenSubKey(registryPath))
+                {
+                    if (key == null)
+                    {
+                        Console.Error.WriteLine($"cannot read {registryPath}: key not found");
+                        return null;
+                    }
+                    object value = key.GetValue(valueName);
+                    if (value is string rulefile)
+                    {
+                        return rulefile;
+                    }
+                    else
+                    {
+                        Console.Error.WriteLine($"cannot read {registryPath}: 'Rulefile' not found or not string");
+                        return null;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine($"cannot read {registryPath}: {ex.Message}");
+                return null;
+            }
+        }
+    }
+
+// 補助クラス Section
+public class Section
+{
+    public string Name;
+    public bool Disabled = false;
+    public bool WarningWhenCloseDialog = false;
+    public StringBuilder ExcludeGroups = new StringBuilder();
+    public StringBuilder Excludes = new StringBuilder();
+    public StringBuilder Patterns = new StringBuilder();
+
+    public Section(string name)
+    {
+        Name = name;
+    }
+}
+
+// Configクラス
+public class Config
+{
+    public bool IgnoreQueryString = false;
+    public bool OnlyMainFrame = false;
+    public List<Section> SectionList = new List<Section>();
+}
+
+public static class ConfParser
+{
+
+}
+
 }

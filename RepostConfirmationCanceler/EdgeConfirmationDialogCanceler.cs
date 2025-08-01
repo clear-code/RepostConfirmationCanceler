@@ -3,6 +3,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Automation;
+using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace RepostConfirmationCanceler
 {
@@ -29,7 +31,7 @@ namespace RepostConfirmationCanceler
                     PrintControlIdentifiers(context, edgeElement, 0);
                     CancelDialog(context, edgeElement);
                 }
-                Task.Delay(1000).Wait();
+                Task.Delay(500).Wait();
             }
         }
 
@@ -67,7 +69,7 @@ namespace RepostConfirmationCanceler
                 {
                     return;
                 }
-                context.Logger.Log($"Found confirmation dialog: {confirmDialogElement.Current.Name}");
+                context.Logger.Log($"Found confirmation dialog");
                 var cancelButtonNameCondition = new OrCondition(
                     new PropertyCondition(AutomationElement.NameProperty, "Cancel"),
                     new PropertyCondition(AutomationElement.NameProperty, "キャンセル"));
@@ -85,12 +87,59 @@ namespace RepostConfirmationCanceler
                     return;
                 }
                 cancelButton.Invoke();
-                context.Logger.Log($"Dialog canceled: {confirmDialogElement.Current.Name}");
+                context.Logger.Log($"Dialog canceled");
+
+                // 「フォームを再送信しますか?」ダイアログが消えていることを確認する。
+                // 最大10秒待つ。
+                for (int i = 0; i < 10; i++)
+                {
+                    confirmDialogElement = edgeElement.FindFirst(TreeScope.Descendants, confirmDialogCondition);
+                    if (confirmDialogElement == null)
+                    {
+                        break;
+                    }
+                    Task.Delay(1000).Wait();
+                }
+
+                if (confirmDialogElement != null)
+                {
+                    context.Logger.Log($"Dialog not closed");
+                    return;
+                }
+
+                var edgeConfig = context.Config.GetEdgeSection();
+                if (edgeConfig?.WarningWhenCloseDialog ?? false)
+                {
+                    context.Logger.Log($"Display warning dialog");
+                    ShowWarningDialog();
+                }
             }
             catch (Exception ex)
             {
                 context.Logger.Log(ex);
             }
         }
+
+        internal static void ShowWarningDialog()
+        {
+            // メッセージボックスの表示はスレッドをブロックするので、別スレッドで実行する
+            Task.Run(() =>
+            {
+                MessageBox.Show("フォームの再送信が発生するため、このサイトでのリロードは禁止されています。\n\nリロードはキャンセルされました。", "RepostConfirmationCanceler", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            });
+
+            // メッセージボックスがEdgeの後ろ側に来てしまうことがあるので、強制的にフォーカスする。
+            Task.Run(() =>
+            {
+                Task.Delay(100).Wait();
+                AutomationElement desktop = AutomationElement.RootElement;
+                var windowCondition = new AndCondition(
+                    new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Window),
+                    new PropertyCondition(AutomationElement.NameProperty, "RepostConfirmationCanceler"));
+                var dialog = desktop.FindFirst(TreeScope.Children, windowCondition);
+                dialog?.SetFocus();
+            });
+        }
+
     }
 }

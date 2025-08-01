@@ -8,10 +8,13 @@ namespace RepostConfirmationCanceler
 
         internal Logger Logger { get; }
 
+        internal Config Config { get; }
+
         internal RuntimeContext(RunTimeMode mode)
         {
             FinishTime = DateTime.Now.AddMinutes(1);
             Logger = new Logger(mode);
+            Config = ConfigLoader.LoadConfig();
         }
 
         internal DateTime FinishTime
