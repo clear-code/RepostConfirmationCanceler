@@ -41,12 +41,7 @@
   * 書き込み権限がない場合、コマンドプロンプトを管理者権限で起動して作成する
 * `C:\Program Files\RepostConfirmationCanceler\RepostConfirmationCanceler.ini` のアクセス権を変更し、ユーザー権限での書き込みを許可した上で、以下のような内容を記載する
   * ```
-    [GLOBAL]
-    @DISABLED
-    @TOP_PAGE_ONLY
-
     [Edge]
-    @TOP_PAGE_ONLY
     *
     ```
 
