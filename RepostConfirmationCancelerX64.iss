@@ -53,7 +53,7 @@ Source: "bin\Release\RepostConfirmationCanceler.exe"; DestDir: "{app}\";Flags: i
 Source: "Resources\RepostConfirmationCanceler.ini"; DestDir: "{app}"; Flags: onlyifdoesntexist
 
 ;host
-Source: "bin\Release\RepostConfirmationCancelerTalk.exe"; DestDir: "{app}\RepostConfirmationCancelerHost";Flags: ignoreversion;permissions:users-readexec admins-full system-full
+Source: "bin\x64\Release\RepostConfirmationCancelerTalk.exe"; DestDir: "{app}\RepostConfirmationCancelerHost";Flags: ignoreversion;permissions:users-readexec admins-full system-full
 
 ;edge
 Source: "Resources\edge.json"; DestDir: "{app}\RepostConfirmationCancelerHost";Flags: ignoreversion;permissions:users-readexec admins-full system-full

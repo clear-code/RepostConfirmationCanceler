@@ -20,8 +20,8 @@
 ### ネイティブアプリのインストーラー作成方法
 
 1. RepostConfirmationCanceler.sln をVisual Studio 2022で開く
-2. 構成Release、プラットフォームx86でソリューションのビルドを実行する
-3. RepostConfirmationCancelerX64.iss をInno Setupで開く
+2. 構成Release、プラットフォームx86およびx64でソリューションのビルドを実行する
+3. RepostConfirmationCancelerX64.iss および RepostConfirmationCancelerX86.iss をInno Setupで開く
 4. Build -> Compileからインストーラーをコンパイルする
 5. SetupOutput配下にネイティブアプリのインストーラーが作成される
 
