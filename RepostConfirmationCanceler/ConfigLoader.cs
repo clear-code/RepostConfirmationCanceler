@@ -47,7 +47,7 @@ namespace RepostConfirmationCanceler
             }
             using (var fileStream = new FileStream(ruleFilePath, FileMode.Open, FileAccess.Read, FileShare.Read))
             using (var streamReader = new StreamReader(fileStream, Encoding.UTF8, true, 1024, true))
-            {   
+            {
                 string data = streamReader.ReadToEnd();
                 return ParseConf(data);
             }
