@@ -139,8 +139,11 @@ const RepostConfirmationCancelerTalkClient = {
 
     console.log(`* Lookup sections for ${urlToMatch}`);
     for (const section of config.Sections) {
+      if (section.Name.toLowerCase() !== "[edge]")
+      {
+        continue;
+      }
       console.log(`handleURL: check for section ${section.Name} (${JSON.stringify(section)})`);
-
       if (this.match(section, urlToMatch)) {
         console.log(` => unmatched`);
         this.startMonitoring();
