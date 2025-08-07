@@ -177,7 +177,7 @@ static char *dump_json(struct config *conf)
 	int need_comma;
 
 	/* WarningWhenCloseDialog */
-	strbuf_concat(&sb, "\"WarningWhenCloseDialog\":");
+	strbuf_concat(&sb, "{\"WarningWhenCloseDialog\":");
 	strbuf_concat(&sb, _itoa(conf->warning_when_close_dialog, buf, 10));
 	strbuf_putchar(&sb, ',');
 
