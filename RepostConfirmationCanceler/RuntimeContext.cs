@@ -34,7 +34,7 @@ namespace RepostConfirmationCanceler
                 }
             }
         }
-        private static DateTime _finishTime = DateTime.MinValue;
+        private DateTime _finishTime = DateTime.MinValue;
 
         internal bool IsEndTime
         {

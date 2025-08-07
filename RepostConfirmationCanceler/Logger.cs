@@ -37,7 +37,7 @@ namespace RepostConfirmationCanceler
                 FilePath = Path.Combine(logDirectory, $"{LogFileNameBase}.log");
                 EnableLogging = true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // ログ出力できないが、全体の処理は続行する。
             }
