@@ -92,7 +92,7 @@ const RepostConfirmationCancelerTalkClient = {
   },
 
   match(section, url) {
-    for (let pattern of (section.URLExcludePatterns || section.Excludes || [])) {
+    for (let pattern of (section.Excludes || [])) {
       if (Array.isArray(pattern)) {
         pattern = pattern[0];
       }
@@ -102,7 +102,7 @@ const RepostConfirmationCancelerTalkClient = {
       }
     }
 
-    for (let pattern of (section.URLPatterns || section.Patterns || [])) {
+    for (let pattern of (section.Patterns || [])) {
       if (Array.isArray(pattern)) {
         pattern = pattern[0];
       }
