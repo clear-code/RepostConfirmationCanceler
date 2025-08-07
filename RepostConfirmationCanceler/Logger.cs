@@ -17,19 +17,30 @@ namespace RepostConfirmationCanceler
 
         private string LogFileNameBase { get; }
 
+        private bool EnableLogging { get; }
+
         internal void Log(string message) => NoException(() => LogImpl(message));
         internal void Log(Exception e) => NoException(() => LogImpl(e));
 
         internal Logger(RunTimeMode mode)
         {
-            LogFileNameBase = mode == RunTimeMode.Server ? "RepostConfirmationCanceler_server" : "RepostConfirmationCanceler_client";
-            string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            var logDirectory = Path.Combine(appDataPath, "RepostConfirmationCanceler");
-            if (!Directory.Exists(logDirectory))
+            EnableLogging = false;
+            try
             {
-                Directory.CreateDirectory(logDirectory);
+                LogFileNameBase = mode == RunTimeMode.Server ? "RepostConfirmationCanceler_server" : "RepostConfirmationCanceler_client";
+                string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                var logDirectory = Path.Combine(appDataPath, "RepostConfirmationCanceler");
+                if (!Directory.Exists(logDirectory))
+                {
+                    Directory.CreateDirectory(logDirectory);
+                }
+                FilePath = Path.Combine(logDirectory, $"{LogFileNameBase}.log");
+                EnableLogging = true;
             }
-            FilePath = Path.Combine(logDirectory, $"{LogFileNameBase}.log");
+            catch (Exception ex)
+            {
+                // ログ出力できないが、全体の処理は続行する。
+            }
         }
 
         private void NoException(Action func)
@@ -39,6 +50,10 @@ namespace RepostConfirmationCanceler
 
         private void LogImpl(string message)
         {
+            if (!EnableLogging)
+            {
+                return;
+            }
             lock (LockObject)
             {
                 RotateIfNeed();
@@ -49,6 +64,10 @@ namespace RepostConfirmationCanceler
 
         private void LogImpl(Exception e)
         {
+            if (!EnableLogging)
+            {
+                return;
+            }
             LogImpl(e.ToString());
         }
 
