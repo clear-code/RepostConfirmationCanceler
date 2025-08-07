@@ -99,7 +99,7 @@ static void parse_conf(char *data, struct config *conf)
 			if (global) {
 				if (line == "@WARNING_WHEN_CLOSE_DIALOG")
 				{
-					conf.warning_when_close_dialog = true;
+					conf->warning_when_close_dialog = TRUE;
 				}
 			}
 			break;
@@ -296,7 +296,6 @@ int cb_config(char *cmd)
 	section = conf.section;
 	while (section) {
 		next = section->next;
-		free(section->exclude_groups.buf);
 		free(section->patterns.buf);
 		free(section->excludes.buf);
 		free(section);
