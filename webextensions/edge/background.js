@@ -124,7 +124,7 @@ const RepostConfirmationCancelerTalkClient = {
       console.log(`* Ignore non-HTTP/HTTPS URL ${url}`);
       return false;
     }
-    const urlToMatch = config.IgnoreQueryString ? url.replace(/\?.*/, '') : url;
+    const urlToMatch = url;
 
     console.log(`* Lookup sections for ${urlToMatch}`);
     for (const section of config.Sections) {
