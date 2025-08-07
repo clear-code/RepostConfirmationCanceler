@@ -107,8 +107,7 @@ namespace RepostConfirmationCanceler
                     return;
                 }
 
-                var edgeConfig = context.Config.GetEdgeSection();
-                if (edgeConfig?.WarningWhenCloseDialog ?? false)
+                if (context.Config?.WarningWhenCloseDialog ?? false)
                 {
                     context.Logger.Log($"Display warning dialog");
                     ShowWarningDialog();

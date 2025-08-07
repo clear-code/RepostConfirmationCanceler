@@ -25,16 +25,13 @@
  */
 struct section {
 	char name[16];
-	int disabled;
-	struct strbuf exclude_groups;
 	struct strbuf patterns;
 	struct strbuf excludes;
 	struct section *next;    /* linked list */
 };
 
 struct config {
-	int only_main_frame;
-	int ignore_query_string;
+	int warning_when_close_dialog;
 	struct section *section;
 };
 
@@ -64,9 +61,9 @@ static struct section *new_section(char *line)
  * You can define variables/URLs in each section like this:
  *
  *     [GLOBAL]
- *     @TOP_PAGE_ONLY
+ *     @WARNING_WHEN_CLOSE_DIALOG
  *
- *     [Edge]
+ *     [TARGETS]
  *     https://example.com*
  *     -https://test.example.com*
  *
@@ -77,7 +74,6 @@ static void parse_conf(char *data, struct config *conf)
 {
 	char *line;
 	int global;
-	int _default;
 	struct section *section;
 	struct section **indirect = &conf->section;
 
@@ -89,14 +85,10 @@ static void parse_conf(char *data, struct config *conf)
 	        break;
 	    case '[':
 			global = 0;
-			_default = 0;
 
 	        if (strcmp(line, "[GLOBAL]") == 0) {
 				global = 1;
 	        }
-			else if (strcmp(line, "[Default]") == 0) {
-				_default = 1;
-			}
 			else {
 				section = new_section(line);
 				*indirect = section;
@@ -105,20 +97,9 @@ static void parse_conf(char *data, struct config *conf)
 	        break;
 	    case '@':
 			if (global) {
-				if (strcmp(line, "@TOP_PAGE_ONLY") == 0) {
-					conf->ignore_query_string = 1;
-				}
-				else if (strcmp(line, "@ONLY_MAIN_FRAME") == 0) {
-					conf->only_main_frame = 1;
-				}
-			}
-			else if (section) {
-				if (strcmp(line, "@DISABLED") == 0) {
-					section->disabled = 1;
-				}
-				else if (strstr(line, "@EXCLUDE_GROUP:") == line) {
-					strbuf_concat(&section->exclude_groups, line + strlen("@EXCLUDE_GROUP:"));
-					strbuf_putchar(&section->exclude_groups, '\n');
+				if (line == "@WARNING_WHEN_CLOSE_DIALOG")
+				{
+					conf.warning_when_close_dialog = true;
 				}
 			}
 			break;
@@ -149,22 +130,6 @@ static char *dump_section(struct section *section)
 	strbuf_concat(&sb, "{\"Name\":");
 	strbuf_concat_jsonstr(&sb, section->name, strlen(section->name));
 	strbuf_putchar(&sb, ',');
-
-	strbuf_concat(&sb, "\"ExcludeGroups\":[");
-	if (section->exclude_groups.buf) {
-		ptr = section->exclude_groups.buf;
-		need_comma = 0;
-		while (*ptr) {
-			if (need_comma)
-				strbuf_putchar(&sb, ',');
-
-			end = strchr(ptr, '\n');
-			strbuf_concat_jsonstr(&sb, ptr, end - ptr);
-			need_comma = 1;
-			ptr = end + 1;
-		}
-	}
-	strbuf_concat(&sb, "],");
 
 	/* URLPatterns */
 	strbuf_concat(&sb, "\"Patterns\":[");
@@ -211,14 +176,9 @@ static char *dump_json(struct config *conf)
 	char *json;
 	int need_comma;
 
-	/* OnlyMainFrame */
-	strbuf_concat(&sb, "{\"OnlyMainFrame\":");
-	strbuf_concat(&sb, _itoa(conf->only_main_frame, buf, 10));
-	strbuf_putchar(&sb, ',');
-
-	/* IgnoreQueryString */
-	strbuf_concat(&sb, "\"IgnoreQueryString\":");
-	strbuf_concat(&sb, _itoa(conf->ignore_query_string, buf, 10));
+	/* WarningWhenCloseDialog */
+	strbuf_concat(&sb, "\"WarningWhenCloseDialog\":");
+	strbuf_concat(&sb, _itoa(conf->warning_when_close_dialog, buf, 10));
 	strbuf_putchar(&sb, ',');
 
 	/* Sections */
@@ -227,8 +187,8 @@ static char *dump_json(struct config *conf)
 	section = conf->section;
 	need_comma = 0;
 	while (section) {
-		/* Disabled or no pattern defined */
-		if (section->disabled || section->patterns.buf == NULL) {
+		/* no pattern defined */
+		if (section->patterns.buf == NULL) {
 			section = section->next;
 			continue;
 		}

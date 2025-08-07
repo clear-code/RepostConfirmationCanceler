@@ -355,27 +355,62 @@ RepostConfirmationCancelerセットアップ先のRepostConfirmationCanceler.ini
 
 例) `C:\Program Files\RepostConfirmationCanceler\RepostConfirmationCanceler.ini`
 
+## 設定ファイルの書式
+
+設定ファイルは、以下のように`[GLOBAL]`セクションと`[TARGETS]`セクションに分かれています。
+
+```
+[GLOBAL]
+@WARNING_WHEN_CLOSE_DIALOG
+
+[TARGETS]
+https://example.com/*
+-https://example.com/test/
+```
+
+各セクションに対して、必要な項目を設定します。
+
 ## 設定項目の一覧
 
-Edgeでの動作については、`[Edge]`セクションに記載します。
+### 一般設定
+
+一般設定については、`[GLOBAL]`セクションに記載します。
+
+| 項目       | 設定内容                               | 既定  |
+| @WARNING_WHEN_CLOSE_DIALOG | 「フォームを再送信しますか?」ダイアログをキャンセルしたとき、追加の警告ダイアログを表示する | 無効 |
+
+#### @WARNING_WHEN_CLOSE_DIALOG
+
+フォームを再送信しますか?」ダイアログをキャンセルしたとき、以下のような追加の警告ダイアログを表示します。
+
+![](user-guide/media/image31.png)
+
+以下のように値なしのパラメータとして指定します。
+
+```
+[GLOBAL]
+@WARNING_WHEN_CLOSE_DIALOG
+```
+
+### 対象URL一覧
+
+対象URL一覧については、`[TARGETS]`セクションに記載します。
 
 | 項目       | 設定内容                               | 既定  |
 |------------|---------------------------------------|------|
 | 対象URL一覧（書式は後述） | 「フォームを再送信しますか?」ダイアログをキャンセルするURL|*（すべてのURL）|
-| @WARNING_WHEN_CLOSE_DIALOG | 「フォームを再送信しますか?」ダイアログをキャンセルしたとき、追加の警告ダイアログを表示する | 無効 |
-
 
 注: いずれかのタブで対象URLを開いている場合に本プログラムが動作します。実際に開いているURLが対象URLでなくても、別のタブで対象URLを
 開いている場合、「フォームを再送信しますか?」ダイアログがキャンセルされます。
 
-### 対象URL一覧書式
+#### 対象URL一覧書式
 
 対象URL一覧は以下のようにURL全体を改行切りで指定します。
 
 例) 
 
 ```
-[Edge]
+[TARGETS]
 https://www.clear-code.com/
 https://example.com/
 ```
@@ -402,25 +437,12 @@ https://example.com/
 例) 
 
 ```
-[Edge]
+[TARGETS]
 https://example.com/*
 -https://example.com/test/
 ```
 
 これは「`https://example.com/`を含むサイトを対象とするが、`https://example.com/test/`は除外する」という設定です。
-
-### @WARNING_WHEN_CLOSE_DIALOG
-
-フォームを再送信しますか?」ダイアログをキャンセルしたとき、以下のような追加の警告ダイアログを表示します。
-
-![](user-guide/media/image31.png)
-
-以下のように値なしのパラメータとして指定します。
-
-```
-[Edge]
-@WARNING_WHEN_CLOSE_DIALOG
-```
 
 ## グループポリシー(GPO)を利用した設定ファイルの配布手順
 

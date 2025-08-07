@@ -83,7 +83,7 @@ const RepostConfirmationCancelerTalkClient = {
 
   /*
    * Request monitoring to Native Messaging Hosts.
-   * * Request Example: "Q edge https://example.com/".
+   * * Request Example: "Q edge".
    */
   startMonitoring() {
     const query = new String('Q ' + BROWSER);
@@ -128,7 +128,7 @@ const RepostConfirmationCancelerTalkClient = {
 
     console.log(`* Lookup sections for ${urlToMatch}`);
     for (const section of config.Sections) {
-      if (section.Name.toLowerCase() !== "edge")
+      if (section.Name.toLowerCase() !== "targets")
       {
         continue;
       }

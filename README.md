@@ -41,13 +41,13 @@
   * 書き込み権限がない場合、コマンドプロンプトを管理者権限で起動して作成する
 * `C:\Program Files\RepostConfirmationCanceler\RepostConfirmationCanceler.ini` のアクセス権を変更し、ユーザー権限での書き込みを許可した上で、以下のような内容を記載する
   * ```
-    [Edge]
+    [TARGETS]
     *
     ```
 
 ## 動作解説
 
-* ブラウザの拡張機能 RepostConfirmationCanceler が、`RepostConfirmationCanceler.ini`の`[Edge]`セクションに記載されているURLを開いているかを判定する
+* ブラウザの拡張機能 RepostConfirmationCanceler が、`RepostConfirmationCanceler.ini`の`[TARGETS]`セクションに記載されているURLを開いているかを判定する
   * サイトを開いたタイミングと、30秒ごとのポーリングで判定を行う
 * 指定のURLを開いていた場合、ブラウザの拡張機能が RepostConfirmationCancelerTalk.exe を呼び出す。
   * このとき、`Q Edge`というメッセージを送信する
