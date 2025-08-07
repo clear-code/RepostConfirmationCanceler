@@ -20,40 +20,20 @@ const ALARM_MINUTES = 0.5;
  * true
  */
 function wildcmp(wild, string) {
-  let i = 0;
-  let j = 0;
-  let mp, cp;
-
-  while ((j < string.length) && (wild[i] != '*')) {
-    if ((wild[i] != string[j]) && (wild[i] != '?')) {
-      return 0;
-    }
-    i += 1;
-    j += 1;
+  if(!wild || !string) {
+    return false;
   }
-  while (j < string.length) {
-    if (wild[i] == '*') {
-      i += 1;
-
-      if (i == wild.length) {
-        return 1;
-      }
-      mp = i;
-      cp = j + 1
-    } else if ((wild[i] == string[j]) || (wild[i] == '?')) {
-      i += 1;
-      j += 1;
-    } else {
-      i = mp;
-      j = cp;
-      cp += 1;
-    }
-  }
-  while (wild[i] == '*' && i < wild.length) {
-    i += 1;
-  }
-  return i >= wild.length;
+  const pattern = wildcardToRegexp(wild);
+  const regex = new RegExp(`^${pattern}$`, "i");
+  return regex.test(string);
 };
+
+function wildcardToRegexp(source) {
+  // https://stackoverflow.com/questions/6300183/sanitize-string-of-regex-characters-before-regexp-build
+  const sanitized = source.replace(/[#-.]|[[-^]|[?|{}]/g, "\\$&");
+  const wildcardAccepted = sanitized.replace(/\\\*/g, ".*").replace(/\\\?/g, ".");
+  return wildcardAccepted;
+}
 
 /*
  * Observe WebRequests with config fetched from RepostConfirmationCanceler.
