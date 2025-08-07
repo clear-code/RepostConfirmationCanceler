@@ -114,17 +114,6 @@ const RepostConfirmationCancelerTalkClient = {
     return false;
   },
 
-  getBrowserName(section) {
-    const name = section.Name.toLowerCase();
-
-    /* Guess the browser name from the executable path */
-    if (name.match(/^custom/i)) {
-      if (section.Path.match(RegExp(BROWSER, 'i')))
-        return BROWSER;
-    }
-    return name;
-  },
-
   handleURL(config, url){
     if (!url) {
       console.log(`* Empty URL found`);
