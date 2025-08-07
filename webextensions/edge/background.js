@@ -128,7 +128,7 @@ const RepostConfirmationCancelerTalkClient = {
 
     console.log(`* Lookup sections for ${urlToMatch}`);
     for (const section of config.Sections) {
-      if (section.Name.toLowerCase() !== "[edge]")
+      if (section.Name.toLowerCase() !== "edge")
       {
         continue;
       }
