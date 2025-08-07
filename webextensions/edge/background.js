@@ -20,40 +20,20 @@ const ALARM_MINUTES = 0.5;
  * true
  */
 function wildcmp(wild, string) {
-  let i = 0;
-  let j = 0;
-  let mp, cp;
-
-  while ((j < string.length) && (wild[i] != '*')) {
-    if ((wild[i] != string[j]) && (wild[i] != '?')) {
-      return 0;
-    }
-    i += 1;
-    j += 1;
+  if(!wild || !string) {
+    return false;
   }
-  while (j < string.length) {
-    if (wild[i] == '*') {
-      i += 1;
-
-      if (i == wild.length) {
-        return 1;
-      }
-      mp = i;
-      cp = j + 1
-    } else if ((wild[i] == string[j]) || (wild[i] == '?')) {
-      i += 1;
-      j += 1;
-    } else {
-      i = mp;
-      j = cp;
-      cp += 1;
-    }
-  }
-  while (wild[i] == '*' && i < wild.length) {
-    i += 1;
-  }
-  return i >= wild.length;
+  const pattern = wildcardToRegexp(wild);
+  const regex = new RegExp(`^${pattern}$`, "i");
+  return regex.test(string);
 };
+
+function wildcardToRegexp(source) {
+  // https://stackoverflow.com/questions/6300183/sanitize-string-of-regex-characters-before-regexp-build
+  const sanitized = source.replace(/[#-.]|[[-^]|[?|{}]/g, "\\$&");
+  const wildcardAccepted = sanitized.replace(/\\\*/g, ".*").replace(/\\\?/g, ".");
+  return wildcardAccepted;
+}
 
 /*
  * Observe WebRequests with config fetched from RepostConfirmationCanceler.
@@ -102,8 +82,8 @@ const RepostConfirmationCancelerTalkClient = {
   },
 
   /*
-   * Request redirection to Native Messaging Hosts.
-   * * Request Example: "Q edge https://example.com/".
+   * Request monitoring to Native Messaging Hosts.
+   * * Request Example: "Q edge".
    */
   startMonitoring() {
     const query = new String('Q ' + BROWSER);
@@ -112,7 +92,7 @@ const RepostConfirmationCancelerTalkClient = {
   },
 
   match(section, url) {
-    for (let pattern of (section.URLExcludePatterns || section.Excludes || [])) {
+    for (let pattern of (section.Excludes || [])) {
       if (Array.isArray(pattern)) {
         pattern = pattern[0];
       }
@@ -122,7 +102,7 @@ const RepostConfirmationCancelerTalkClient = {
       }
     }
 
-    for (let pattern of (section.URLPatterns || section.Patterns || [])) {
+    for (let pattern of (section.Patterns || [])) {
       if (Array.isArray(pattern)) {
         pattern = pattern[0];
       }
@@ -132,17 +112,6 @@ const RepostConfirmationCancelerTalkClient = {
       }
     }
     return false;
-  },
-
-  getBrowserName(section) {
-    const name = section.Name.toLowerCase();
-
-    /* Guess the browser name from the executable path */
-    if (name.match(/^custom/i)) {
-      if (section.Path.match(RegExp(BROWSER, 'i')))
-        return BROWSER;
-    }
-    return name;
   },
 
   handleURL(config, url){
@@ -155,12 +124,15 @@ const RepostConfirmationCancelerTalkClient = {
       console.log(`* Ignore non-HTTP/HTTPS URL ${url}`);
       return false;
     }
-    const urlToMatch = config.IgnoreQueryString ? url.replace(/\?.*/, '') : url;
+    const urlToMatch = url;
 
     console.log(`* Lookup sections for ${urlToMatch}`);
     for (const section of config.Sections) {
+      if (section.Name.toLowerCase() !== "targets")
+      {
+        continue;
+      }
       console.log(`handleURL: check for section ${section.Name} (${JSON.stringify(section)})`);
-
       if (this.match(section, urlToMatch)) {
         console.log(` => unmatched`);
         this.startMonitoring();

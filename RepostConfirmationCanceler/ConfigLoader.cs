@@ -11,9 +11,6 @@ namespace RepostConfirmationCanceler
     internal class Section
     {
         public string Name;
-        public bool Disabled = false;
-        public bool WarningWhenCloseDialog = false;
-        public StringBuilder ExcludeGroups = new StringBuilder();
         public StringBuilder Excludes = new StringBuilder();
         public StringBuilder Patterns = new StringBuilder();
 
@@ -27,12 +24,8 @@ namespace RepostConfirmationCanceler
     {
         public bool IgnoreQueryString = false;
         public bool OnlyMainFrame = false;
+        public bool WarningWhenCloseDialog = false;
         public List<Section> SectionList = new List<Section>();
-
-        public Section GetEdgeSection()
-        {
-            return SectionList.FirstOrDefault(_ => _.Name.ToLowerInvariant() == "[edge]");
-        }
     }
 
     internal static class ConfigLoader
@@ -120,29 +113,9 @@ namespace RepostConfirmationCanceler
                     case '@':
                         if (global)
                         {
-                            if (line == "@TOP_PAGE_ONLY")
+                            if (line == "@WARNING_WHEN_CLOSE_DIALOG")
                             {
-                                conf.IgnoreQueryString = true;
-                            }
-                            else if (line == "@ONLY_MAIN_FRAME")
-                            {
-                                conf.OnlyMainFrame = true;
-                            }
-                        }
-                        else if (section != null)
-                        {
-                            if (line == "@DISABLED")
-                            {
-                                section.Disabled = true;
-                            }
-                            else if (line == "@WARNING_WHEN_CLOSE_DIALOG")
-                            {
-                                section.WarningWhenCloseDialog = true;
-                            }
-                            else if (line.StartsWith("@EXCLUDE_GROUP:"))
-                            {
-                                section.ExcludeGroups.Append(line.Substring("@EXCLUDE_GROUP:".Length));
-                                section.ExcludeGroups.Append('\n');
+                                conf.WarningWhenCloseDialog = true;
                             }
                         }
                         break;
