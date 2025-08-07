@@ -102,7 +102,7 @@ const RepostConfirmationCancelerTalkClient = {
   },
 
   /*
-   * Request redirection to Native Messaging Hosts.
+   * Request monitoring to Native Messaging Hosts.
    * * Request Example: "Q edge https://example.com/".
    */
   startMonitoring() {
