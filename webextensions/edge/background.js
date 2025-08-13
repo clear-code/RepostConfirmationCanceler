@@ -134,7 +134,7 @@ const RepostConfirmationCanceler = {
       }
       console.log(`handleURL: check for section ${section.Name} (${JSON.stringify(section)})`);
       if (this.match(section, urlToMatch)) {
-        console.log(` => unmatched`);
+        console.log(` => matched`);
         callbackWhenMatch();
         return true;
       }
