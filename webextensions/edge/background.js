@@ -114,7 +114,7 @@ const RepostConfirmationCancelerTalkClient = {
     return false;
   },
 
-  handleURL(config, url){
+  handleURL(config, url, callbackWhenMatch){
     if (!url) {
       console.log(`* Empty URL found`);
       return false;
@@ -135,7 +135,7 @@ const RepostConfirmationCancelerTalkClient = {
       console.log(`handleURL: check for section ${section.Name} (${JSON.stringify(section)})`);
       if (this.match(section, urlToMatch)) {
         console.log(` => unmatched`);
-        this.startMonitoring();
+        callbackWhenMatch();
         return true;
       }
       else {
@@ -153,7 +153,7 @@ const RepostConfirmationCancelerTalkClient = {
       for (const tab of tabs) {
         const url = tab.url ?? tab.pendingUrl;
         console.log(`handleAllTabs ${url} (tab=${tab.id})`);
-        if(this.handleURL(config, url)){
+        if(this.handleURL(config, url, this.startMonitoring)){
           break;
         }
       };
@@ -169,15 +169,40 @@ const RepostConfirmationCancelerTalkClient = {
 
     const config = this.cached;
     const url = tab.pendingUrl || tab.url;
-    this.handleURL(config, url);
+    this.handleURL(config, url, this.startMonitoring);
   },
 
   onNavigationCommitted(details) {
     const url = details.url;
     console.log(`onNavigationCommitted: ${url}`);
     const config = this.cached;
-    this.handleURL(config, url);
+    this.handleURL(config, url, this.startMonitoring);
   },
+
+  onErrorOccurred(details) {
+    console.log('onErrorOccurred:', details);
+    if (details.error === 'net::ERR_CACHE_MISS') {
+      const url = details.url;
+      const config = this.cached;
+      const tabId = details.tabId;
+      this.handleURL(config, url, () => { 
+        this.closeTab(tabId);
+      });
+    }
+  },
+
+  closeTab(tabId) {
+    if (tabId !== -1) {
+      console.log("Closing tab:", tabId);
+      chrome.tabs.remove(tabId, () => {
+        if (chrome.runtime.lastError) {
+          console.log("Error while closing tab:", chrome.runtime.lastError.message)
+        } else {
+          console.log("Tab closed");
+        }
+      });
+    }
+  }
 };
 
 /* Refresh config for every N minute */
@@ -191,6 +216,11 @@ chrome.alarms.onAlarm.addListener((alarm) => {
     //handleURL for all url in tabs.
   }
 });
+
+chrome.webRequest.onErrorOccurred.addListener(
+  RepostConfirmationCancelerTalkClient.onErrorOccurred.bind(RepostConfirmationCancelerTalkClient),
+  {urls: ["<all_urls>"]}
+);
 
 /* Tab book-keeping for intelligent tab handlings */
 chrome.tabs.onUpdated.addListener(RepostConfirmationCancelerTalkClient.onTabUpdated.bind(RepostConfirmationCancelerTalkClient));
