@@ -47,13 +47,13 @@ function wildcardToRegexp(source) {
  *   ]
  * }
  */
-const RepostConfirmationCancelerTalkClient = {
+const RepostConfirmationCanceler = {
   cached: null,
 
   init() {
     this.cached = null;
     this.ensureLoadedAndConfigured();
-    console.log('Running as RepostConfirmationCancelerTalkClient Talk client');
+    console.log('Running RepostConfirmationCanceler');
   },
 
   async ensureLoadedAndConfigured() {
@@ -114,7 +114,7 @@ const RepostConfirmationCancelerTalkClient = {
     return false;
   },
 
-  handleURL(config, url){
+  handleURL(config, url, callbackWhenMatch){
     if (!url) {
       console.log(`* Empty URL found`);
       return false;
@@ -135,7 +135,7 @@ const RepostConfirmationCancelerTalkClient = {
       console.log(`handleURL: check for section ${section.Name} (${JSON.stringify(section)})`);
       if (this.match(section, urlToMatch)) {
         console.log(` => unmatched`);
-        this.startMonitoring();
+        callbackWhenMatch();
         return true;
       }
       else {
@@ -153,7 +153,7 @@ const RepostConfirmationCancelerTalkClient = {
       for (const tab of tabs) {
         const url = tab.url ?? tab.pendingUrl;
         console.log(`handleAllTabs ${url} (tab=${tab.id})`);
-        if(this.handleURL(config, url)){
+        if(this.handleURL(config, url, this.startMonitoring)){
           break;
         }
       };
@@ -169,15 +169,40 @@ const RepostConfirmationCancelerTalkClient = {
 
     const config = this.cached;
     const url = tab.pendingUrl || tab.url;
-    this.handleURL(config, url);
+    this.handleURL(config, url, this.startMonitoring);
   },
 
   onNavigationCommitted(details) {
     const url = details.url;
     console.log(`onNavigationCommitted: ${url}`);
     const config = this.cached;
-    this.handleURL(config, url);
+    this.handleURL(config, url, this.startMonitoring);
   },
+
+  onErrorOccurred(details) {
+    console.log('onErrorOccurred:', details);
+    if (details.error === 'net::ERR_CACHE_MISS') {
+      const url = details.url;
+      const tabId = details.tabId;
+      const config = this.cached;
+      this.handleURL(config, url, () => { 
+        this.closeTab(tabId);
+      });
+    }
+  },
+
+  closeTab(tabId) {
+    if (tabId !== -1) {
+      console.log("Closing tab:", tabId);
+      chrome.tabs.remove(tabId, () => {
+        if (chrome.runtime.lastError) {
+          console.log("Error while closing tab:", chrome.runtime.lastError.message)
+        } else {
+          console.log("Tab closed");
+        }
+      });
+    }
+  }
 };
 
 /* Refresh config for every N minute */
@@ -186,14 +211,19 @@ chrome.alarms.create('poll-config', {'periodInMinutes': ALARM_MINUTES});
 
 chrome.alarms.onAlarm.addListener((alarm) => {
   if (alarm.name === 'poll-config') {
-    RepostConfirmationCancelerTalkClient.configure();
-    RepostConfirmationCancelerTalkClient.handleAllTabs();
+    RepostConfirmationCanceler.configure();
+    RepostConfirmationCanceler.handleAllTabs();
     //handleURL for all url in tabs.
   }
 });
 
-/* Tab book-keeping for intelligent tab handlings */
-chrome.tabs.onUpdated.addListener(RepostConfirmationCancelerTalkClient.onTabUpdated.bind(RepostConfirmationCancelerTalkClient));
-chrome.webNavigation.onCommitted.addListener(RepostConfirmationCancelerTalkClient.onNavigationCommitted.bind(RepostConfirmationCancelerTalkClient));
+chrome.webRequest.onErrorOccurred.addListener(
+  RepostConfirmationCanceler.onErrorOccurred.bind(RepostConfirmationCanceler),
+  {urls: ["<all_urls>"]}
+);
 
-RepostConfirmationCancelerTalkClient.init();
+/* Tab book-keeping for intelligent tab handlings */
+chrome.tabs.onUpdated.addListener(RepostConfirmationCanceler.onTabUpdated.bind(RepostConfirmationCanceler));
+chrome.webNavigation.onCommitted.addListener(RepostConfirmationCanceler.onNavigationCommitted.bind(RepostConfirmationCanceler));
+
+RepostConfirmationCanceler.init();
