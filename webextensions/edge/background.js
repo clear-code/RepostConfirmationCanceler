@@ -47,13 +47,13 @@ function wildcardToRegexp(source) {
  *   ]
  * }
  */
-const RepostConfirmationCancelerTalkClient = {
+const RepostConfirmationCanceler = {
   cached: null,
 
   init() {
     this.cached = null;
     this.ensureLoadedAndConfigured();
-    console.log('Running as RepostConfirmationCancelerTalkClient Talk client');
+    console.log('Running RepostConfirmationCanceler');
   },
 
   async ensureLoadedAndConfigured() {
@@ -183,8 +183,8 @@ const RepostConfirmationCancelerTalkClient = {
     console.log('onErrorOccurred:', details);
     if (details.error === 'net::ERR_CACHE_MISS') {
       const url = details.url;
-      const config = this.cached;
       const tabId = details.tabId;
+      const config = this.cached;
       this.handleURL(config, url, () => { 
         this.closeTab(tabId);
       });
@@ -211,19 +211,19 @@ chrome.alarms.create('poll-config', {'periodInMinutes': ALARM_MINUTES});
 
 chrome.alarms.onAlarm.addListener((alarm) => {
   if (alarm.name === 'poll-config') {
-    RepostConfirmationCancelerTalkClient.configure();
-    RepostConfirmationCancelerTalkClient.handleAllTabs();
+    RepostConfirmationCanceler.configure();
+    RepostConfirmationCanceler.handleAllTabs();
     //handleURL for all url in tabs.
   }
 });
 
 chrome.webRequest.onErrorOccurred.addListener(
-  RepostConfirmationCancelerTalkClient.onErrorOccurred.bind(RepostConfirmationCancelerTalkClient),
+  RepostConfirmationCanceler.onErrorOccurred.bind(RepostConfirmationCanceler),
   {urls: ["<all_urls>"]}
 );
 
 /* Tab book-keeping for intelligent tab handlings */
-chrome.tabs.onUpdated.addListener(RepostConfirmationCancelerTalkClient.onTabUpdated.bind(RepostConfirmationCancelerTalkClient));
-chrome.webNavigation.onCommitted.addListener(RepostConfirmationCancelerTalkClient.onNavigationCommitted.bind(RepostConfirmationCancelerTalkClient));
+chrome.tabs.onUpdated.addListener(RepostConfirmationCanceler.onTabUpdated.bind(RepostConfirmationCanceler));
+chrome.webNavigation.onCommitted.addListener(RepostConfirmationCanceler.onNavigationCommitted.bind(RepostConfirmationCanceler));
 
-RepostConfirmationCancelerTalkClient.init();
+RepostConfirmationCanceler.init();
