@@ -3,7 +3,7 @@ Add-Type -AssemblyName System.Net
 $listener = New-Object System.Net.HttpListener
 $listener.Prefixes.Add("http://localhost:8080/")
 $listener.Start()
-Write-Host "HTTP サーバー起動中: http://localhost:8080/"
+Write-Host "HTTP server running: http://localhost:8080/"
 
 while ($listener.IsListening) {
     try {
@@ -11,7 +11,7 @@ while ($listener.IsListening) {
         $response = $context.Response
         $request = $context.Request
 
-        # キャッシュ無効化ヘッダー
+        # Disable cache in order to cause ERR_CACHE_MISS
         $response.Headers.Add("Cache-Control", "no-store, no-cache, must-revalidate")
         $response.Headers.Add("Pragma", "no-cache")
         $response.ContentType = "text/html"
@@ -32,6 +32,6 @@ while ($listener.IsListening) {
         $response.OutputStream.Write($buffer, 0, $buffer.Length)
         $response.OutputStream.Close()
     } catch {
-        Write-Warning "エラー: $_"
+        Write-Warning "Error: $_"
     }
 }
