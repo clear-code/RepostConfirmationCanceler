@@ -4,6 +4,7 @@
   "path": "RepostConfirmationCancelerTalk.exe",
   "type": "stdio",
   "allowed_origins": [
-    "chrome-extension://oibalikebhofnalakmnpbdmjpkahagoa/"
+    "chrome-extension://oibalikebhofnalakmnpbdmjpkahagoa/",
+    "chrome-extension://pnajiialncbppogbgjdgkgpiaokoaijn/"
   ]
 }
