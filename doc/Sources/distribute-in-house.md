@@ -106,7 +106,7 @@ RepostConfirmationCanceler_組織内サーバー配布.zip はMicrosoft Edge拡�
 ```
 
 * 1.7 編集後の「manifest.xml」を上書き保存します。
-* 1.8 検証対象の端末に一般ユーザーでログインし、1.3で配置した3つのファイルを読み取れることを確認します。
+* 1.8 検証対象の端末に一般ユーザーでログインし、1.3で配置した2つのファイルを読み取れることを確認します。
   * manifest.xmlのURL（前述の仮定に従うと「file://fileserver/repost-confirmation-canceler-test/manifest.xml」）をEdgeで開き、1.6で設定した通りの内容を読み取れることを確認します。
   * edge.crxのURL（前述の仮定に従うと「file://fileserver/repost-confirmation-canceler-test/edge.crx」）をEdgeで開き、ファイルがダウンロード可能であることを確認します。
 * 1.9 グループポリシー管理コンソールを起動します。
@@ -205,7 +205,7 @@ ADドメイン参加端末全体を対象として、RepostConfirmationCanceler�
 ```
 
 * 1.7 編集後の「manifest.xml」を上書き保存します。
-* 1.8 任意のADドメイン参加端末に一般ユーザーでログインし、1.3 で配置した3つのファイルを読み取れることを確認します。
+* 1.8 任意のADドメイン参加端末に一般ユーザーでログインし、1.3 で配置した2つのファイルを読み取れることを確認します。
   * 1.8.1 manifest.xmlのURL（前述の仮定に従うと「file://fileserver/repost-confirmation-canceler/manifest.xml」）をEdgeで開き、1.6で設定した通りの内容を読み取れることを確認します。
   * 1.8.2 edge.crxのURL（前述の仮定に従うと「file://fileserver/repost-confirmation-canceler/edge.crx」）をEdgeで開き、ファイル がダウンロード可能であることを確認します。
 * 1.9 グループポリシー管理コンソールを起動します。
