@@ -2,7 +2,9 @@
 
 ## 概要
 
-特定のサイトを開いている際に、「フォームを再送信しますか？」ダイアログが表示されたら、自動でキャンセルするEdge向け拡張機能
+特定のサイトを開いている際に、「フォームを再送信しますか？」ダイアログが表示されたら、自動でキャンセルするEdge向け拡張機能。
+
+また、ERR_CACHE_MISSページ（「フォームを再送信しますか？」が表示されるエラーページ）が表示された場合にも自動でそのページを終了する。
 
 ## ビルド方法
 
@@ -58,4 +60,5 @@
   * このとき、最初と同様に`Q Edge`というメッセージを送信する
 * `Q Edge`メッセージを受け取ったRepostConfirmationCancelerTalk.exeは、RepostConfirmationCanceler.exeを起動する
   * もし、既にRepostConfirmationCanceler.exeが起動していた場合、既存のRepostConfirmationCanceler.exeに`keep-alive`メッセージを送信し、今回のRepostConfirmationCanceler.exeは直ちに終了する
+
   * `keep-alive`メッセージを受信した既存のRepostConfirmationCanceler.exeは、メッセージ受信から1分後にまで常駐時間を延ばす
