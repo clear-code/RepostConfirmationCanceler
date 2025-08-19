@@ -41,6 +41,8 @@ RepostConfirmationCanceler拡張機能は、ADドメイン参加端末に対し�
   * Windows ファイル共有サーバー、もしくは WWW サーバーが必要です。
   * 本サーバーはドメインコントローラーとの兼用可です。
 
+また、クリアコードが提供する RepostConfirmationCanceler_組織内サーバー配布.zip （組織内サーバー配布用RepostConfirmationCanceler拡張機能関連ファイル一式を含むZipファイル）を準備します。
+
 \newpage
 # RepostConfirmationCanceler拡張機能の組織内サーバーからのインストール
 
@@ -49,8 +51,7 @@ RepostConfirmationCanceler拡張機能は、ADドメイン参加端末に対し�
 全体展開前の検証のために、ADドメイン参加端末のうち、情報システム部門のみの端末など、一部の端末のみを対象として、RepostConfirmationCanceler拡張機能を組織内サーバーで配布する形で新規に導入する場合、もしくは、組織内サーバーでの配布を行っていなかった状態から組織内サーバーでの配布へ切り替える場合について、手順の大まかな流れは以下の通りです。
 
 1. GPOによるRepostConfirmationCanceler拡張機能の新規インストール
-2. GPOによる「edge.json」の書き換え
-3. 端末でRepostConfirmationCanceler拡張機能が新規インストールされたことの確認
+2. 端末でRepostConfirmationCanceler拡張機能が新規インストールされたことの確認
 
 以下に具体的な作業手順を記します。
 
@@ -63,16 +64,14 @@ RepostConfirmationCanceler拡張機能は、ADドメイン参加端末に対し�
 * 1.1 全端末からアクセス可能なファイル配布用サーバー上に、一般ユーザー権限で読み取り可能な、ファイル配布用フォルダーを作成します。  
 以下、コンピューター名/ホスト名が「fileserver」である Windowsファイル共有サーバーを使用し、ファイル配布用フォルダー名は「repost-confirmation-canceler-test」を使用するものと仮定します。  
 この仮定に従い、ファイル共有サーバー上に作成された共有フォルダーのUNCパスが「`\\fileserver\repost-confirmation-canceler-test\`」 となると仮定します。
-* 1.2 Windows のエクスプローラーもしくはZip形式の展開が可能なツールを使用し、RepostConfirmationCanceler.zip（クリアコード提供の組織内サーバー配布用RepostConfirmationCanceler拡張機能関連ファイル一式を含むZipファイル）を展開します。  
-RepostConfirmationCanceler.zipはお客様向け共有ストレージ内にある「Edge拡張機能」フォルダーに拡張機能のバージョンごとに保管しています。この手順では、RepostConfirmationCanceler拡張機能バージョン1.0.0を使用するので、「version1.0.0」フォルダー内のRepostConfirmationCanceler.zip を使用してください。  
-以下の3つのファイルが展開されます。  
+* 1.2 Windows のエクスプローラーもしくはZip形式の展開が可能なツールを使用し、RepostConfirmationCanceler_組織内サーバー配布.zipを展開します。  
+RepostConfirmationCanceler_組織内サーバー配布.zip はMicrosoft Edge拡張機能バージョンごとに異なります。この手順では、RepostConfirmationCanceler拡張機能バージョン1.0.0を使用しています。  
+以下の2つのファイルが展開されます。  
 「edge.crx」  
-「edge.json」  
 「manifest.xml」
-* 1.3 1.2 で展開された3つのファイルを、1.1で作成したファイル配布用フォルダーにコピーします。  
+* 1.3 1.2 で展開された2つのファイルを、1.1で作成したファイル配布用フォルダーにコピーします。  
 前述の仮定に従い、各ファイルの UNC パスは  
 「`\\fileserver\repost-confirmation-canceler-test\edge.crx`」  
-「`\\fileserver\repost-confirmation-canceler-test\edge.json`」  
 「`\\fileserver\repost-confirmation-canceler-test\manifest.xml`」  
 となると仮定します。
 * 1.4 配置した各ファイルの「プロパティ」を開き、「セキュリティ」タブを選択して、当該ファイルが「Everyone」で読み取り可能な状態になっていることを確認します。  
@@ -107,10 +106,9 @@ RepostConfirmationCanceler.zipはお客様向け共有ストレージ内にあ�
 ```
 
 * 1.7 編集後の「manifest.xml」を上書き保存します。
-* 1.8 検証対象の端末に一般ユーザーでログインし、1.3で配置した3つのファイルを読み取れることを確認します。
+* 1.8 検証対象の端末に一般ユーザーでログインし、1.3で配置した2つのファイルを読み取れることを確認します。
   * manifest.xmlのURL（前述の仮定に従うと「file://fileserver/repost-confirmation-canceler-test/manifest.xml」）をEdgeで開き、1.6で設定した通りの内容を読み取れることを確認します。
   * edge.crxのURL（前述の仮定に従うと「file://fileserver/repost-confirmation-canceler-test/edge.crx」）をEdgeで開き、ファイルがダウンロード可能であることを確認します。
-  * edge.json をメモ帳などで開き、内容を閲覧できることを確認します。
 * 1.9 グループポリシー管理コンソールを起動します。
 * 1.10 検証対象の端末の一般ユーザーに適用するためのGPOを作成、もしくは検証対象の端末の一般ユーザーに適用されるGPOを用意します。  
 ここでは例として、「RepostConfirmationCanceler拡張機能（事前検証）」という名称のGPOを使用するものとします。
@@ -132,23 +130,6 @@ RepostConfirmationCanceler.zipはお客様向け共有ストレージ内にあ�
 * 1.16 「OK」ボタンを押して、値の設定画面を閉じます。
 * 1.17 「OK」ボタンを押して、ポリシーの設定画面を閉じます。
 
-### GPOによる「edge.json」の書き換え
-
-組織内サーバーから配布されたRepostConfirmationCanceler拡張機能によるRepostConfirmationCanceler本体の呼び出し要求を許可するため、edge.jsonの配布のための設定を行います。  
-以下の作業はすべて、作業環境にて、システム管理者が管理者ユーザーアカウントで実施します。
-
-* 2.1 グループポリシー管理コンソールで、検証対象の端末の一般ユーザーに適用されるGPO（「RepostConfirmationCanceler拡張機能（事前検証）」と仮定）について、  
-「ユーザーの構成」  
-→「基本設定」  
-→「Windows の設定」  
-→「ファイル」  
-を右クリックし「新規作成」から「ファイル」を選択します。
-* 2.2 以下の通り設定します。
-  * アクション：「置換」を選択。
-  * ソースファイル：1.3 で配置した「edge.json」を、全端末から参照可能な UNCパスで指定。（例：「`\\fileserver\repost-confirmation-canceler-test\edge.json`」）
-  * ターゲットファイル：「`C:\Program Files\RepostConfirmationCanceler\RepostConfirmationCancelerHost\edge.json`」を指定。
-  * 属性：「読み取り専用」のみにチェック。
-
 ### 端末でRepostConfirmationCanceler拡張機能がインストールされたことの確認
 
 端末の強制再起動などを行い、グループポリシーが検証対象の端末に反映された状態として下さい。
@@ -157,13 +138,12 @@ RepostConfirmationCanceler.zipはお客様向け共有ストレージ内にあ�
 
 以下の作業はすべて、ADドメイン参加状態の検証対象の端末にて、システム管理者または一般ユーザーが一般ユーザーアカウントで実施します。
 
-* 3.1 「`C:\Program Files\RepostConfirmationCanceler\RepostConfirmationCancelerHost\`」配下の「edge.json」をメモ帳で開き、前項で配布するよう設定したファイルの通りの内容になっている（ファイルが配信されている）ことを確認します。
-* 3.2 Edgeを起動します。
-* 3.3 数秒待ち、Edgeのツールバー上にパズルピース型のボタンが表示されることを確認します。
-* 3.4 Edgeのツールバー上にパズルピース型のボタンをクリックし、「拡張機能の管理」をクリックします。
-* 3.5 拡張機能の管理画面が開かれますので、「インストール済の拡張機能」の一覧に以下の項目が存在する事を確認します。
+* 2.1 Edgeを起動します。
+* 2.2 数秒待ち、Edgeのツールバー上にパズルピース型のボタンが表示されることを確認します。
+* 2.3 Edgeのツールバー上にパズルピース型のボタンをクリックし、「拡張機能の管理」をクリックします。
+* 2.4 拡張機能の管理画面が開かれますので、「インストール済の拡張機能」の一覧に以下の項目が存在する事を確認します。
   * RepostConfirmationCanceler
-* 3.6 項目の詳細情報を表示し、バージョンが組織内サーバーで配布しているバージョンと一致していることを確認します。
+* 2.5 項目の詳細情報を表示し、バージョンが組織内サーバーで配布しているバージョンと一致していることを確認します。
 
 以上の手順により、組織内サーバーに設置したバージョンのRepostConfirmationCanceler拡張機能が、検証対象の端末にインストールされます。
 
@@ -172,8 +152,7 @@ RepostConfirmationCanceler.zipはお客様向け共有ストレージ内にあ�
 ADドメイン参加端末全体を対象として、RepostConfirmationCanceler拡張機能を組織内サーバーで配布する形で新規に導入する場合、もしくは、組織内サーバーでの配布を行っていなかった状態から組織内サーバーでの配布へ切り替える場合について、手順の大まかな流れは以下の通りです。
 
 1. GPOによるRepostConfirmationCanceler拡張機能の新規インストール
-2. GPOによる「edge.json」の書き換え
-3. 端末でRepostConfirmationCanceler拡張機能が新規インストールされたことの確認
+2. 端末でRepostConfirmationCanceler拡張機能が新規インストールされたことの確認
 
 以下に、具体的な作業手順を記します。
 
@@ -185,15 +164,13 @@ ADドメイン参加端末全体を対象として、RepostConfirmationCanceler�
 * 1.1 全端末からアクセス可能なファイル配布用サーバー上に、一般ユーザー権限で読み取り可能な、事前検証用とは別のファイル配布用フォルダーを作成します。  
 以下、コンピューター名/ホスト名が「fileserver」である Windowsファイル共有サーバーを使用し、全体展開用のファイル配布用フォルダー名は「repost-confirmation-canceler」を使用するものと仮定します。  
 この仮定に従い、ファイル共有サーバー上に作成された共有フォルダーの UNCパスが「`\\fileserver\repost-confirmation-canceler\`」となると仮定します。
-* 1.2 Windows のエクスプローラーもしくはZip形式の展開が可能なツールを使用し、RepostConfirmationCanceler.zip（クリアコード提供の組織内サーバー配布用RepostConfirmationCanceler拡張機能関連ファイル一式を含むZipファイル）を展開します。   
-以下の3つのファイルが展開されます。  
+* 1.2 Windows のエクスプローラーもしくはZip形式の展開が可能なツールを使用し、RepostConfirmationCanceler_組織内サーバー配布.zipを展開します。   
+以下の2つのファイルが展開されます。  
 「edge.crx」  
-「edge.json」
 「manifest.xml」
-* 1.3 1.2 で展開された3つのファイルを、1.1で作成したファイル配布用フォルダーにコピーします。  
+* 1.3 1.2 で展開された2つのファイルを、1.1で作成したファイル配布用フォルダーにコピーします。  
 前述の仮定に従い、各ファイルのUNCパスは  
 「`\\fileserver\repost-confirmation-canceler\edge.crx`」  
-「`\\fileserver\repost-confirmation-canceler\edge.json`」  
 「`\\fileserver\repost-confirmation-canceler\manifest.xml`」  
 となると仮定します。
 * 1.4 配置した各ファイルの「プロパティ」を開き、「セキュリティ」タブを選択して、当該ファイルが「Everyone」で読み取り可能な状態になっていることを確認します。  
@@ -228,10 +205,9 @@ ADドメイン参加端末全体を対象として、RepostConfirmationCanceler�
 ```
 
 * 1.7 編集後の「manifest.xml」を上書き保存します。
-* 1.8 任意のADドメイン参加端末に一般ユーザーでログインし、1.3 で配置した3つのファイルを読み取れることを確認します。
+* 1.8 任意のADドメイン参加端末に一般ユーザーでログインし、1.3 で配置した2つのファイルを読み取れることを確認します。
   * 1.8.1 manifest.xmlのURL（前述の仮定に従うと「file://fileserver/repost-confirmation-canceler/manifest.xml」）をEdgeで開き、1.6で設定した通りの内容を読み取れることを確認します。
   * 1.8.2 edge.crxのURL（前述の仮定に従うと「file://fileserver/repost-confirmation-canceler/edge.crx」）をEdgeで開き、ファイル がダウンロード可能であることを確認します。
-  * 1.8.3 edge.json をメモ帳などで開き、内容を閲覧できることを確認します。
 * 1.9 グループポリシー管理コンソールを起動します。
 * 1.10 全端末の一般ユーザーに適用するための GPOを作成、もしくは全端末の一般ユーザーに適用されるGPOを用意します。  
 ここでは例として、「RepostConfirmationCanceler拡張機能」という名称のGPOを使用するものとします。
@@ -253,23 +229,6 @@ ADドメイン参加端末全体を対象として、RepostConfirmationCanceler�
 * 1.16 「OK」ボタンを押して、値の設定画面を閉じます。
 * 1.17 「OK」ボタンを押して、ポリシーの設定画面を閉じます。
 
-### GPOによる「edge.json」の書き換え
-
-組織内サーバーから配布されたRepostConfirmationCanceler拡張機能によるRepostConfirmationCanceler本体の呼び出し要求を許可するため、edge.json の配布のための設定を行います。  
-以下の作業はすべて、作業環境にて、システム管理者が管理者ユーザーアカウントで実施します。
-
-* 2.1 グループポリシー管理コンソールで、全端末の一般ユーザーに適用されるGPO（「RepostConfirmationCanceler拡張機能」と仮定）について、  
-「ユーザーの構成」  
-→「基本設定」  
-→「Windows の設定」  
-→「ファイル」  
-を右クリックし「新規作成」から「ファイル」を選択します。
-* 2.2 以下の通り設定します。
-  * アクション：「置換」を選択。
-  * ソースファイル：1.3で配置した「edge.json」を、全端末から参照可能なUNCパスで指定。（例：「`\\fileserver\repost-confirmation-canceler\edge.json`」）
-  * ターゲットファイル：「`C:\Program Files\RepostConfirmationCanceler\RepostConfirmationCancelerHost\edge.json`」を指定。
-  * 属性：「読み取り専用」のみにチェック。
-
 ### 端末でRepostConfirmationCanceler拡張機能がインストールされたことの確認
 
 端末の強制再起動などを行い、グループポリシーが全ての端末に反映された状態として下さい。 
@@ -277,13 +236,12 @@ ADドメイン参加端末全体を対象として、RepostConfirmationCanceler�
 以下にグループポリシーの反映を確認する手順を示します。  
 以下の作業はすべて、任意のADドメイン参加端末にて、システム管理者または一般ユーザーが一般ユーザーアカウントで実施します。全台で確認することは不可能ですので、何台か抽出して確認されることを推奨します。
 
-* 3.1 「`C:\Program Files\RepostConfirmationCanceler\RepostConfirmationCancelerHost\`」配下の「edge.json」をメモ帳で開き、前項で配布するよう設定したファイルの通りの内容になっている（ファイルが配信されている）ことを確認します。
-* 3.2 Edgeを起動します。
-* 3.3 数秒待ち、Edgeのツールバー上にパズルピース型のボタンが表示されることを確認します。
-* 3.4 Edgeのツールバー上にパズルピース型のボタンをクリックし、「拡張機能の管理」をクリックします。
-* 3.5 拡張機能の管理画面が開かれますので、「インストール済の拡張機能」の一覧に以下の項目が存在する事を確認します。
+* 2.1 Edgeを起動します。
+* 2.2 数秒待ち、Edgeのツールバー上にパズルピース型のボタンが表示されることを確認します。
+* 2.3 Edgeのツールバー上にパズルピース型のボタンをクリックし、「拡張機能の管理」をクリックします。
+* 2.4 拡張機能の管理画面が開かれますので、「インストール済の拡張機能」の一覧に以下の項目が存在する事を確認します。
   * RepostConfirmationCanceler
-* 3.6 項目の詳細情報を表示し、バージョンが組織内サーバーで配布しているバージョンと一致していることを確認します。
+* 2.5 項目の詳細情報を表示し、バージョンが組織内サーバーで配布しているバージョンと一致していることを確認します。
 
 以上の手順により、組織内サーバーに設置したバージョンのRepostConfirmationCanceler拡張機能が、各端末に導入されます。
 
