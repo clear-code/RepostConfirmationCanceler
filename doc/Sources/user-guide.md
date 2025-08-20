@@ -284,7 +284,7 @@ Microsoft Edgeのアドオンストアから拡張機能をインストールし
 
 ### Microsoft EdgeのアドオンストアからのRepostConfirmationCanceler拡張の導入手順
 
-* <RepostConfirmationCancelerのアドオンページのURL>を開きます
+* <https://microsoftedge.microsoft.com/addons/detail/repostconfirmationcancele/oibalikebhofnalakmnpbdmjpkahagoa>を開きます
 * インストールボタンから拡張機能をインストールします
 
 ### グループポリシー(GPO)を利用したRepostConfirmationCanceler拡張の導入手順
@@ -316,7 +316,7 @@ Microsoft Edgeのアドオンストアから拡張機能をインストールし
 5. 設定の状態を「有効」に設定します。
 6. 「表示...」をクリックして、値の設定画面を開きます。
 7. 以下の項目を追加します。  
-「<ストア登録後の拡張機能のIDに変更する>」  
+「oibalikebhofnalakmnpbdmjpkahagoa」  
 8. 「OK」ボタンを押して、値の設定画面を閉じます。
 9. 「OK」ボタンを押して、ポリシーの設定画面を閉じます。
 
