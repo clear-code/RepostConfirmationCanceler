@@ -81,7 +81,7 @@ RepostConfirmationCanceler_組織内サーバー配布.zip はMicrosoft Edge拡�
 ```
 <?xml version='1.0' encoding='UTF-8'?>
 <gupdate xmlns='http://www.google.com/update2/response' protocol='2.0'>
-  <app appid='pnajiialncbppogbgjdgkgpiaokoaijn'>
+  <app appid='pbkdopiddoeocbchoeeegmdkjaifpeif'>
     <updatecheck
       codebase='（edge.crx の URL）'
       version='（バージョン番号）' />
@@ -97,7 +97,7 @@ RepostConfirmationCanceler_組織内サーバー配布.zip はMicrosoft Edge拡�
 ```
 <?xml version='1.0' encoding='UTF-8'?>
 <gupdate xmlns='http://www.google.com/update2/response' protocol='2.0'>
-  <app appid='pnajiialncbppogbgjdgkgpiaokoaijn'>
+  <app appid='pbkdopiddoeocbchoeeegmdkjaifpeif'>
     <updatecheck
       codebase='file://fileserver/repost-confirmation-canceler-test/edge.crx'
       version='1.0.0' />
@@ -122,11 +122,11 @@ RepostConfirmationCanceler_組織内サーバー配布.zip はMicrosoft Edge拡�
 * 1.13 「表示...」をクリックして、値の設定画面を開きます。
 * 1.14 以下の項目が存在する場合、項目を削除します。  
 「oibalikebhofnalakmnpbdmjpkahagoa」
-「pnajiialncbppogbgjdgkgpiaokoaijn」  
+「pbkdopiddoeocbchoeeegmdkjaifpeif」  
 * 1.15 以下の項目を追加します。  
-「pnajiialncbppogbgjdgkgpiaokoaijn;（manifest.xml の URL）」  
+「pbkdopiddoeocbchoeeegmdkjaifpeif;（manifest.xml の URL）」  
 前述の仮定に従うと、追加する項目は以下の要領となります。  
-「pnajiialncbppogbgjdgkgpiaokoaijn;file://fileserver/repost-confirmation-canceler-test/manifest.xml」
+「pbkdopiddoeocbchoeeegmdkjaifpeif;file://fileserver/repost-confirmation-canceler-test/manifest.xml」
 * 1.16 「OK」ボタンを押して、値の設定画面を閉じます。
 * 1.17 「OK」ボタンを押して、ポリシーの設定画面を閉じます。
 
@@ -180,7 +180,7 @@ ADドメイン参加端末全体を対象として、RepostConfirmationCanceler�
 ```
 <?xml version='1.0' encoding='UTF-8'?>
 <gupdate xmlns='http://www.google.com/update2/response' protocol='2.0'>
-  <app appid='pnajiialncbppogbgjdgkgpiaokoaijn'>
+  <app appid='pbkdopiddoeocbchoeeegmdkjaifpeif'>
     <updatecheck
       codebase='（edge.crx の URL）'
       version='（バージョン番号）' />
@@ -196,7 +196,7 @@ ADドメイン参加端末全体を対象として、RepostConfirmationCanceler�
 ```
 <?xml version='1.0' encoding='UTF-8'?>
 <gupdate xmlns='http://www.google.com/update2/response' protocol='2.0'>
-  <app appid='pnajiialncbppogbgjdgkgpiaokoaijn'>
+  <app appid='pbkdopiddoeocbchoeeegmdkjaifpeif'>
   <updatecheck
     codebase='file://fileserver/repost-confirmation-canceler/edge.crx'
     version='1.0.0' />
@@ -220,12 +220,12 @@ ADドメイン参加端末全体を対象として、RepostConfirmationCanceler�
 * 1.12 設定の状態を「有効」に設定します。
 * 1.13 「表示...」をクリックして、値の設定画面を開きます。
 * 1.14 以下の項目が存在する場合、項目を削除します。  
-「pnajiialncbppogbgjdgkgpiaokoaijn」  
+「pbkdopiddoeocbchoeeegmdkjaifpeif」  
 「oibalikebhofnalakmnpbdmjpkahagoa」
 * 1.15 以下の項目を追加します。  
-「pnajiialncbppogbgjdgkgpiaokoaijn;（manifest.xml の URL）」  
+「pbkdopiddoeocbchoeeegmdkjaifpeif;（manifest.xml の URL）」  
 前述の仮定に従うと、追加する項目は以下の要領となります。  
-「pnajiialncbppogbgjdgkgpiaokoaijn;file://fileserver/repost-confirmation-canceler/manifest.xml」
+「pbkdopiddoeocbchoeeegmdkjaifpeif;file://fileserver/repost-confirmation-canceler/manifest.xml」
 * 1.16 「OK」ボタンを押して、値の設定画面を閉じます。
 * 1.17 「OK」ボタンを押して、ポリシーの設定画面を閉じます。
 
@@ -274,7 +274,7 @@ ADドメイン参加端末全体を対象として、RepostConfirmationCanceler�
 ```
 <?xml version='1.0' encoding='UTF-8'?>
 <gupdate xmlns='http://www.google.com/update2/response' protocol='2.0'>
-  <app appid='pnajiialncbppogbgjdgkgpiaokoaijn'>
+  <app appid='pbkdopiddoeocbchoeeegmdkjaifpeif'>
   <updatecheck
     codebase='（edge.crx の URL）'
     version='（バージョン番号）' />
@@ -290,7 +290,7 @@ ADドメイン参加端末全体を対象として、RepostConfirmationCanceler�
 ```
 <?xml version='1.0' encoding='UTF-8'?>
 <gupdate xmlns='http://www.google.com/update2/response' protocol='2.0'>
-  <app appid='pnajiialncbppogbgjdgkgpiaokoaijn'>
+  <app appid='pbkdopiddoeocbchoeeegmdkjaifpeif'>
   <updatecheck
     codebase='file://fileserver/repost-confirmation-canceler-test/edge.crx'
     version='1.1.0' />
@@ -342,7 +342,7 @@ ADドメイン参加端末全体を対象として、RepostConfirmationCanceler�
 ```
 <?xml version='1.0' encoding='UTF-8'?>
 <gupdate xmlns='http://www.google.com/update2/response' protocol='2.0'>
-  <app appid='pnajiialncbppogbgjdgkgpiaokoaijn'>
+  <app appid='pbkdopiddoeocbchoeeegmdkjaifpeif'>
     <updatecheck
       codebase='（edge.crx の URL）'
       version='（バージョン番号）' />
@@ -358,7 +358,7 @@ ADドメイン参加端末全体を対象として、RepostConfirmationCanceler�
 ```
 <?xml version='1.0' encoding='UTF-8'?>
 <gupdate xmlns='http://www.google.com/update2/response' protocol='2.0'>
-  <app appid='pnajiialncbppogbgjdgkgpiaokoaijn'>
+  <app appid='pbkdopiddoeocbchoeeegmdkjaifpeif'>
     <updatecheck
       codebase='file://fileserver/repost-confirmation-canceler/edge.crx'
       version='1.1.0' />
@@ -416,7 +416,7 @@ ADドメイン参加端末全体を対象として、RepostConfirmationCanceler�
 ```
 <?xml version='1.0' encoding='UTF-8'?>
 <gupdate xmlns='http://www.google.com/update2/response' protocol='2.0'>
-  <app appid='pnajiialncbppogbgjdgkgpiaokoaijn'>
+  <app appid='pbkdopiddoeocbchoeeegmdkjaifpeif'>
     <updatecheck
       codebase='（edge.crx の URL）'
       version='（バージョン番号）' />
@@ -432,7 +432,7 @@ ADドメイン参加端末全体を対象として、RepostConfirmationCanceler�
 ```
 <?xml version='1.0' encoding='UTF-8'?>
 <gupdate xmlns='http://www.google.com/update2/response' protocol='2.0'>
-  <app appid='pnajiialncbppogbgjdgkgpiaokoaijn'>
+  <app appid='pbkdopiddoeocbchoeeegmdkjaifpeif'>
     <updatecheck
       codebase='file://fileserver/repost-confirmation-canceler-test/edge.crx'
       version='1.0.0' />
@@ -495,7 +495,7 @@ ADドメイン参加端末全体を対象として、RepostConfirmationCanceler�
 ```
 <?xml version='1.0' encoding='UTF-8'?>
 <gupdate xmlns='http://www.google.com/update2/response' protocol='2.0'>
-  <app appid='pnajiialncbppogbgjdgkgpiaokoaijn'>
+  <app appid='pbkdopiddoeocbchoeeegmdkjaifpeif'>
     <updatecheck
       codebase='（edge.crx の URL）'
       version='（バージョン番号）' />
@@ -511,7 +511,7 @@ ADドメイン参加端末全体を対象として、RepostConfirmationCanceler�
 ```
 <?xml version='1.0' encoding='UTF-8'?>
 <gupdate xmlns='http://www.google.com/update2/response' protocol='2.0'>
-  <app appid='pnajiialncbppogbgjdgkgpiaokoaijn'>
+  <app appid='pbkdopiddoeocbchoeeegmdkjaifpeif'>
     <updatecheck
       codebase='file://fileserver/repost-confirmation-canceler/edge.crx'
       version='1.0.0' />
