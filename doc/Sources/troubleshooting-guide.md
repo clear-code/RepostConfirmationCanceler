@@ -7,7 +7,7 @@ title: |
   RepostConfirmationCanceler
   トラブルシューティングガイド
 subject: RepostConfirmationCancelerトラブルシューティングガイド
-date: 2025/09/26
+date: 2025/08/20
 author: 株式会社クリアコード
 keywords: [RepostConfirmationCanceler, Troubleshooting guide]
 titlepage: true
@@ -19,7 +19,7 @@ toc-own-page: true
 
 | 日付       | Version | 備考                              |
 |------------|---------|-----------------------------------|
-| 2025/09/26 | 1.0.0    | 第1版                             |
+| 2025/08/20 | 1.1.0    | 第1版                             |
 
 **本書について**
 
