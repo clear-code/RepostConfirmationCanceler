@@ -482,7 +482,7 @@ ADに所属している端末の設定を強制する場合、グループポリ
 4. 配置した各ファイルの「プロパティ」を開き、「セキュリティ」タブを選択して、当該ファイルが「Everyone」で読み取り可能な状態になっていることを確認します。  
 もしそのようになっていない場合は、「編集」ボタンをクリックし、開かれたダイアログ内で「追加」ボタンをクリックして、開かれたダイアログ内で「選択するオブジェクト名を入力してください」欄に「Everyone」と入力し、「OK」ボタンを押してダイアログを閉じる操作を3回繰り返して、ファイルを「Everyone」で読み取り可能な状態に設定します。
 5. 任意のADドメイン参加端末に一般ユーザーでログインし、3で配置したファイルを読み取れることを確認します。
-  * RepostConfirmationCanceler.iniを（前述の仮定に従うと「`\\fileserver\repost-confirmation-canceler\RepostConfirmationCanceler.ini`」をメモ帳などで開き、内容を閲覧できることを確認します。
+  * RepostConfirmationCanceler.iniを（前述の仮定に従うと「`\\fileserver\repost-confirmation-canceler\RepostConfirmationCanceler.ini`」）をメモ帳などで開き、内容を閲覧できることを確認します。
 6. ドメインコントローラーのグループポリシー管理コンソールで、対象の端末の一般ユーザーに適用されるGPOについて、 
 「ユーザーの構成」  
 →「基本設定」  
