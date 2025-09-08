@@ -98,11 +98,11 @@ static void parse_conf(char *data, struct config *conf)
 	        break;
 	    case '@':
 			if (global) {
-				if (line == "@WARNING_WHEN_CLOSE_DIALOG")
+				if (strcmp(line, "@WARNING_WHEN_CLOSE_DIALOG") == 0)
 				{
 					conf->warning_when_close_dialog = 1;
 				}
-				if (line == "@CLOSE_ERR_CACHE_MISS_PAGE")
+				if (strcmp(line, "@CLOSE_ERR_CACHE_MISS_PAGE") == 0)
 				{
 					conf->close_err_cache_miss_page = 1;
 				}
