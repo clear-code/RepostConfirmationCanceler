@@ -185,9 +185,11 @@ const RepostConfirmationCanceler = {
       const url = details.url;
       const tabId = details.tabId;
       const config = this.cached;
-      this.handleURL(config, url, () => { 
-        this.closeTab(tabId);
-      });
+      if (config.CloseErrCacheMissPage) {
+        this.handleURL(config, url, () => { 
+          this.closeTab(tabId);
+        });
+      }
     }
   },
 

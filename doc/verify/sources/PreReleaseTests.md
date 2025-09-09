@@ -45,7 +45,7 @@
 * http://localhost:8080 をリロードする
   * [ ] 「フォームを再送信しますか？」ダイアログ一瞬表示され、キャンセルされること
 
-##### ERR_CACHE_MISSページを自動で閉じるケース
+##### ERR_CACHE_MISSページが表示されるケース
 
 * `powershell doc\verify\sources\TestTools\http_server.ps1`でローカルのWebサーバーを起動する
   * `http://localhost:8080`で簡易Webサーバーが起動する
@@ -55,7 +55,7 @@
 * フォームに「test」と入力して、「送信」ボタンを押す
 * 遷移先の http://localhost:8080 で右クリックし、「戻る」を押す
 * 遷移先の 「form.html」 で右クリックし、「進む」を押す
-  * [ ] ポップアップダイアログが閉じること
+  * [ ] ERR_CACHE_MISSページが表示されること
 
 ### すべてのURLを対象にした時の動作確認（警告ダイアログ有）
 

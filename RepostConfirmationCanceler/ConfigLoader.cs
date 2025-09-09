@@ -23,7 +23,6 @@ namespace RepostConfirmationCanceler
     internal class Config
     {
         public bool IgnoreQueryString = false;
-        public bool OnlyMainFrame = false;
         public bool WarningWhenCloseDialog = false;
         public List<Section> SectionList = new List<Section>();
     }

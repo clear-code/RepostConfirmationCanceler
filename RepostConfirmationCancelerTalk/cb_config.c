@@ -32,6 +32,7 @@ struct section {
 
 struct config {
 	int warning_when_close_dialog;
+	int close_err_cache_miss_page;
 	struct section *section;
 };
 
@@ -97,9 +98,13 @@ static void parse_conf(char *data, struct config *conf)
 	        break;
 	    case '@':
 			if (global) {
-				if (line == "@WARNING_WHEN_CLOSE_DIALOG")
+				if (strcmp(line, "@WARNING_WHEN_CLOSE_DIALOG") == 0)
 				{
 					conf->warning_when_close_dialog = 1;
+				}
+				if (strcmp(line, "@CLOSE_ERR_CACHE_MISS_PAGE") == 0)
+				{
+					conf->close_err_cache_miss_page = 1;
 				}
 			}
 			break;
@@ -179,6 +184,11 @@ static char *dump_json(struct config *conf)
 	/* WarningWhenCloseDialog */
 	strbuf_concat(&sb, "{\"WarningWhenCloseDialog\":");
 	strbuf_concat(&sb, _itoa(conf->warning_when_close_dialog, buf, 10));
+	strbuf_putchar(&sb, ',');
+
+	/* CloseErrCacheMissPage */
+	strbuf_concat(&sb, "\"CloseErrCacheMissPage\":");
+	strbuf_concat(&sb, _itoa(conf->close_err_cache_miss_page, buf, 10));
 	strbuf_putchar(&sb, ',');
 
 	/* Sections */
