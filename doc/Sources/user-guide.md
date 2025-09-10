@@ -337,9 +337,9 @@ RepostConfirmationCanceler インストーラーには以下のモジュール�
 --------------------------------------------------------------------------------------
 ファイル名                            サイズ           概要
 ------------------------------------- ---------------- --------------------------------
-RepostConfirmationCanceler.exe        約16KB           ダイアログキャンセルモジュール
+RepostConfirmationCanceler.exe        約60KB           ダイアログキャンセルモジュール
 
-`RepostConfirmationCancelerHost\` \   約160KB          モダンブラウザー拡張連携
+`RepostConfirmationCancelerHost\` \   約700KB          モダンブラウザー拡張連携
 RepostConfirmationCancelerTalk.exe
 
 `RepostConfirmationCancelerHost\` \   約1KB             Microsoft Edge拡張連携
