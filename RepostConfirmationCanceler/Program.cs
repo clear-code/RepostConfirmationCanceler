@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 class Program
 {
-    private static Mutex MyMutex { get; } = new Mutex(false, @"Global\RepostConfirmationCancelerMutex");
+    private static Mutex MyMutex { get; } = new Mutex(false, @"RepostConfirmationCancelerMutex");
 
     [STAThread]
     static void Main()
