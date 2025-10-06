@@ -8,6 +8,8 @@ Copyright (c) 2025 ClearCode Inc.
 using System;
 using System.IO;
 using System.IO.Pipes;
+using System.Security.AccessControl;
+using System.Security.Principal;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -16,15 +18,25 @@ namespace RepostConfirmationCanceler
 {
     internal static class ProcessCommunicator
     {
-        private const string NAMED_PIPE_NAME = "RepostConfirmationCancelerNamedPipe";
+        private const string NAMED_PIPE_NAME_BASE = "RepostConfirmationCancelerNamedPipe";
+
+        private static string GeneratePipeName()
+        {
+            WindowsIdentity user = WindowsIdentity.GetCurrent();
+            string sid = user.User.Value;
+            return $"{NAMED_PIPE_NAME_BASE}_{sid}";
+        }
 
         internal static async void RunNamedPipedServer(RuntimeContext context)
         {
+            PipeSecurity ps = new PipeSecurity();
+            ps.AddAccessRule(new PipeAccessRule("Everyone", PipeAccessRights.FullControl, AccessControlType.Allow));
+
             context.Logger.Log("Start server");
             // FinishTime > DateTime.Nowではなく、trueでも良いが、念のため。
             while (!context.IsEndTime)
             {
-                using (var pipeServer = new NamedPipeServerStream(NAMED_PIPE_NAME, PipeDirection.InOut, 1, PipeTransmissionMode.Byte, PipeOptions.Asynchronous))
+                using (var pipeServer = new NamedPipeServerStream(GeneratePipeName(), PipeDirection.InOut, 1, PipeTransmissionMode.Byte, PipeOptions.Asynchronous, 1024, 1024, ps))
                 {
                     var cancellationTokenSource = new CancellationTokenSource();
                     Task waitTask = pipeServer.WaitForConnectionAsync(cancellationTokenSource.Token);
@@ -74,7 +86,7 @@ namespace RepostConfirmationCanceler
             context.Logger.Log("Start to send keep-alive");
             try
             {
-                using (var pipeClient = new NamedPipeClientStream(".", NAMED_PIPE_NAME, PipeDirection.Out))
+                using (var pipeClient = new NamedPipeClientStream(".", GeneratePipeName(), PipeDirection.Out))
                 {
                     pipeClient.Connect(1000);
                     using (var writer = new StreamWriter(pipeClient) { AutoFlush = true })
