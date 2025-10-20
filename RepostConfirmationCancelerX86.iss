@@ -3,8 +3,8 @@
 [Setup]
 AppName=RepostConfirmationCanceler
 AppVerName=RepostConfirmationCanceler
-VersionInfoVersion=1.2.2.0
-AppVersion=1.2.2.0
+VersionInfoVersion=1.2.3.0
+AppVersion=1.2.3.0
 AppMutex=RepostConfirmationCancelerSetup
 ;DefaultDirName=C:\RepostConfirmationCanceler
 DefaultDirName={code:GetProgramFiles}\RepostConfirmationCanceler
@@ -23,7 +23,7 @@ UninstallDisplayIcon={app}\RepostConfirmationCanceler.exe
 Root: HKLM; Subkey: "Software\RepostConfirmationCanceler"; Flags: uninsdeletekey
 Root: HKLM; Subkey: "Software\RepostConfirmationCanceler"; ValueType: string; ValueName: "Path"; ValueData: "{app}\"
 Root: HKLM; Subkey: "Software\RepostConfirmationCanceler"; ValueType: string; ValueName: "ClientType"; ValueData: ""
-Root: HKLM; Subkey: "Software\RepostConfirmationCanceler"; ValueType: string; ValueName: "Version"; ValueData: "1.2.2.0"
+Root: HKLM; Subkey: "Software\RepostConfirmationCanceler"; ValueType: string; ValueName: "Version"; ValueData: "1.2.3.0"
 Root: HKLM; Subkey: "Software\RepostConfirmationCanceler"; ValueType: string; ValueName: "Rulefile"; ValueData: "{app}\RepostConfirmationCanceler.ini"
 Root: HKLM; Subkey: "Software\RepostConfirmationCanceler"; ValueType: string; ValueName: "RCAPfile"; ValueData: "{app}\ResourceCap.ini"
 Root: HKLM; Subkey: "Software\RepostConfirmationCanceler"; ValueType: string; ValueName: "ExtensionExecfile"; ValueData: "{app}\RepostConfirmationCanceler.exe"
