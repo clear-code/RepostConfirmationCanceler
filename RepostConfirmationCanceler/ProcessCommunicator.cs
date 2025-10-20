@@ -27,12 +27,34 @@ namespace RepostConfirmationCanceler
             return $"{NAMED_PIPE_NAME_BASE}_{sid}";
         }
 
+        internal static void LogThreadStatus(RuntimeContext context)
+        {
+            try
+            {
+                ThreadPool.GetAvailableThreads(out int workerThreads, out int completionPortThreads);
+                ThreadPool.GetMaxThreads(out int maxWorkerThreads, out int maxCompletionPortThreads);
+
+                int usedWorkerThreads = maxWorkerThreads - workerThreads;
+                int usedCompletionPortThreads = maxCompletionPortThreads - completionPortThreads;
+
+                context.Logger.Log($"Max worker threads: {maxWorkerThreads}");
+                context.Logger.Log($"Used worker threads: {usedWorkerThreads}");
+                context.Logger.Log($"Max completion port threads: {maxCompletionPortThreads}");
+                context.Logger.Log($"Used completion port threads: {usedCompletionPortThreads}");
+            }
+            catch
+            {
+                //Do nothing
+            }
+        }
+
         internal static async void RunNamedPipedServer(RuntimeContext context)
         {
             PipeSecurity ps = new PipeSecurity();
             ps.AddAccessRule(new PipeAccessRule("Everyone", PipeAccessRights.FullControl, AccessControlType.Allow));
 
             context.Logger.Log("Start server");
+            LogThreadStatus(context);
             // FinishTime > DateTime.Nowではなく、trueでも良いが、念のため。
             while (!context.IsEndTime)
             {
@@ -41,6 +63,7 @@ namespace RepostConfirmationCanceler
                     var cancellationTokenSource = new CancellationTokenSource();
                     Task waitTask = pipeServer.WaitForConnectionAsync(cancellationTokenSource.Token);
                     TimeSpan waitDuration = context.FinishTime - DateTime.Now;
+                    waitDuration = waitDuration < TimeSpan.Zero ? TimeSpan.Zero : waitDuration;
 #pragma warning disable CS4014 // この呼び出しは待機されなかったため、現在のメソッドの実行は呼び出しの完了を待たずに続行されます
                     Task.Delay(waitDuration).ContinueWith(t => cancellationTokenSource.Cancel());
 #pragma warning restore CS4014 // この呼び出しは待機されなかったため、現在のメソッドの実行は呼び出しの完了を待たずに続行されます
@@ -61,7 +84,7 @@ namespace RepostConfirmationCanceler
                             }
                             if (receiveString.ToLowerInvariant().Contains("keep-alive"))
                             {
-                                context.FinishTime = DateTime.Now.AddMinutes(1);
+                                context.FinishTime = DateTime.Now.AddMinutes(2);
                                 continue;
                             }
                         }
@@ -88,7 +111,7 @@ namespace RepostConfirmationCanceler
             {
                 using (var pipeClient = new NamedPipeClientStream(".", GeneratePipeName(), PipeDirection.Out))
                 {
-                    pipeClient.Connect(1000);
+                    pipeClient.Connect(15000);
                     using (var writer = new StreamWriter(pipeClient) { AutoFlush = true })
                     {
                         writer.WriteLine("keep-alive");
@@ -99,6 +122,7 @@ namespace RepostConfirmationCanceler
             catch (TimeoutException)
             {
                 context.Logger.Log("Failed to connect to the named pipe server within the timeout period.");
+                LogThreadStatus(context);
             }
             catch (Exception ex)
             {

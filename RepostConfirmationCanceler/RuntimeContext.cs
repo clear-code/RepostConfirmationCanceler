@@ -19,7 +19,7 @@ namespace RepostConfirmationCanceler
 
         internal RuntimeContext(RunTimeMode mode)
         {
-            FinishTime = DateTime.Now.AddMinutes(1);
+            FinishTime = DateTime.Now.AddMinutes(2);
             Logger = new Logger(mode);
             Config = ConfigLoader.LoadConfig();
         }
