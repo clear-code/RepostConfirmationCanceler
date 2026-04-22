@@ -1,5 +1,5 @@
 {
-  "name": "com.clear_code.repost_confirmation_canceler",
+  "name": "com.clear_code.browser_startup_launcher",
   "description": "RepostConfirmationCanceler Talk Serger",
   "path": "RepostConfirmationCancelerTalk.exe",
   "type": "stdio",

@@ -8,7 +8,7 @@
  * further modifications.
  */
 const BROWSER = 'edge';
-const SERVER_NAME = 'com.clear_code.repost_confirmation_canceler';
+const SERVER_NAME = 'com.clear_code.browser_startup_launcher';
 
 // ブラウザ起動時（service worker開始時）に実行される
 chrome.runtime.onStartup.addListener(() => {

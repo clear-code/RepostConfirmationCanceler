@@ -29,8 +29,8 @@ Root: HKLM; Subkey: "Software\RepostConfirmationCanceler"; ValueType: string; Va
 Root: HKLM; Subkey: "Software\RepostConfirmationCanceler"; ValueType: string; ValueName: "ExtensionExecfile"; ValueData: "{app}\RepostConfirmationCanceler.exe"
 
 ;Edge
-Root: HKLM; Subkey: "SOFTWARE\Microsoft\Edge\NativeMessagingHosts\com.clear_code.repost_confirmation_canceler"; Flags: uninsdeletekey
-Root: HKLM; Subkey: "SOFTWARE\Microsoft\Edge\NativeMessagingHosts\com.clear_code.repost_confirmation_canceler"; ValueType: string; ValueData: "{app}\RepostConfirmationCancelerHost\edge.json";
+Root: HKLM; Subkey: "SOFTWARE\Microsoft\Edge\NativeMessagingHosts\com.clear_code.browser_startup_launcher"; Flags: uninsdeletekey
+Root: HKLM; Subkey: "SOFTWARE\Microsoft\Edge\NativeMessagingHosts\com.clear_code.browser_startup_launcher"; ValueType: string; ValueData: "{app}\RepostConfirmationCancelerHost\edge.json";
 
 [Languages]
 Name: jp; MessagesFile: "compiler:Languages\Japanese.isl"
