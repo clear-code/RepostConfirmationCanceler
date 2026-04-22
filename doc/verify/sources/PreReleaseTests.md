@@ -9,7 +9,7 @@
 
 準備は以下の手順で行う。
 
-1. RepostConfirmationCancelerの最新のインストーラ `RepostConfirmationCanceler.exe` をダウンロードし、実行、インストールする。
+1. BrowserStartupLauncherの最新のインストーラ `BrowserStartupLauncher.exe` をダウンロードし、実行、インストールする。
 2. Edgeアドオンの開発版パッケージを用意し、インストールするための設定を行う。
    1. Edgeを起動する。
    2. アドオンの管理画面（`edge://extensions`）を開く。
@@ -17,7 +17,7 @@
    4. `拡張機能のパック` で `webextensions\edge` をパックする。（1つ上のディレクトリーに `edge.crx` と `edge.pem` が作られる）
    5. `edge.crx` をEdgeのアドオン管理画面にドラッグ＆ドロップし、インストールして、IDを控える。
       例：`oapdkmbdgdcjpacbjpcdfhncifimimcj`
-   6. `C:\Program Files\RepostConfirmationCanceler\RepostConfirmationCancelerHost\edge.json` のアクセス権を変更し、ユーザー権限での書き込みを許可した上で、`"allowed_origins"` に、先ほど控えたIDに基づくURLを追加する。
+   6. `C:\Program Files\BrowserStartupLauncher\BrowserStartupLauncherHost\edge.json` のアクセス権を変更し、ユーザー権限での書き込みを許可した上で、`"allowed_origins"` に、先ほど控えたIDに基づくURLを追加する。
       例：`"chrome-extension://oapdkmbdgdcjpacbjpcdfhncifimimcj/"`
 
 ## 検証
@@ -28,7 +28,7 @@
 
 以下の通り設定して検証を行う。
 
-* [doc\verify\sources\TestTools/Scenarios/scenario1.ini](../TestTools/Scenarios/scenario1.ini) を `C:\Program Files\RepostConfirmationCanceler\RepostConfirmationCanceler.ini` に配置する。
+* [doc\verify\sources\TestTools/Scenarios/scenario1.ini](../TestTools/Scenarios/scenario1.ini) を `C:\Program Files\BrowserStartupLauncher\BrowserStartupLauncher.ini` に配置する。
 * 念のためEdgeを再起動する
 
 #### 検証
@@ -63,7 +63,7 @@
 
 以下の通り設定して検証を行う。
 
-* [doc\verify\sources\TestTools/Scenarios/scenario2.ini](../TestTools/Scenarios/scenario2.ini) を `C:\Program Files\RepostConfirmationCanceler\RepostConfirmationCanceler.ini` に配置する。
+* [doc\verify\sources\TestTools/Scenarios/scenario2.ini](../TestTools/Scenarios/scenario2.ini) を `C:\Program Files\BrowserStartupLauncher\BrowserStartupLauncher.ini` に配置する。
   * これは、「https://example.com」を開いている場合は
 * 念のためEdgeを再起動する
 
@@ -113,7 +113,7 @@
 
 以下の通り設定して検証を行う。
 
-* [doc\verify\sources\TestTools/Scenarios/scenario3.ini](../TestTools/Scenarios/scenario3.ini) を `C:\Program Files\RepostConfirmationCanceler\RepostConfirmationCanceler.ini` に配置する。
+* [doc\verify\sources\TestTools/Scenarios/scenario3.ini](../TestTools/Scenarios/scenario3.ini) を `C:\Program Files\BrowserStartupLauncher\BrowserStartupLauncher.ini` に配置する。
   * 設定の内容は以下の通り
     * 以下のサイトを対象とする
       * `*://example.com/jp*`
@@ -141,7 +141,7 @@
 * Edgeを終了する
 * タスクマネージャーを起動する
 * 詳細タブを開く
-* RepostConfirmationCanceler.exeが起動していれば終了する
+* BrowserStartupLauncher.exeが起動していれば終了する
 * Edgeを起動する
 * `https://example.com/us/ab/` を開く
 * `doc\verify\sources\TestTools\form.html` を開く
@@ -151,7 +151,7 @@
 * Edgeを終了する
 * タスクマネージャーを起動する
 * 詳細タブを開く
-* RepostConfirmationCanceler.exeが起動していれば終了する
+* BrowserStartupLauncher.exeが起動していれば終了する
 * Edgeを起動する
 * `https://www.clear-code.com/` を開く
 * `doc\verify\sources\TestTools\form.html` を開く
@@ -171,7 +171,7 @@ ERR_CACHE_MISSページを閉じる機能は指定したURLでのみ動作する
 
 以下の通り設定して検証を行う。
 
-* [doc\verify\sources\TestTools/Scenarios/scenario3.ini](../TestTools/Scenarios/scenario3.ini) を `C:\Program Files\RepostConfirmationCanceler\RepostConfirmationCanceler.ini` に配置する。
+* [doc\verify\sources\TestTools/Scenarios/scenario3.ini](../TestTools/Scenarios/scenario3.ini) を `C:\Program Files\BrowserStartupLauncher\BrowserStartupLauncher.ini` に配置する。
   * 設定の内容は以下の通り
     * 以下のサイトを対象とする
       * `*://example.com/jp*`
@@ -199,7 +199,7 @@ ERR_CACHE_MISSページを閉じる機能は指定したURLでのみ動作する
 
 以下の通り設定して検証を行う。
 
-* [doc\verify\sources\TestTools/Scenarios/scenario4.ini](../TestTools/Scenarios/scenario4.ini) を `C:\Program Files\RepostConfirmationCanceler\RepostConfirmationCanceler.ini` に配置する。
+* [doc\verify\sources\TestTools/Scenarios/scenario4.ini](../TestTools/Scenarios/scenario4.ini) を `C:\Program Files\BrowserStartupLauncher\BrowserStartupLauncher.ini` に配置する。
   * 設定の内容は以下の通り
     * 以下のサイトを対象とする
       * `*://localhost:8080*`

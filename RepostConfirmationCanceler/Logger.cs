@@ -8,7 +8,7 @@ Copyright (c) 2025 ClearCode Inc.
 using System;
 using System.IO;
 
-namespace RepostConfirmationCanceler
+namespace BrowserStartupLauncher
 {
     internal class Logger
     {
@@ -34,9 +34,9 @@ namespace RepostConfirmationCanceler
             EnableLogging = false;
             try
             {
-                LogFileNameBase = mode == RunTimeMode.Server ? "RepostConfirmationCanceler_server" : "RepostConfirmationCanceler_client";
+                LogFileNameBase = mode == RunTimeMode.Server ? "BrowserStartupLauncher_server" : "BrowserStartupLauncher_client";
                 string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-                var logDirectory = Path.Combine(appDataPath, "RepostConfirmationCanceler");
+                var logDirectory = Path.Combine(appDataPath, "BrowserStartupLauncher");
                 if (!Directory.Exists(logDirectory))
                 {
                     Directory.CreateDirectory(logDirectory);

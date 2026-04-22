@@ -6,7 +6,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 Copyright (c) 2025 ClearCode Inc.
 */
 using Microsoft.Win32;
-using RepostConfirmationCanceler;
+using BrowserStartupLauncher;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 class Program
 {
-    private static Mutex MyMutex { get; } = new Mutex(false, @"RepostConfirmationCancelerMutex");
+    private static Mutex MyMutex { get; } = new Mutex(false, @"BrowserStartupLauncherMutex");
 
     [STAThread]
     static void Main()

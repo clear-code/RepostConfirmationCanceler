@@ -13,7 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RepostConfirmationCanceler
+namespace BrowserStartupLauncher
 {
     internal class Section
     {
@@ -54,7 +54,7 @@ namespace RepostConfirmationCanceler
 
         internal static string GetRulefilePath()
         {
-            const string registryPath = @"SOFTWARE\RepostConfirmationCanceler";
+            const string registryPath = @"SOFTWARE\BrowserStartupLauncher";
             const string valueName = "Rulefile";
             try
             {

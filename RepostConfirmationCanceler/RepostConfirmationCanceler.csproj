@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{6153B03D-CB7F-4096-90BA-CEAD50EE0F54}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>RepostConfirmationCanceler</RootNamespace>
-    <AssemblyName>RepostConfirmationCanceler</AssemblyName>
+    <RootNamespace>BrowserStartupLauncher</RootNamespace>
+    <AssemblyName>BrowserStartupLauncher</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -70,7 +70,7 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>RepostConfirmationCanceler.ico</ApplicationIcon>
+    <ApplicationIcon>BrowserStartupLauncher.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -126,7 +126,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="RepostConfirmationCanceler.ico" />
+    <Content Include="BrowserStartupLauncher.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -14,11 +14,11 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace RepostConfirmationCanceler
+namespace BrowserStartupLauncher
 {
     internal static class ProcessCommunicator
     {
-        private const string NAMED_PIPE_NAME_BASE = "RepostConfirmationCancelerNamedPipe";
+        private const string NAMED_PIPE_NAME_BASE = "BrowserStartupLauncherNamedPipe";
 
         private static string GeneratePipeName()
         {

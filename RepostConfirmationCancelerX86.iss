@@ -1,36 +1,36 @@
-﻿;RepostConfirmationCanceler Setup--
+﻿;BrowserStartupLauncher Setup--
 
 [Setup]
-AppName=RepostConfirmationCanceler
-AppVerName=RepostConfirmationCanceler
+AppName=BrowserStartupLauncher
+AppVerName=BrowserStartupLauncher
 VersionInfoVersion=1.2.3.0
 AppVersion=1.2.3.0
-AppMutex=RepostConfirmationCancelerSetup
-;DefaultDirName=C:\RepostConfirmationCanceler
-DefaultDirName={code:GetProgramFiles}\RepostConfirmationCanceler
+AppMutex=BrowserStartupLauncherSetup
+;DefaultDirName=C:\BrowserStartupLauncher
+DefaultDirName={code:GetProgramFiles}\BrowserStartupLauncher
 Compression=lzma2
 SolidCompression=yes
 OutputDir=SetupOutput
-OutputBaseFilename=RepostConfirmationCancelerSetup_x86
-AppPublisher=RepostConfirmationCanceler
+OutputBaseFilename=BrowserStartupLauncherSetup_x86
+AppPublisher=BrowserStartupLauncher
 WizardImageStretch=no
-VersionInfoDescription=RepostConfirmationCancelerSetup
+VersionInfoDescription=BrowserStartupLauncherSetup
 ArchitecturesAllowed=x86
-DefaultGroupName=RepostConfirmationCanceler
-UninstallDisplayIcon={app}\RepostConfirmationCanceler.exe
+DefaultGroupName=BrowserStartupLauncher
+UninstallDisplayIcon={app}\BrowserStartupLauncher.exe
 
 [Registry]
-Root: HKLM; Subkey: "Software\RepostConfirmationCanceler"; Flags: uninsdeletekey
-Root: HKLM; Subkey: "Software\RepostConfirmationCanceler"; ValueType: string; ValueName: "Path"; ValueData: "{app}\"
-Root: HKLM; Subkey: "Software\RepostConfirmationCanceler"; ValueType: string; ValueName: "ClientType"; ValueData: ""
-Root: HKLM; Subkey: "Software\RepostConfirmationCanceler"; ValueType: string; ValueName: "Version"; ValueData: "1.2.3.0"
-Root: HKLM; Subkey: "Software\RepostConfirmationCanceler"; ValueType: string; ValueName: "Rulefile"; ValueData: "{app}\RepostConfirmationCanceler.ini"
-Root: HKLM; Subkey: "Software\RepostConfirmationCanceler"; ValueType: string; ValueName: "RCAPfile"; ValueData: "{app}\ResourceCap.ini"
-Root: HKLM; Subkey: "Software\RepostConfirmationCanceler"; ValueType: string; ValueName: "ExtensionExecfile"; ValueData: "{app}\RepostConfirmationCanceler.exe"
+Root: HKLM; Subkey: "Software\BrowserStartupLauncher"; Flags: uninsdeletekey
+Root: HKLM; Subkey: "Software\BrowserStartupLauncher"; ValueType: string; ValueName: "Path"; ValueData: "{app}\"
+Root: HKLM; Subkey: "Software\BrowserStartupLauncher"; ValueType: string; ValueName: "ClientType"; ValueData: ""
+Root: HKLM; Subkey: "Software\BrowserStartupLauncher"; ValueType: string; ValueName: "Version"; ValueData: "1.2.3.0"
+Root: HKLM; Subkey: "Software\BrowserStartupLauncher"; ValueType: string; ValueName: "Rulefile"; ValueData: "{app}\BrowserStartupLauncher.ini"
+Root: HKLM; Subkey: "Software\BrowserStartupLauncher"; ValueType: string; ValueName: "RCAPfile"; ValueData: "{app}\ResourceCap.ini"
+Root: HKLM; Subkey: "Software\BrowserStartupLauncher"; ValueType: string; ValueName: "ExtensionExecfile"; ValueData: "{app}\BrowserStartupLauncher.exe"
 
 ;Edge
 Root: HKLM; Subkey: "SOFTWARE\Microsoft\Edge\NativeMessagingHosts\com.clear_code.browser_startup_launcher"; Flags: uninsdeletekey
-Root: HKLM; Subkey: "SOFTWARE\Microsoft\Edge\NativeMessagingHosts\com.clear_code.browser_startup_launcher"; ValueType: string; ValueData: "{app}\RepostConfirmationCancelerHost\edge.json";
+Root: HKLM; Subkey: "SOFTWARE\Microsoft\Edge\NativeMessagingHosts\com.clear_code.browser_startup_launcher"; ValueType: string; ValueData: "{app}\BrowserStartupLauncherHost\edge.json";
 
 [Languages]
 Name: jp; MessagesFile: "compiler:Languages\Japanese.isl"
@@ -38,23 +38,23 @@ Name: jp; MessagesFile: "compiler:Languages\Japanese.isl"
 
 [Files]
 ;exe
-Source: "bin\Release\RepostConfirmationCanceler.exe"; DestDir: "{app}\";Flags: ignoreversion;permissions:users-readexec admins-full system-full
+Source: "bin\Release\BrowserStartupLauncher.exe"; DestDir: "{app}\";Flags: ignoreversion;permissions:users-readexec admins-full system-full
 ;ini
-Source: "Resources\RepostConfirmationCanceler.ini"; DestDir: "{app}"; Flags: onlyifdoesntexist
+Source: "Resources\BrowserStartupLauncher.ini"; DestDir: "{app}"; Flags: onlyifdoesntexist
 
 ;host
-Source: "bin\Release\RepostConfirmationCancelerTalk.exe"; DestDir: "{app}\RepostConfirmationCancelerHost";Flags: ignoreversion;permissions:users-readexec admins-full system-full
+Source: "bin\Release\BrowserStartupLauncherTalk.exe"; DestDir: "{app}\BrowserStartupLauncherHost";Flags: ignoreversion;permissions:users-readexec admins-full system-full
 
 ;edge
-Source: "Resources\edge.json"; DestDir: "{app}\RepostConfirmationCancelerHost";Flags: ignoreversion;permissions:users-readexec admins-full system-full
+Source: "Resources\edge.json"; DestDir: "{app}\BrowserStartupLauncherHost";Flags: ignoreversion;permissions:users-readexec admins-full system-full
 
 [Dirs]
 Name: "{app}";Permissions: users-modify
 
 [Run] 
-Filename: "{sys}\icacls.exe";Parameters: """{app}\RepostConfirmationCanceler.exe"" /inheritance:r"; Flags: runhidden shellexec
-Filename: "{sys}\icacls.exe";Parameters: """{app}\RepostConfirmationCancelerHost\RepostConfirmationCancelerTalk.exe"" /inheritance:r"; Flags: runhidden shellexec
-Filename: "{sys}\icacls.exe";Parameters: """{app}\RepostConfirmationCancelerHost\edge.json"" /inheritance:r"; Flags: runhidden shellexec
+Filename: "{sys}\icacls.exe";Parameters: """{app}\BrowserStartupLauncher.exe"" /inheritance:r"; Flags: runhidden shellexec
+Filename: "{sys}\icacls.exe";Parameters: """{app}\BrowserStartupLauncherHost\BrowserStartupLauncherTalk.exe"" /inheritance:r"; Flags: runhidden shellexec
+Filename: "{sys}\icacls.exe";Parameters: """{app}\BrowserStartupLauncherHost\edge.json"" /inheritance:r"; Flags: runhidden shellexec
 
 [UninstallRun]
 
@@ -74,6 +74,6 @@ end;
 function InitializeSetup():Boolean;
 begin 
 	TaskKill('msedge.exe');
-	TaskKill('RepostConfirmationCanceler.exe');
+	TaskKill('BrowserStartupLauncher.exe');
 	Result := True; 
 end; 

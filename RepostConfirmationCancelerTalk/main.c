@@ -142,9 +142,9 @@ int main(int argc, char *argv[])
 	 * Talk protocol defines two operations.
 	 *
 	 *  "C edge"
-	 *    ... Read and return RepostConfirmationCanceler.ini.
+	 *    ... Read and return BrowserStartupLauncher.ini.
 	 *  "Q edge
-	 *    ... Open RepostConfirmationCanceler for edge.
+	 *    ... Open BrowserStartupLauncher for edge.
 	 */
 	switch (cmd[0]) {
 	case 'C':

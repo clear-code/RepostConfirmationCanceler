@@ -7,7 +7,7 @@ Copyright (c) 2025 ClearCode Inc.
 */
 using System;
 
-namespace RepostConfirmationCanceler
+namespace BrowserStartupLauncher
 {
     internal class RuntimeContext
     {

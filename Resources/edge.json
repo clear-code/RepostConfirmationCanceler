@@ -1,7 +1,7 @@
 {
   "name": "com.clear_code.browser_startup_launcher",
-  "description": "RepostConfirmationCanceler Talk Serger",
-  "path": "RepostConfirmationCancelerTalk.exe",
+  "description": "BrowserStartupLauncher Talk Serger",
+  "path": "BrowserStartupLauncherTalk.exe",
   "type": "stdio",
   "allowed_origins": [
     "chrome-extension://oibalikebhofnalakmnpbdmjpkahagoa/",

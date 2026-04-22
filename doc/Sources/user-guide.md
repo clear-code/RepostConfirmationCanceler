@@ -4,12 +4,12 @@ CJKoptions:
   - BoldFont=Noto Sans CJK JP Bold
 titlepage-logo: ./user-guide/media/image1.png
 title: |
-  RepostConfirmationCanceler  
+  BrowserStartupLauncher  
   ユーザーガイド
-subject: RepostConfirmationCancelerユーザーガイド
+subject: BrowserStartupLauncherユーザーガイド
 date: 2025/09/08
 author: 株式会社クリアコード
-keywords: [RepostConfirmationCanceler, Set up]
+keywords: [BrowserStartupLauncher, Set up]
 titlepage: true
 toc-title: 目次
 toc-own-page: true
@@ -24,14 +24,14 @@ toc-own-page: true
 
 **本書について**
 
-本書は、株式会社クリアコードが、RepostConfirmationCancelerを御利用いただく管理者向けに作成した資料となります。2025年9月時点のデータにより作成されており、それ以降の状況の変動によっては、本書の内容と事実が異なる場合があります。また、本書の内容に基づく運用結果については責任を負いかねますので、予めご了承下さい。
+本書は、株式会社クリアコードが、BrowserStartupLauncherを御利用いただく管理者向けに作成した資料となります。2025年9月時点のデータにより作成されており、それ以降の状況の変動によっては、本書の内容と事実が異なる場合があります。また、本書の内容に基づく運用結果については責任を負いかねますので、予めご了承下さい。
 
 本書で使用するシステム名、製品名は、それぞれの各社の商標、または登録商標です。なお、本文中ではTM、®、©マークは省略しています。
 
 \newpage
-# RepostConfirmationCanceler概要
+# BrowserStartupLauncher概要
 
-## RepostConfirmationCancelerとは
+## BrowserStartupLauncherとは
 
 WEBサイトをリロードした際に「フォームを再送信しますか?」ダイアログが表示されたとき、自動でキャンセルしリロードを中止するソリューションです。
 誤操作によるフォーム再送信の防止を目的としています。　
@@ -41,7 +41,7 @@ WEBサイトをリロードした際に「フォームを再送信しますか?�
 
 ## 概要
 
-RepostConfirmationCancelerが対応しているWindowsシステムについて、記述します。
+BrowserStartupLauncherが対応しているWindowsシステムについて、記述します。
 
 ## 動作サポートOS
 
@@ -57,20 +57,20 @@ RepostConfirmationCancelerが対応しているWindowsシステムについて�
 \newpage
 # インストール手順
 
-## RepostConfirmationCancelerインストールについて
+## BrowserStartupLauncherインストールについて
 
-RepostConfirmationCancelerを利用するために、別途ランタイムライブラリー(.NET Framework等)の追加インストールは必要ありません。
+BrowserStartupLauncherを利用するために、別途ランタイムライブラリー(.NET Framework等)の追加インストールは必要ありません。
 
 ## インストール方法
 
-**RepostConfirmationCancelerのセットアップ用のインストーラーは2種類あります。**  
+**BrowserStartupLauncherのセットアップ用のインストーラーは2種類あります。**  
 **御利用されるWindows環境に合わせてセットアップファイルを選択してください。**
 
 * Windows 64bit(x64)環境用  
-  * **RepostConfirmationCancelerSetup_x64.exe**
+  * **BrowserStartupLauncherSetup_x64.exe**
 
 * Windows 32bit(x86)環境用  
-  * **RepostConfirmationCancelerSetup_x86.exe**
+  * **BrowserStartupLauncherSetup_x86.exe**
 
 Windows環境に合っていないセットアップファイルを実行すると以下のメッセージが表示されます。
 
@@ -79,18 +79,18 @@ Windows環境に合っていないセットアップファイルを実行する�
 > このプログラムは  
 > x86プロセッサー向けの Windows にしかインストールできません。
 
-対処方法：RepostConfirmationCancelerSetup_x64.exeを利用してください。
+対処方法：BrowserStartupLauncherSetup_x64.exeを利用してください。
 
 ![](user-guide/media/image4.png)
 
 > このプログラムは  
 > x64プロセッサー向けの Windows にしかインストールできません。
 
-対処方法：RepostConfirmationCancelerSetup_x86.exeを利用してください。
+対処方法：BrowserStartupLauncherSetup_x86.exeを利用してください。
 
 ### Windows 11(64bit)、Windows 10(64bit)環境のセットアップ例
 
-1. RepostConfirmationCancelerSetup_x64.exeを実行します。
+1. BrowserStartupLauncherSetup_x64.exeを実行します。
 
     **■管理者権限で実行してください。**
 
@@ -123,7 +123,7 @@ Windows環境に合っていないセットアップファイルを実行する�
 
     ![](user-guide/media/image10.png)
 
-2. 一覧より「RepostConfirmationCanceler」を選択しダブルクリックします。
+2. 一覧より「BrowserStartupLauncher」を選択しダブルクリックします。
 
     ![](user-guide/media/image10.png)
 
@@ -137,7 +137,7 @@ Windows環境に合っていないセットアップファイルを実行する�
 
     ![](user-guide/media/image12.png)
 
-5. `<インストール先>\RepostConfirmationCanceler`フォルダーを削除します。
+5. `<インストール先>\BrowserStartupLauncher`フォルダーを削除します。
 
     ![](user-guide/media/image13.png)
 
@@ -146,9 +146,9 @@ Windows環境に合っていないセットアップファイルを実行する�
 \newpage
 # サイレント インストール手順（自動インストール）
 
-## RepostConfirmationCancelerサイレント インストールについて
+## BrowserStartupLauncherサイレント インストールについて
 
-RepostConfirmationCancelerのインストールをサイレント実行するための手順について記載します。
+BrowserStartupLauncherのインストールをサイレント実行するための手順について記載します。
 
 1.  応答ファイルの作成  
 
@@ -160,7 +160,7 @@ RepostConfirmationCancelerのインストールをサイレント実行するた
 
 ## 応答ファイルの作成
 
-1. メモ帳を起動し`RepostConfirmationCanceler.inf`ファイルを作成します。
+1. メモ帳を起動し`BrowserStartupLauncher.inf`ファイルを作成します。
 
     ![](user-guide/media/image14.png)
 
@@ -174,8 +174,8 @@ RepostConfirmationCancelerのインストールをサイレント実行するた
     ```
     [Setup]
     Lang=jp
-    Dir=C:\Program Files\RepostConfirmationCanceler
-    Group=RepostConfirmationCanceler
+    Dir=C:\Program Files\BrowserStartupLauncher
+    Group=BrowserStartupLauncher
     NoIcons=0
     Tasks=
     ```
@@ -188,22 +188,22 @@ RepostConfirmationCancelerのインストールをサイレント実行するた
 
 1. セットアップ用のEXEファイルに「/SP- /VERYSILENT」オプションを付与し実行します。  
   
-    例) RepostConfirmationCancelerSetup_x64.exe /SP- /VERYSILENT</p>
+    例) BrowserStartupLauncherSetup_x64.exe /SP- /VERYSILENT</p>
 
 ### 応答ファイルを利用したサイレント インストールの場合
 
-1. セットアップ用のEXEファイルに「/SP- /VERYSILENT **/LOADINF="RepostConfirmationCanceler.inf"**」オプションを付与し実行します。  
+1. セットアップ用のEXEファイルに「/SP- /VERYSILENT **/LOADINF="BrowserStartupLauncher.inf"**」オプションを付与し実行します。  
 
-    例) RepostConfirmationCancelerSetup_x64.exe /SP- /VERYSILENT /LOADINF="RepostConfirmationCanceler.inf"
+    例) BrowserStartupLauncherSetup_x64.exe /SP- /VERYSILENT /LOADINF="BrowserStartupLauncher.inf"
 
-    ■応答ファイル RepostConfirmationCanceler.infはSetupファイルと同一フォルダーに設置するかフルパスを指定します。
+    ■応答ファイル BrowserStartupLauncher.infはSetupファイルと同一フォルダーに設置するかフルパスを指定します。
 
 \newpage
 # サイレント アンインストール手順（自動アンインストール）
 
-## RepostConfirmationCancelerサイレント アンインストールについて
+## BrowserStartupLauncherサイレント アンインストールについて
 
-RepostConfirmationCancelerのアンインストールをサイレント実行するための手順について記載します。
+BrowserStartupLauncherのアンインストールをサイレント実行するための手順について記載します。
 
 **■管理者権限での実行が必要です。**  
 
@@ -211,29 +211,29 @@ RepostConfirmationCancelerのアンインストールをサイレント実行す
 
 ## サイレント アンインストール
 
-1. RepostConfirmationCancelerセットアップ先にあるunins000.exeファイルに「/VERYSILENT」オプションを付与し実行します。  
+1. BrowserStartupLauncherセットアップ先にあるunins000.exeファイルに「/VERYSILENT」オプションを付与し実行します。  
 
-    例) `"C:\Program Files\RepostConfirmationCanceler\unins000.exe" /VERYSILENT`
+    例) `"C:\Program Files\BrowserStartupLauncher\unins000.exe" /VERYSILENT`
 
 \newpage
 # バージョンアップ手順
 
-## RepostConfirmationCancelerバージョンアップについて
+## BrowserStartupLauncherバージョンアップについて
 
-RepostConfirmationCancelerのアンインストールの必要はありません。上書きインストールを行ってください。  
+BrowserStartupLauncherのアンインストールの必要はありません。上書きインストールを行ってください。  
 
 ■マイナーバージョンアップの場合はアンインストールの必要はありません。
 
 ## バージョンアップ方法
 
-**RepostConfirmationCancelerのセットアップ用のインストーラーは2種類あります。**  
+**BrowserStartupLauncherのセットアップ用のインストーラーは2種類あります。**  
 **御利用されるWindows環境に合わせてセットアップファイルを選択してください。**
 
 * Windows 64bit(x64)環境用  
-  * **RepostConfirmationCancelerSetup_x64.exe**
+  * **BrowserStartupLauncherSetup_x64.exe**
 
 * Windows 32bit(x86)環境用  
-  * **RepostConfirmationCancelerSetup_x86.exe**
+  * **BrowserStartupLauncherSetup_x86.exe**
 
 Windows環境に合っていないセットアップファイルを実行すると以下のメッセージが表示されます。
 
@@ -242,18 +242,18 @@ Windows環境に合っていないセットアップファイルを実行する�
 > このプログラムは  
 > x86プロセッサー向けの Windows にしかインストールできません。
 
-対処方法：RepostConfirmationCancelerSetup_x64.exeを利用してください。
+対処方法：BrowserStartupLauncherSetup_x64.exeを利用してください。
 
 ![](user-guide/media/image4.png)
 
 > このプログラムは  
 > x64プロセッサー向けの Windows にしかインストールできません。
 
-対処方法：RepostConfirmationCancelerSetup_x86.exeを利用してください。
+対処方法：BrowserStartupLauncherSetup_x86.exeを利用してください。
 
 ## Windows 11(64bit)、Windows 10(64bit)環境のセットアップ例
 
-1. RepostConfirmationCancelerSetup_x64.exeを実行します。  
+1. BrowserStartupLauncherSetup_x64.exeを実行します。  
 
     **■管理者権限で実行してください。**
 
@@ -270,20 +270,20 @@ Windows環境に合っていないセットアップファイルを実行する�
 以上で、バージョンアップ作業は完了です。
 
 \newpage
-# Microsoft Edge RepostConfirmationCanceler拡張導入手順
+# Microsoft Edge BrowserStartupLauncher拡張導入手順
 
-## Microsoft EdgeへのRepostConfirmationCanceler拡張導入手順について
+## Microsoft EdgeへのBrowserStartupLauncher拡張導入手順について
 
 Microsoft Edgeのアドオンストアから拡張機能をインストールします。
 
 また、ADに所属している端末にMicrosoft Edgeへの拡張機能のインストールを強制する場合、グループポリシー(GPO)でインストールを強制します。
 
-### Microsoft EdgeのアドオンストアからのRepostConfirmationCanceler拡張の導入手順
+### Microsoft EdgeのアドオンストアからのBrowserStartupLauncher拡張の導入手順
 
 * <https://microsoftedge.microsoft.com/addons/detail/repostconfirmationcancele/oibalikebhofnalakmnpbdmjpkahagoa>を開きます
 * インストールボタンから拡張機能をインストールします
 
-### グループポリシー(GPO)を利用したRepostConfirmationCanceler拡張の導入手順
+### グループポリシー(GPO)を利用したBrowserStartupLauncher拡張の導入手順
 
 #### 前提
 
@@ -316,7 +316,7 @@ Microsoft Edgeのアドオンストアから拡張機能をインストールし
 8. 「OK」ボタンを押して、値の設定画面を閉じます。
 9. 「OK」ボタンを押して、ポリシーの設定画面を閉じます。
 
-以上の手順により、グループポリシー(GPO)により各端末に RepostConfirmationCanceler拡張機能がインストールされます。
+以上の手順により、グループポリシー(GPO)により各端末に BrowserStartupLauncher拡張機能がインストールされます。
 
 グループポリシーが適用されると拡張機能の青のスライドバーの左隣に鍵マークが表示されます。
 
@@ -327,31 +327,31 @@ Microsoft Edgeのアドオンストアから拡張機能をインストールし
 \newpage
 # モジュール構成
 
-## RepostConfirmationCancelerモジュール構成
+## BrowserStartupLauncherモジュール構成
 
-RepostConfirmationCanceler インストーラーには以下のモジュールが含まれています。(合計 約15MB)
+BrowserStartupLauncher インストーラーには以下のモジュールが含まれています。(合計 約15MB)
 
 --------------------------------------------------------------------------------------
 ファイル名                            サイズ           概要
 ------------------------------------- ---------------- --------------------------------
-RepostConfirmationCanceler.exe        約60KB           ダイアログキャンセルモジュール
+BrowserStartupLauncher.exe        約60KB           ダイアログキャンセルモジュール
 
-`RepostConfirmationCancelerHost\` \   約700KB          モダンブラウザー拡張連携
-RepostConfirmationCancelerTalk.exe
+`BrowserStartupLauncherHost\` \   約700KB          モダンブラウザー拡張連携
+BrowserStartupLauncherTalk.exe
 
-`RepostConfirmationCancelerHost\` \   約1KB             Microsoft Edge拡張連携
+`BrowserStartupLauncherHost\` \   約1KB             Microsoft Edge拡張連携
 edge.json
 --------------------------------------------------------------------------------------
 
 # 設定概要
 
-RepostConfirmationCancelerは設定ファイルにより動作を変更することができます。
+BrowserStartupLauncherは設定ファイルにより動作を変更することができます。
 
 ## 設定ファイルの場所
 
-RepostConfirmationCancelerセットアップ先のRepostConfirmationCanceler.iniファイル
+BrowserStartupLauncherセットアップ先のBrowserStartupLauncher.iniファイル
 
-例) `C:\Program Files\RepostConfirmationCanceler\RepostConfirmationCanceler.ini`
+例) `C:\Program Files\BrowserStartupLauncher\BrowserStartupLauncher.ini`
 
 ## 設定ファイルの書式
 
@@ -459,22 +459,22 @@ ADに所属している端末の設定を強制する場合、グループポリ
 * 作業環境：Active Directoryドメインコントローラーを操作可能な Windows 端末 1台
 * 適用時に必要なサーバー：全端末からアクセス可能なファイル配布用サーバー 1台
 
-### GPOによる「RepostConfirmationCanceler.ini」の書き換え
+### GPOによる「BrowserStartupLauncher.ini」の書き換え
 
 以下の作業はすべて、作業環境にて、システム管理者が管理者ユーザーアカウントで実施します。
 
 1. 各端末からアクセス可能なファイル配布用サーバー上に、一般ユーザー権限で読み取り可能な、ファイル配布用フォルダーを作成します。  
 以下、コンピューター名/ホスト名が「fileserver」である Windowsファイル共有サーバーを使用し、ファイル配布用フォルダー名は「repost-confirmation-canceler」を使用するものと仮定します。  
 この仮定に従い、ファイル共有サーバー上に作成された共有フォルダーのUNCパスが「`\\fileserver\repost-confirmation-canceler\`」 となると仮定します。
-2. 強制したい設定がされた RepostConfirmationCanceler.ini ファイルを作成します。
+2. 強制したい設定がされた BrowserStartupLauncher.ini ファイルを作成します。
 3. 作成したファイルを、1で作成したファイル配布用フォルダーにコピーします。
 前述の仮定に従い、ファイルの UNC パスは  
-「`\\fileserver\repost-confirmation-canceler\RepostConfirmationCanceler.ini`」  
+「`\\fileserver\repost-confirmation-canceler\BrowserStartupLauncher.ini`」  
 となると仮定します。
 4. 配置した各ファイルの「プロパティ」を開き、「セキュリティ」タブを選択して、当該ファイルが「Everyone」で読み取り可能な状態になっていることを確認します。  
 もしそのようになっていない場合は、「編集」ボタンをクリックし、開かれたダイアログ内で「追加」ボタンをクリックして、開かれたダイアログ内で「選択するオブジェクト名を入力してください」欄に「Everyone」と入力し、「OK」ボタンを押してダイアログを閉じる操作を3回繰り返して、ファイルを「Everyone」で読み取り可能な状態に設定します。
 5. 任意のADドメイン参加端末に一般ユーザーでログインし、3で配置したファイルを読み取れることを確認します。
-  * RepostConfirmationCanceler.ini（前述の仮定に従うと「`\\fileserver\repost-confirmation-canceler\RepostConfirmationCanceler.ini`」）をメモ帳などで開き、内容を閲覧できることを確認します。
+  * BrowserStartupLauncher.ini（前述の仮定に従うと「`\\fileserver\repost-confirmation-canceler\BrowserStartupLauncher.ini`」）をメモ帳などで開き、内容を閲覧できることを確認します。
 6. ドメインコントローラーのグループポリシー管理コンソールで、対象の端末の一般ユーザーに適用されるGPOについて、 
 「ユーザーの構成」  
 →「基本設定」  
@@ -483,11 +483,11 @@ ADに所属している端末の設定を強制する場合、グループポリ
 を右クリックし「新規作成」から「ファイル」を選択します。
 7. 以下の通り設定します。
   * アクション：「置換」を選択。
-  * ソースファイル：3 で配置した「RepostConfirmationCanceler.ini」を、全端末から参照可能な UNCパスで指定。（例：「`\\fileserver\repost-confirmation-canceler\RepostConfirmationCanceler.ini`」）
-  * ターゲットファイル：「`C:\Program Files\RepostConfirmationCanceler\RepostConfirmationCanceler.ini`」を指定。
+  * ソースファイル：3 で配置した「BrowserStartupLauncher.ini」を、全端末から参照可能な UNCパスで指定。（例：「`\\fileserver\repost-confirmation-canceler\BrowserStartupLauncher.ini`」）
+  * ターゲットファイル：「`C:\Program Files\BrowserStartupLauncher\BrowserStartupLauncher.ini`」を指定。
   * 属性：「読み取り専用」のみにチェック。
 
-以上の手順により、組織内サーバーに設置したRepostConfirmationCanceler.iniが、各端末に導入されます。
+以上の手順により、組織内サーバーに設置したBrowserStartupLauncher.iniが、各端末に導入されます。
 
 # 「フォームを再送信しますか?」ダイアログの抑止動作確認
 

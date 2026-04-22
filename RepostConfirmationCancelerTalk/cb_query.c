@@ -3,16 +3,16 @@
 #include <stdlib.h>
 #include "internal.h"
 
-static int get_RepostConfirmationCancelerExtensionExecfile(char *buf, DWORD size)
+static int get_BrowserStartupLauncherExtensionExecfile(char *buf, DWORD size)
 {
 	int ret;
 	DWORD len = size;
 	memset(buf, 0, size);
 
-	ret = RegGetValueA(HKEY_LOCAL_MACHINE, "SOFTWARE\\RepostConfirmationCanceler", "ExtensionExecfile", RRF_RT_REG_SZ,
+	ret = RegGetValueA(HKEY_LOCAL_MACHINE, "SOFTWARE\\BrowserStartupLauncher", "ExtensionExecfile", RRF_RT_REG_SZ,
 	                   NULL, buf, &size);
 	if (ret != ERROR_SUCCESS) {
-	    fprintf(stderr, "cannot read %s (%i)", "SOFTWARE\\RepostConfirmationCanceler", ret);
+	    fprintf(stderr, "cannot read %s (%i)", "SOFTWARE\\BrowserStartupLauncher", ret);
 	    return -1;
 	}
 	buf[len - 1] = '\0';
@@ -68,7 +68,7 @@ int cb_query(char *cmd)
 	 */
 	browser = cmd + 2;
 
-	if (get_RepostConfirmationCancelerExtensionExecfile(path, MAX_PATH) < 0)
+	if (get_BrowserStartupLauncherExtensionExecfile(path, MAX_PATH) < 0)
 		return -1;
 
 	if (start_monitoring(browser, path) < 0)

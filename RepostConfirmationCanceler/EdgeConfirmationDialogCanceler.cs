@@ -13,7 +13,7 @@ using System.Windows.Automation;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 
-namespace RepostConfirmationCanceler
+namespace BrowserStartupLauncher
 {
     internal static class EdgeConfirmationDialogCanceler
     {
@@ -131,7 +131,7 @@ namespace RepostConfirmationCanceler
             // メッセージボックスの表示はスレッドをブロックするので、別スレッドで実行する
             Task.Run(() =>
             {
-                MessageBox.Show("フォームの再送信が発生するため、このサイトでのリロードは禁止されています。\n\nリロードはキャンセルされました。", "RepostConfirmationCanceler", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("フォームの再送信が発生するため、このサイトでのリロードは禁止されています。\n\nリロードはキャンセルされました。", "BrowserStartupLauncher", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             });
 
             // メッセージボックスがEdgeの後ろ側に来てしまうことがあるので、強制的にフォーカスする。
@@ -141,7 +141,7 @@ namespace RepostConfirmationCanceler
                 AutomationElement desktop = AutomationElement.RootElement;
                 var windowCondition = new AndCondition(
                     new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Window),
-                    new PropertyCondition(AutomationElement.NameProperty, "RepostConfirmationCanceler"));
+                    new PropertyCondition(AutomationElement.NameProperty, "BrowserStartupLauncher"));
                 var dialog = desktop.FindFirst(TreeScope.Children, windowCondition);
                 dialog?.SetFocus();
             });

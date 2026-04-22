@@ -1,5 +1,5 @@
 on: [push]
-name: Build RepostConfirmationCanceler
+name: Build BrowserStartupLauncher
 jobs:
   build:
     runs-on: [ windows-2022 ]
@@ -11,9 +11,9 @@ jobs:
       - name: Compile x64
         run: msbuild /p:Configuration=Release /p:Platform=x64
       - name: Make Installer (x86)
-        run: iscc.exe RepostConfirmationCancelerX86.iss
+        run: iscc.exe BrowserStartupLauncherX86.iss
       - name: Make Installer (x64)
-        run: iscc.exe RepostConfirmationCancelerX64.iss
+        run: iscc.exe BrowserStartupLauncherX64.iss
       - name: Upload Binaries
         uses: actions/upload-artifact@v4
         with:
