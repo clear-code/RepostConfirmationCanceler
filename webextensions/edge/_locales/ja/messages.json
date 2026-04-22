@@ -1,4 +1,4 @@
 {
-	"extName": { "message": "RepostConfirmationCanceler" },
-	"extDescription": { "message": "RepostConfirmationCanceler WebExtension for Edge" }
+	"extName": { "message": "BrowserStartupLauncher" },
+	"extDescription": { "message": "BrowserStartupLauncher WebExtension for Edge" }
 }

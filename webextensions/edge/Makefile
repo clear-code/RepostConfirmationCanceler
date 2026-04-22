@@ -11,11 +11,11 @@ clean:
 	rm -f *.zip
 
 zip: $(FILES)
-	zip -9 - $(FILES) > RepostConfirmationCancelerEdge.zip
+	zip -9 - $(FILES) > BrowserStartupLauncherEdge.zip
 
 dev: $(FILES)
 	rm -rf dev
 	mkdir -p dev
 	cp -R manifest.json misc _locales background.js dev/
-	sed -i -E -e 's/RepostConfirmationCanceler/RepostConfirmationCanceler Enterprise Developer Edition/g' dev/_locales/*/messages.json
-	cd dev && zip -9 - $(FILES) > ../RepostConfirmationCancelerEdgeDev.zip
+	sed -i -E -e 's/BrowserStartupLauncher/BrowserStartupLauncher Enterprise Developer Edition/g' dev/_locales/*/messages.json
+	cd dev && zip -9 - $(FILES) > ../BrowserStartupLauncherEdgeDev.zip
