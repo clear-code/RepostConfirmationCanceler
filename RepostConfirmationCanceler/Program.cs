@@ -60,9 +60,18 @@ class Program
         else
         {
             // Mutexの獲得に失敗した場合、既にサーバーが起動中なので、先行のプロセスの実行時間を延ばす。
-            var runtimeContext = new RuntimeContext(RunTimeMode.Client);
-            ProcessCommunicator.SendKeepAliveMessage(runtimeContext);
-
+            RuntimeContext runtimeContext = null;
+            try
+            {
+                runtimeContext = new RuntimeContext(RunTimeMode.Client);
+                ProcessCommunicator.SendKeepAliveMessage(runtimeContext);
+            }
+            catch (Exception ex)
+            {
+                // 処理しきれなかった例外がここまで伝播した場合、プロセスを異常終了させずに
+                // ログを残して終了する。
+                runtimeContext?.Logger.Log(ex);
+            }
         }
     }
 }

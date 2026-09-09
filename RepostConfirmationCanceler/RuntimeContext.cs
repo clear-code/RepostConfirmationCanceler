@@ -20,8 +20,29 @@ namespace RepostConfirmationCanceler
         internal RuntimeContext(RunTimeMode mode)
         {
             FinishTime = DateTime.Now.AddMinutes(2);
+            // 設定の読み込みに失敗した場合もログを出力できるよう、Loggerを先に初期化する。
             Logger = new Logger(mode);
-            Config = ConfigLoader.LoadConfig();
+            Config = LoadConfigOrDefault();
+        }
+
+        private Config LoadConfigOrDefault()
+        {
+            try
+            {
+                return ConfigLoader.LoadConfig();
+            }
+            catch (Exception ex)
+            {
+                // ルールファイルはGPOの基本設定「ファイル」でアクション「置換」により各端末へ
+                // 配布する運用を案内しているため、グループポリシーの適用タイミングでファイルが
+                // 一時的に存在しない、または他プロセスにロックされていることがある。
+                // ここで例外を送出するとプロセスが動作できなくなるため、既定の設定で継続する。
+                // 既定の設定ではダイアログのキャンセル後に警告を表示しないだけで、
+                // キャンセル自体は従来通り行われる。
+                Logger.Log("Failed to load the configuration. Continue with the default configuration.");
+                Logger.Log(ex);
+                return new Config();
+            }
         }
 
         internal DateTime FinishTime
