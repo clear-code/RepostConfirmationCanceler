@@ -20,6 +20,9 @@ namespace RepostConfirmationCanceler
     {
         private const string NAMED_PIPE_NAME_BASE = "RepostConfirmationCancelerNamedPipe";
 
+        // 通信エラーが連続して発生した場合に、CPUを占有し続けないようにするための待ち時間。
+        private static readonly TimeSpan RETRY_INTERVAL = TimeSpan.FromMilliseconds(500);
+
         private static string GeneratePipeName()
         {
             WindowsIdentity user = WindowsIdentity.GetCurrent();
@@ -48,7 +51,7 @@ namespace RepostConfirmationCanceler
             }
         }
 
-        internal static async void RunNamedPipedServer(RuntimeContext context)
+        internal static async Task RunNamedPipedServer(RuntimeContext context)
         {
             PipeSecurity ps = new PipeSecurity();
             ps.AddAccessRule(new PipeAccessRule("Everyone", PipeAccessRights.FullControl, AccessControlType.Allow));
@@ -58,17 +61,19 @@ namespace RepostConfirmationCanceler
             // FinishTime > DateTime.Nowではなく、trueでも良いが、念のため。
             while (!context.IsEndTime)
             {
-                using (var pipeServer = new NamedPipeServerStream(GeneratePipeName(), PipeDirection.InOut, 1, PipeTransmissionMode.Byte, PipeOptions.Asynchronous, 1024, 1024, ps))
+                try
                 {
-                    var cancellationTokenSource = new CancellationTokenSource();
-                    Task waitTask = pipeServer.WaitForConnectionAsync(cancellationTokenSource.Token);
-                    TimeSpan waitDuration = context.FinishTime - DateTime.Now;
-                    waitDuration = waitDuration < TimeSpan.Zero ? TimeSpan.Zero : waitDuration;
-#pragma warning disable CS4014 // この呼び出しは待機されなかったため、現在のメソッドの実行は呼び出しの完了を待たずに続行されます
-                    Task.Delay(waitDuration).ContinueWith(t => cancellationTokenSource.Cancel());
-#pragma warning restore CS4014 // この呼び出しは待機されなかったため、現在のメソッドの実行は呼び出しの完了を待たずに続行されます
-                    try
+                    // NamedPipeServerStreamの生成とWaitForConnectionAsyncの呼び出しは、awaitした時ではなく
+                    // その場で同期的に例外を投げることがあるため、tryブロックの内側で実行する。
+                    using (var pipeServer = new NamedPipeServerStream(GeneratePipeName(), PipeDirection.InOut, 1, PipeTransmissionMode.Byte, PipeOptions.Asynchronous, 1024, 1024, ps))
                     {
+                        var cancellationTokenSource = new CancellationTokenSource();
+                        Task waitTask = pipeServer.WaitForConnectionAsync(cancellationTokenSource.Token);
+                        TimeSpan waitDuration = context.FinishTime - DateTime.Now;
+                        waitDuration = waitDuration < TimeSpan.Zero ? TimeSpan.Zero : waitDuration;
+#pragma warning disable CS4014 // この呼び出しは待機されなかったため、現在のメソッドの実行は呼び出しの完了を待たずに続行されます
+                        Task.Delay(waitDuration).ContinueWith(t => cancellationTokenSource.Cancel());
+#pragma warning restore CS4014 // この呼び出しは待機されなかったため、現在のメソッドの実行は呼び出しの完了を待たずに続行されます
                         context.Logger.Log("Start to wait client access");
                         //受信待ち。
                         await waitTask;
@@ -89,16 +94,25 @@ namespace RepostConfirmationCanceler
                             }
                         }
                     }
-                    catch (OperationCanceledException)
-                    {
-                        context.Logger.Log("WaitForConnectionAsync was cancelled");
-                        break;
-                    }
-                    catch (Exception ex)
-                    {
-                        context.Logger.Log(ex);
-                        break;
-                    }
+                }
+                catch (OperationCanceledException)
+                {
+                    context.Logger.Log("WaitForConnectionAsync was cancelled");
+                    break;
+                }
+                catch (IOException ex)
+                {
+                    // サーバーが接続の受け付けを開始する前に、クライアントが接続・送信・切断まで完了した
+                    // 場合(ERROR_NO_DATA)などに発生する。クライアントの依頼自体は送信済みであり、
+                    // パイプを作り直して待ち受けを継続すればよいので、サーバーは終了させない。
+                    context.Logger.Log(ex);
+                    LogThreadStatus(context);
+                    await Task.Delay(RETRY_INTERVAL);
+                }
+                catch (Exception ex)
+                {
+                    context.Logger.Log(ex);
+                    break;
                 }
             }
             context.Logger.Log("Stop server");

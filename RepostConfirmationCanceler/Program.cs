@@ -38,12 +38,19 @@ class Program
             // Mutexの獲得に成功した
             // * NamedPipeサーバーを起動し、後続のプロセスによるメッセージ受付を開始
             // * ダイアログの監視を開始
+            RuntimeContext runtimeContext = null;
             try
             {
-                var runtimeContext = new RuntimeContext(RunTimeMode.Server);
+                runtimeContext = new RuntimeContext(RunTimeMode.Server);
                 Task serverTask = Task.Run(() => ProcessCommunicator.RunNamedPipedServer(runtimeContext));
                 Task watchTask = Task.Run(() => EdgeConfirmationDialogCanceler.WatchDialog(runtimeContext));
                 Task.WhenAll(serverTask, watchTask).Wait();
+            }
+            catch (Exception ex)
+            {
+                // 各タスクで処理しきれなかった例外がここまで伝播した場合、プロセスを異常終了させずに
+                // ログを残して終了する。
+                runtimeContext?.Logger.Log(ex);
             }
             finally
             {
