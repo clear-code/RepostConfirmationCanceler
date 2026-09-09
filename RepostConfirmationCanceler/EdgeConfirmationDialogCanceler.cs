@@ -17,28 +17,82 @@ namespace RepostConfirmationCanceler
 {
     internal static class EdgeConfirmationDialogCanceler
     {
+        private static readonly TimeSpan WATCH_INTERVAL = TimeSpan.FromMilliseconds(500);
+
         internal static void WatchDialog(RuntimeContext context)
         {
             AutomationElement desktop = AutomationElement.RootElement;
             while (!context.IsEndTime)
             {
+                try
+                {
+                    WatchDialogOnce(context, desktop);
+                }
+                catch (Exception ex)
+                {
+                    // Edgeのプロセスやウィンドウは頻繁に生成・破棄されるため、一時的なエラーが
+                    // 発生し得る。ここで監視を終了してしまうと、以降は確認ダイアログが自動
+                    // キャンセルされなくなるため、ログを残して監視を継続する。
+                    context.Logger.Log(ex);
+                }
+                Task.Delay(WATCH_INTERVAL).Wait();
+            }
+        }
+
+        private static void WatchDialogOnce(RuntimeContext context, AutomationElement desktop)
+        {
+            var edges = Process.GetProcessesByName("msedge");
+            try
+            {
                 //Edgeのプロセスのうち、メインウィンドウがあるものに絞り込み
-                var edges = Process.GetProcessesByName("msedge").Where(_ => _.MainWindowHandle != IntPtr.Zero);
                 foreach (var edge in edges)
                 {
-                    var targetPid = edge.Id;
-                    var windowCondition = new AndCondition(
-                        new PropertyCondition(AutomationElement.ProcessIdProperty, targetPid),
-                        new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Window));
-                    var edgeElement = desktop.FindFirst(TreeScope.Children, windowCondition);
-                    if (edgeElement == null)
+                    try
                     {
-                        continue;
+                        if (!HasMainWindow(edge))
+                        {
+                            continue;
+                        }
+                        var targetPid = edge.Id;
+                        var windowCondition = new AndCondition(
+                            new PropertyCondition(AutomationElement.ProcessIdProperty, targetPid),
+                            new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Window));
+                        var edgeElement = desktop.FindFirst(TreeScope.Children, windowCondition);
+                        if (edgeElement == null)
+                        {
+                            continue;
+                        }
+                        PrintControlIdentifiers(context, edgeElement, 0);
+                        CancelDialog(context, edgeElement);
                     }
-                    PrintControlIdentifiers(context, edgeElement, 0);
-                    CancelDialog(context, edgeElement);
+                    catch (Exception ex)
+                    {
+                        // あるEdgeプロセスの処理に失敗しても、他のEdgeプロセスの監視は継続する。
+                        context.Logger.Log(ex);
+                    }
                 }
-                Task.Delay(500).Wait();
+            }
+            finally
+            {
+                foreach (var edge in edges)
+                {
+                    edge.Dispose();
+                }
+            }
+        }
+
+        private static bool HasMainWindow(Process process)
+        {
+            try
+            {
+                return process.MainWindowHandle != IntPtr.Zero;
+            }
+            catch (InvalidOperationException)
+            {
+                // プロセスを列挙してからMainWindowHandleを参照するまでの間に、対象のプロセスが
+                // 終了した場合に発生する。Edgeはレンダラー等の子プロセスを頻繁に起動・終了するため
+                // 通常運用でも起こり得る。既に終了したプロセスは監視対象ではないので無視する。
+                return false;
             }
         }
 
